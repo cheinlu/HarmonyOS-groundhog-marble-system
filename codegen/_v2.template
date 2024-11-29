@@ -1,0 +1,59 @@
+package v2_saas
+
+import (
+	"login-demo/internal/model"
+
+	"github.com/gogf/gf/v2/frame/g"
+)
+
+{{- $modelname := (datasource "config").modelname }}
+{{- $zhname := (datasource "config").zh }}
+{{- $capitalized := (title $modelname) }}
+
+type {{ title $modelname }}ListReq struct {
+	g.Meta    `path:"{{ $modelname }}/list" tags:"{{ $zhname }}管理" method:"get" summary:"{{ $zhname }}列表"`
+	{{- range $index,$element := (datasource "config").columns }}
+	{{ title .name }}          interface{}       `json:"{{ regexp.Replace `([a-z0-9])([A-Z])` "${1}_${2}" .name | strings.ToLower }}"`
+	{{- end }}
+	model.PageReq
+}
+
+type {{ title $modelname }}ListRes struct {
+	g.Meta      `mime:"application/json" example:"string"`
+	{{- range $index,$element := (datasource "config").columns }}
+	{{ title .name }}          {{ .type }}       `json:"{{ regexp.Replace `([a-z0-9])([A-Z])` "${1}_${2}" .name | strings.ToLower }}"`
+	{{- end }}
+}
+
+type {{ title $modelname }}AddReq struct {
+	g.Meta    `path:"{{ $modelname }}/add" tags:"{{ $zhname }}管理" method:"POST" summary:"添加{{ $zhname }}"`
+	{{- range $index,$element := (datasource "config").columns }}
+	{{- if gt $index 0 }}
+	{{ title .name }}          {{ .type }}       `json:"{{ regexp.Replace `([a-z0-9])([A-Z])` "${1}_${2}" .name | strings.ToLower }}"`
+	{{- end }}
+	{{- end }}
+}
+
+type {{ title $modelname }}AddRes struct {
+	g.Meta `mime:"application/json" `
+}
+
+type {{ title $modelname }}DelReq struct {
+	g.Meta `path:"{{ $modelname }}/delete" tags:"{{ $zhname }}管理" method:"DELETE" summary:"删除{{ $zhname }}"`
+	Id     int `json:"id"`
+}
+
+type {{ title $modelname }}DelRes struct {
+	g.Meta `mime:"application/json" `
+}
+
+type {{ title $modelname }}UpdateReq struct {
+	g.Meta    `path:"{{ $modelname }}/update" tags:"{{ $zhname }}管理" method:"post" summary:"修改{{ $zhname }}"`
+	{{- range $index,$element := (datasource "config").columns }}
+	{{ title .name }}          {{ .type }}       `json:"{{ regexp.Replace `([a-z0-9])([A-Z])` "${1}_${2}" .name | strings.ToLower }}"`
+	{{- end }}
+}
+
+type {{ title $modelname }}UpdateRes struct {
+	g.Meta `mime:"application/json" `
+}

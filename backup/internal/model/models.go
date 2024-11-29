@@ -6,6 +6,42 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
+type MarbleQuery struct {
+	Sn     string `json:"sn"          ` //
+	Name   string `json:"name"        ` //
+	Type   string `json:"type"        ` //
+	Price  int    `json:"price"       ` //
+	Width  int    `json:"width"       ` //
+	Length int    `json:"length"      ` //
+	Height int    `json:"height"      ` //
+	Mass   int    `json:"mass"        ` //
+	Area   int    `json:"area"        ` //
+	State  int    `json:"state"       ` //
+}
+
+type MarblesResult struct {
+	Id          int    `json:"id"          ` //
+	Sn          string `json:"sn"          ` //
+	Name        string `json:"name"        ` //
+	Type        string `json:"type"        ` //
+	PictureUrls string `json:"pictureUrls" ` //
+	Price       int    `json:"price"       ` //
+	Width       int    `json:"width"       ` //
+	Length      int    `json:"length"      ` //
+	Height      int    `json:"height"      ` //
+	Mass        int    `json:"mass"        ` //
+	Area        int    `json:"area"        ` //
+	State       int    `json:"state"       ` //
+	Description string `json:"description" ` //
+}
+
+// 充电订单聚合查询
+type MarblesNameResult struct {
+	Id         int    `json:"id"         ` //
+	Name       string `json:"name"       ` //
+	PictureUrl string `json:"pictureUrl" ` //
+}
+
 // 充电相关
 type ChargeOrderQuery struct {
 	OrderCode string    `json:"qrderCode"`

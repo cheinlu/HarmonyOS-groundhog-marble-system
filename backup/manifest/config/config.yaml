@@ -117,7 +117,7 @@ storage:
     path: ./tempFile
     domain: http://127.0.0.1:8000
   s3:
-    enabled: true
+    enabled: false
     endpoint: s3.ap-southeast-1.qiniucs.com
     accessKeyID: xx
     secretAccessKey: xxx-WeCGHWX8D0b

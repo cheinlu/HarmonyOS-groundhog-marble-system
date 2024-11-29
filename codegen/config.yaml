@@ -1,0 +1,17 @@
+modelname: "alertRule"
+zh: "告警规则"
+columns:
+  - name: id
+    type: int
+  - name: tenantId
+    type: int
+  - name: rulename
+    type: string
+  - name: rule
+    type: string
+  - name: ruleType
+    type: string
+  - name: isDeleted
+    type: int
+
+  

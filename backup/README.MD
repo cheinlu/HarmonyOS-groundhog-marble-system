@@ -32,6 +32,16 @@ curl --location 'http://127.0.0.1:8000/api/user/login' \
 {"code":0,"message":"","data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjg2MjE0MTgzfQ.WZV1YvwzokEgDL1urWYoUPpfWSsq3TisO3f6zutmjf4","role":""}}
 ```
 
+# 三、开发介绍
+
+## 1. 如何根据数据库生成dao 文件
+
+```
+1. 将要生成的表名放到 hack/config.yaml 中
+2. backup 目录执行 gf gen dao 
+3. 执行 go run main.go 查看生成结果
+```
+
 # 二、 代码结构
 
 ## 2.1 项目框架

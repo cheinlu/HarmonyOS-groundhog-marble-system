@@ -1,0 +1,67 @@
+package controller_saas
+
+import (
+	"context"
+	v2 "login-demo/api/saas"
+	"login-demo/internal/logic"
+	"login-demo/internal/model"
+	"login-demo/internal/model/do"
+)
+
+
+{{- $modelname := (datasource "config").modelname -}}
+{{ $capitalized := (title $modelname) }}
+
+type {{ $capitalized }}Controller struct {
+}
+
+// 列表
+func ({{ $capitalized }}Controller) List(ctx context.Context, req *v2.{{ $capitalized }}ListReq) (pageRes model.PageRes, err error) {
+	model.InitPageReq(&req.PageReq, 1, 10)
+	query := do.{{ $capitalized }}{
+		{{- range $index,$element := (datasource "config").columns }}
+		{{ title .name }}: req.{{ title .name }},
+		{{- end }}
+	}
+	{{ $modelname }}s, count, err := logic.{{ $capitalized }}.{{ $capitalized }}List(ctx, query, req.PageReq)
+	res := make([]*v2.{{ $capitalized }}ListRes, len({{ $modelname }}s))
+	for i, {{ $modelname }} := range {{ $modelname }}s {
+		res[i] = &v2.{{ $capitalized }}ListRes{
+			{{- range $index,$element := (datasource "config").columns }}
+			{{ title .name }}:          {{ $modelname }}.{{ title .name }},
+			{{- end }}
+		}
+	}
+	pageRes.List, pageRes.PageNo, pageRes.PageSize, pageRes.TotalCount = res, req.PageNo, req.PageSize, count
+	return
+}
+
+// 添加
+func ({{ $capitalized }}Controller) Add(ctx context.Context, req *v2.{{ $capitalized }}AddReq) (res *v2.{{ $capitalized }}AddRes, err error) {
+	var {{ $modelname }} do.{{ $capitalized }} = do.{{ $capitalized }}{
+		{{- range $index,$element := (datasource "config").columns }}
+		{{- if gt $index 0 }}
+		{{ title .name }}: req.{{ title .name }},
+		{{- end }}
+		{{- end }}
+	}
+	err = logic.{{ $capitalized }}.Add(ctx, {{ $modelname }})
+	return
+}
+
+// 删除
+func ({{ $capitalized }}Controller) Del(ctx context.Context, req *v2.{{ $capitalized }}DelReq) (res *v2.{{ $capitalized }}DelRes, err error) {
+	err = logic.{{ $capitalized }}.Del(ctx, req.Id)
+	return
+}
+
+// 修改
+func ({{ $capitalized }}Controller) Update(ctx context.Context, req *v2.{{ $capitalized }}UpdateReq) (res *v2.{{ $capitalized }}UpdateRes, err error) {
+	{{ $modelname }} := do.{{ $capitalized }}{
+		{{- range $index,$element := (datasource "config").columns }}
+			{{ title .name }}:          req.{{ title .name }},
+		{{- end }}
+	}
+	err = logic.{{ $capitalized }}.Update(ctx, {{ $modelname }})
+	return
+}

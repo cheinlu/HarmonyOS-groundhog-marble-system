@@ -5,6 +5,7 @@ gfcli:
   gen:
     dao:
     - link:     "sqlite::@file(manifest/db/user.db)"
-      tables:   "user,tenant,station,pile,charge_order,charge_price,pay_record,user_wallet,wx_user,role,role_permission,audit_log"
+      # tables:   "marbles_name,marbles"
+      tables:   "alert_rule"
       jsonCase: "CamelLower"
       tplDaoInternalPath: "hack/dao_intervel_tpl.tmp"

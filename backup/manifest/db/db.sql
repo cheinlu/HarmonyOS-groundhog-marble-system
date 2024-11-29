@@ -218,3 +218,72 @@ REPLACE INTO audit_log
 VALUES 
 (1, 1, "add", "user", "","{name:'张三'}","insert into user VALUES('xxxxx')",datetime('now'), "admin"),
 (2, 1, "delete", "user", "{name:'张三'}","","delete user where id=1" ,datetime('now'), "zhangsan");
+
+
+CREATE TABLE marbles_name (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tenant_id INTEGER NOT NULL,
+    name TEXT,
+    picture_url TEXT);
+
+REPLACE INTO marbles_name
+(id, tenant_id,name, picture_url) 
+VALUES 
+(1,1,  "鱼肚灰", "xxx"),
+(2, 1, "伯爵白", "xxx"),
+(3, 1, "烟雨江南", "xxx"),
+(4, 1, "梵高棕", "xxx"),
+(5, 1, "芬迪白", "xxx");
+
+
+# state 0出库，state 1存在
+CREATE TABLE marbles (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tenant_id INTEGER NOT NULL,
+    sn TEXT NOT NULL,
+    name TEXT NOT NULL,
+    type TEXT,
+    picture_urls TEXT,
+    price INTEGER,
+    width INTEGER,
+    length INTEGER,
+    height INTEGER,
+    mass INTEGER,
+    area INTEGER,
+    state INTEGER,
+    description TEXT,
+    is_deleted INTEGER DEFAULT 0
+);
+
+
+REPLACE INTO marbles
+(id, tenant_id, sn, name,type,picture_urls,price,width,length,height,mass,area,state,description) 
+VALUES 
+(1,  1,"DLN-KMB23023-00200#6-3#5", "鱼肚灰","slice","www.baidu.com","","2960","1990","18","","5860800",0,""),
+(2,  1,"DLN-KMB23023-00200#6-3#7", "鱼肚灰","slice","www.baidu.com","","2960","1990","18","","5860800",0,""),
+(3,  1,"DLN-KMB23023-00200#6-3#9", "鱼肚灰","slice","www.baidu.com","","2960","1990","18","","5860800",0,""),
+(4,  1,"DLN-KMB23023-00200#6-3#30", "鱼肚灰","slice","www.baidu.com","","2960","1990","18","","5860800",0,""),
+(5,  1,"DLN-SABR0299-00200#5-4#2", "伯爵白","slice","www.baidu.com","","2960","1990","18","","5860800",0,""),
+(6,  1,"DLN-SABR0299-00200#5-4#4", "伯爵白","slice","www.baidu.com","","2960","1990","18","","5860800",0,""),
+(7,  1,"DLN-SABR0299-00200#5-4#8", "伯爵白","slice","www.baidu.com","","2960","1990","18","","5860800",0,""),
+(8,  1,"DLN-KMB23023-00200", "烟雨江南","marble","www.baidu.com","","2960","1990","1800","","",0,""),
+(9,  1,"茶盘", "蓝翡翠","shopping","www.baidu.com","1400","","","","","",0,"60-25"),
+(10, 1, "餐桌", "宝格丽粉","shopping","www.baidu.com","","","","","","",0,"圆桌1600*转盘1000")
+;
+
+
+CREATE TABLE alert_rule (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tenant_id INTEGER NOT NULL,
+    rulename TEXT,
+    rule TEXT,
+    rule_type TEXT,
+    is_deleted INTEGER DEFAULT 0,
+    create_at datetime(0) DEFAULT NULL, --  'Created Time'
+    update_at datetime(0) DEFAULT NULL --  'Updated Time'
+);
+
+REPLACE INTO alert_rule 
+(id, tenant_id, rulename,rule,rule_type,is_deleted) 
+VALUES
+(1, 1, "接口httpcode错误率高","apisix_http_code_error_rate:5m > 10", "业务",0);

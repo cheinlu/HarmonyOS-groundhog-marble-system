@@ -1,0 +1,76 @@
+package logic
+
+import (
+	"context"
+	"login-demo/internal/dao"
+	"login-demo/internal/model"
+	"login-demo/internal/model/do"
+	"login-demo/internal/model/entity"
+
+	"github.com/gogf/gf/v2/errors/gcode"
+	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/gogf/gf/v2/os/gtime"
+)
+
+{{- $modelname := (datasource "config").modelname }}
+{{- $capitalized := (title $modelname) }}
+{{- $snake := (regexp.Replace `([a-z0-9])([A-Z])` "${1}_${2}" $modelname | strings.ToLower) }}
+
+var {{ $capitalized }} {{ $capitalized }}Logic
+
+type {{ $capitalized }}Logic struct {
+}
+
+func (*{{ $capitalized }}Logic) {{ $capitalized }}List(ctx context.Context, query do.{{ $capitalized }}, page model.PageReq) ({{ $modelname }}s []entity.{{ $capitalized }}, count int, err error) {
+	model := dao.{{ $capitalized }}.Ctx(ctx)
+	{{- range $index,$element := (datasource "config").columns }}
+	if query.{{ title .name }} != nil {
+		model = model.Where("{{ $snake }}.{{ .name }} = ?", query.{{ title .name }})
+	}
+	{{- end }}
+	model.Fields("{{ $snake }}.*").OrderDesc("{{ $snake }}.update_at").Page(page.PageNo, page.PageSize).ScanAndCount(&{{ $modelname }}s, &count, false)
+	return
+}
+
+func (*{{ $capitalized }}Logic) Add(ctx context.Context, {{ $modelname }} do.{{ $capitalized }}) (err error) {
+	{{ $modelname }}.CreateAt, {{ $modelname }}.UpdateAt = gtime.Now(), gtime.Now()
+	err = SetCurrentTenantId(ctx, &{{ $modelname }}.TenantId)
+	if err != nil {
+		return
+	}
+	_, err = dao.{{ $capitalized }}.Ctx(ctx).Insert({{ $modelname }})
+	return
+}
+
+func (*{{ $capitalized }}Logic) Del(ctx context.Context, id int) (err error) {
+	rs, err := dao.{{ $capitalized }}.Ctx(ctx).Delete("id = ?", id)
+	if err != nil {
+		return gerror.WrapCode(gcode.New(1, "系统异常，删除失败", ""), err)
+	}
+	rowsAffected, err := rs.RowsAffected()
+	if err != nil {
+		return gerror.WrapCode(gcode.New(1, "系统异常，删除失败", ""), err)
+	}
+	if rowsAffected == 0 {
+		err = gerror.NewCode(gcode.New(1, "删除失败，未找到原数据，可能已被其他人删除", ""))
+		return err
+	}
+	return
+}
+
+func (*{{ $capitalized }}Logic) Update(ctx context.Context, {{ $modelname }} do.{{ $capitalized }}) (err error) {
+	{{ $modelname }}.UpdateAt = gtime.Now()
+	rs, err := dao.{{ $capitalized }}.Ctx(ctx).Update({{ $modelname }}, "id = ?", {{ $modelname }}.Id)
+	if err != nil {
+		return gerror.WrapCode(gcode.New(1, "系统异常，修改失败", ""), err)
+	}
+	rowsAffected, err := rs.RowsAffected()
+	if err != nil {
+		return gerror.WrapCode(gcode.New(1, "系统异常，修改失败", ""), err)
+	}
+	if rowsAffected == 0 {
+		err = gerror.NewCode(gcode.New(1, "修改失败，未找到原数据，可能已被其他人删除", ""))
+		return err
+	}
+	return
+}

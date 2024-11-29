@@ -65,12 +65,14 @@ var (
 							&saasController.RoleController{},
 							&saasController.PermissionController{},
 							&saasController.AuditLogController{},
+							&saasController.MarblesController{},
 						)
 					})
 				})
 				group.Group("/manager-api", func(group *ghttp.RouterGroup) {
 					// 绑定 Login 结构体中的 Login 方法
 					group.POST("", new(managerController.Login).Login)
+					group.Bind(&saasController.AlertRuleController{})
 					group.Group("", func(group *ghttp.RouterGroup) {
 						group.Middleware(middleware.Auth)
 						group.POST("", new(managerController.Login).Refresh)
@@ -97,6 +99,9 @@ var (
 				)
 				group.GET("", new(wxController.WxChargeController).StationList)
 				group.GET("", new(wxController.WxChargeController).PileList)
+				group.GET("", new(wxController.WxMarblesNameController).MarblesNameList)
+				group.GET("", new(wxController.WxMarblesController).MarblesList)
+				group.GET("", new(wxController.WxMarblesController).MarblesMarbleList)
 				group.Group("", func(group *ghttp.RouterGroup) {
 					group.Middleware(middleware.Auth)
 					group.POST("", new(wxController.WxChargeController).StartCharge)
