@@ -1,37 +1,62 @@
 {
   "pages": [
-    "pages/charge/charge",
+    "pages/home/home",
     "pages/my/my",
-    "pages/scan/scan"
+    "pages/slabs/slabs",
+    "pages/rawStone/rawStone",
+    "pages/furniture/furniture"
   ],
   "subPackages": [
     {
       "root": "subpkg",
       "pages": [
-        "charging/charging",
-        "chargeOrder/chargeOrder"
+        "slabsDetail/slabsDetail",
+        "slabsSize/slabsSize",
+        "furnitureDetail/furnitureDetail",
+        "slabsSearch/slabsSearch"
       ]
     }
   ],
   "window": {
-    "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "土拨鼠充电",
-    "navigationBarBackgroundColor": "#0aa671",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "大板",
+    "navigationBarBackgroundColor": "#FFFFFF",
     "backgroundColor": "#FFFFFF"
   },
   "tabBar": {
     "color": "#999",
-    "selectedColor": "#0aa671",
+    "selectedColor": "#c84921",
     "borderStyle": "white",
     "list": [
       {
-        "pagePath": "pages/charge/charge"
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "static/tab_icons/home.png",
+        "selectedIconPath": "static/tab_icons/home_active.png"
       },
       {
-        "pagePath": "pages/scan/scan"
+        "pagePath": "pages/slabs/slabs",
+        "text": "大板",
+        "iconPath": "static/tab_icons/slabs.png",
+        "selectedIconPath": "static/tab_icons/slabs_active.png"
       },
       {
-        "pagePath": "pages/my/my"
+        "pagePath": "pages/rawStone/rawStone",
+        "text": "荒料",
+        "iconPath": "static/tab_icons/raw.png",
+        "selectedIconPath": "static/tab_icons/raw_active.png"
+      },
+      {
+        "pagePath": "pages/furniture/furniture",
+        "text": "家居",
+        "iconPath": "static/tab_icons/furniture.png",
+        "selectedIconPath": "static/tab_icons/furniture_active.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "联系方式",
+        "iconPath": "static/tab_icons/my.png",
+        "selectedIconPath": "static/tab_icons/my_active.png"
       }
     ]
   },

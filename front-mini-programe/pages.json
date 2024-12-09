@@ -3,10 +3,10 @@
        
        
         {
-            "path" : "pages/charge/charge",
+            "path" : "pages/home/home",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "充电",
+                "navigationBarTitleText": "首页",
                 "enablePullDownRefresh": false
             }
             
@@ -15,20 +15,36 @@
             "path" : "pages/my/my",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "我的",
+                "navigationBarTitleText": "联系方式",
                 "enablePullDownRefresh": false
             }
             
         }
         
         ,{
-            "path" : "pages/scan/scan",
+            "path" : "pages/slabs/slabs",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "大板",
                 "enablePullDownRefresh": false
             }
             
+        },
+        {
+        	"path" : "pages/rawStone/rawStone",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "荒料",
+        		"enablePullDownRefresh" : false
+        	}
+        },
+        {
+        	"path" : "pages/furniture/furniture",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "家居",
+        		"enablePullDownRefresh" : false
+        	}
         }
     ],
   "subPackages":[
@@ -36,23 +52,42 @@
       "root": "subpkg",
       "pages": [
               {
-                    "path" : "charging/charging",
+                    "path" : "slabsDetail/slabsDetail",
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "",
                     "enablePullDownRefresh": false
                 }
                 
-                }
-                ,{
-                    "path" : "chargeOrder/chargeOrder",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
-                }
+                },
+				{
+				      "path" : "slabsSize/slabsSize",
+				      "style" :                                                                                    
+				  {
+				      "navigationBarTitleText": "",
+				      "enablePullDownRefresh": false
+				  }
+				  
+				  },
+				  {
+				        "path" : "furnitureDetail/furnitureDetail",
+				        "style" :                                                                                    
+				    {
+				        "navigationBarTitleText": "",
+				        "enablePullDownRefresh": false
+				    }
+				    
+				    },
+				{
+				      "path" : "slabsSearch/slabsSearch",
+				      "style" :                                                                                    
+				  {
+				      "navigationBarTitleText": "",
+				      "enablePullDownRefresh": false
+				  }
+				  
+				  }
                 
-                }
             ]
     }
   ],
@@ -61,26 +96,47 @@
 		"^u-(.*)": "@/uni_modules/uview-plus/components/u-$1/u-$1.vue"
 	},
 	"globalStyle": {
-		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "土拨鼠充电",
-		"navigationBarBackgroundColor": "#0aa671",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "大板",
+		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#FFFFFF"
 	},
 	"uniIdRouter": {},
     "tabBar": {
         "color": "#999",
-        "selectedColor": "#0aa671",
+        "selectedColor": "#c84921",
         "borderStyle": "white",
         "list": [
             {
-                "pagePath": "pages/charge/charge"
+                "pagePath": "pages/home/home",
+				"text": "首页",
+				"iconPath": "static/tab_icons/home.png",
+				"selectedIconPath": "static/tab_icons/home_active.png"
             },
             {
-                "pagePath": "pages/scan/scan"
+                "pagePath": "pages/slabs/slabs",
+				"text": "大板",
+				"iconPath": "static/tab_icons/slabs.png",
+				"selectedIconPath": "static/tab_icons/slabs_active.png"
             },
             {
-                "pagePath": "pages/my/my"
-            }
+                "pagePath": "pages/rawStone/rawStone",
+				"text": "荒料",
+				"iconPath": "static/tab_icons/raw.png",
+				"selectedIconPath": "static/tab_icons/raw_active.png"
+            },
+			{
+			    "pagePath": "pages/furniture/furniture",
+				"text": "家居",
+				"iconPath": "static/tab_icons/furniture.png",
+				"selectedIconPath": "static/tab_icons/furniture_active.png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "联系方式",
+				"iconPath": "static/tab_icons/my.png",
+				"selectedIconPath": "static/tab_icons/my_active.png"
+			}
         ]
   	}
 }

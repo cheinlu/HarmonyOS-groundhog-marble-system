@@ -78,153 +78,204 @@ export const asyncRoute = [
       },
     ]
   },
+
   {
-    //设备管理----充电站/充电桩
-    path: '/device',
+    //大理石管理----大板/荒料/家居
+    path: '/marble',
     component: () => import('@/layout/index.vue'),
-    name: 'Device',
+    name: 'Marble',
     meta: {
-      title: '设备管理',
+      title: '大理石管理',
       hidden: false,
       icon: 'Suitcase'
     },
-    redirect: '/device/station',
+    redirect: '/marble/slabs',
     children: [
       {
-        path: '/device/station',
-        component: () => import('@/view/device/station/index.vue'),
-        name: 'ChargeStationView',
+        path: '/marble/slabs',
+        component: () => import('@/view/marble/slabs/index.vue'),
+        name: 'UserView',
         meta: {
-          title: '充电站管理',
+          title: '大板管理',
           icon: 'Flag',
           has:true
         }
       },
       {
-        path: '/device/pile',
-        component: () => import('@/view/device/pile/index.vue'),
-        name: 'ChargePileView',
+        path: '/marble/raw',
+        component: () => import('@/view/marble/raw/index.vue'),
+        name: 'TenantView',
         meta: {
-          title: '充电桩管理',
+          title: '荒料管理',
+          icon: 'Stamp'
+        }
+      },
+      {
+        path: '/marble/house',
+        component: () => import('@/view/marble/house/index.vue'),
+        name: 'RoleView',
+        meta: {
+          title: '家居管理',
           icon: 'Stamp'
         }
       }
     ]
   },
-  {
-    //系统设置---用户管理/租户管理/角色管理/权限管理/充值管理
-    path: '/acl',
-    component: () => import('@/layout/index.vue'),
-    name: 'Acl',
-    meta: {
-      title: '系统设置',
-      hidden: false,
-      icon: 'List'
-    },
-    redirect: '/acl/user',
-    children: [
-      {
-        path: '/acl/user',
-        component: () => import('@/view/acl/user/index.vue'),
-        name: 'UserView',
-        meta: {
-          title: '用户管理',
-          icon: 'User'
-        }
-      },
-      // 管理台不需要租户管理，路由不展示了
-      // {
-      //   path: '/acl/tenant',
-      //   component: () => import('@/view/acl/tenant/index.vue'),
-      //   name: 'TenantView',
-      //   meta: {
-      //     title: '租户管理',
-      //     icon: 'Grid'
-      //   }
-      // },
-      {
-        path: '/acl/role',
-        component: () => import('@/view/acl/role/index.vue'),
-        name: 'RoleView',
-        meta: {
-          title: '角色管理',
-          icon: 'Avatar'
-        }
-      },
-      {
-        path: '/acl/authority',
-        component: () => import('@/view/acl/authority/index.vue'),
-        name: 'PermissionView',
-        meta: {
-          title: '权限管理',
-          icon: 'Monitor',
-          hidden: true,
-        }
-      },
-      {
-        path: '/acl/record',
-        component: () => import('@/view/acl/record/index.vue'),
-        name: 'RechargeView',
-        meta: {
-          title: '充值管理',
-          icon: 'Money'
-        }
-      },
-    ]
-  },
-  {
-    //运营管理----订单管理/价格规则
-    path: '/opration',
-    component: () => import('@/layout/index.vue'),
-    name: 'Opration',
-    meta: {
-      title: '运营管理',
-      hidden: false,
-      icon: 'Management'
-    },
-    redirect: '/opration/order',
-    children: [
-      {
-        path: '/opration/order',
-        component: () => import('@/view/opration/order/index.vue'),
-        name: 'ChargeOrderView',
-        meta: {
-          title: '充电订单',
-          hidden: false,
-          icon: 'Lock'
-        }
-      },
-      {
-        path: '/opration/priceRange',
-        component: () => import('@/view/opration/priceRange/index.vue'),
-        name: 'PriceView',
-        meta: {
-          title: '充电价格',
-          hidden: false,
-          icon: 'PriceTag'
-        }
-      }
-    ]
-  },
-  {
-    //审计
-    path: '/audit',
-    component: () => import('@/layout/index.vue'),
-    redirect: '/audit',
-    children: [
-      {
-        path: '/audit',
-        component: () => import('@/view/audit/index.vue'),
-        name: 'AtuditLogView',
-        meta: {
-          title: '审计日志',
-          hidden: false,
-          icon: 'Edit'
-        }
-      },
-    ]
-  },
+
+  // {
+  //   //设备管理----充电站/充电桩
+  //   path: '/device',
+  //   component: () => import('@/layout/index.vue'),
+  //   name: 'Device',
+  //   meta: {
+  //     title: '设备管理',
+  //     hidden: false,
+  //     icon: 'Suitcase'
+  //   },
+  //   redirect: '/device/station',
+  //   children: [
+  //     {
+  //       path: '/device/station',
+  //       component: () => import('@/view/device/station/index.vue'),
+  //       name: 'ChargeStationView',
+  //       meta: {
+  //         title: '充电站管理',
+  //         icon: 'Flag',
+  //         has:true
+  //       }
+  //     },
+  //     {
+  //       path: '/device/pile',
+  //       component: () => import('@/view/device/pile/index.vue'),
+  //       name: 'ChargePileView',
+  //       meta: {
+  //         title: '充电桩管理',
+  //         icon: 'Stamp'
+  //       }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   //系统设置---用户管理/租户管理/角色管理/权限管理/充值管理
+  //   path: '/acl',
+  //   component: () => import('@/layout/index.vue'),
+  //   name: 'Acl',
+  //   meta: {
+  //     title: '系统设置',
+  //     hidden: false,
+  //     icon: 'List'
+  //   },
+  //   redirect: '/acl/user',
+  //   children: [
+  //     {
+  //       path: '/acl/user',
+  //       component: () => import('@/view/acl/user/index.vue'),
+  //       name: 'UserView',
+  //       meta: {
+  //         title: '用户管理',
+  //         icon: 'User'
+  //       }
+  //     },
+  //     // 管理台不需要租户管理，路由不展示了
+  //     // {
+  //     //   path: '/acl/tenant',
+  //     //   component: () => import('@/view/acl/tenant/index.vue'),
+  //     //   name: 'TenantView',
+  //     //   meta: {
+  //     //     title: '租户管理',
+  //     //     icon: 'Grid'
+  //     //   }
+  //     // },
+      
+  //     {
+  //       path: '/acl/role',
+  //       component: () => import('@/view/acl/role/index.vue'),
+  //       name: 'RoleView',
+  //       meta: {
+  //         title: '角色管理',
+  //         icon: 'Avatar'
+  //       }
+  //     },
+  //     {
+  //       path: '/acl/authority',
+  //       component: () => import('@/view/acl/authority/index.vue'),
+  //       name: 'PermissionView',
+  //       meta: {
+  //         title: '权限管理',
+  //         icon: 'Monitor',
+  //         hidden: true,
+  //       }
+  //     },
+  //     {
+  //       path: '/acl/record',
+  //       component: () => import('@/view/acl/record/index.vue'),
+  //       name: 'RechargeView',
+  //       meta: {
+  //         title: '充值管理',
+  //         icon: 'Money'
+  //       }
+  //     },
+  //   ]
+  // },
+
+  // {
+  //   //运营管理----订单管理/价格规则
+  //   path: '/opration',
+  //   component: () => import('@/layout/index.vue'),
+  //   name: 'Opration',
+  //   meta: {
+  //     title: '运营管理',
+  //     hidden: false,
+  //     icon: 'Management'
+  //   },
+  //   redirect: '/opration/order',
+  //   children: [
+  //     {
+  //       path: '/opration/order',
+  //       component: () => import('@/view/opration/order/index.vue'),
+  //       name: 'ChargeOrderView',
+  //       meta: {
+  //         title: '充电订单',
+  //         hidden: false,
+  //         icon: 'Lock'
+  //       }
+  //     },
+  //     {
+  //       path: '/opration/priceRange',
+  //       component: () => import('@/view/opration/priceRange/index.vue'),
+  //       name: 'PriceView',
+  //       meta: {
+  //         title: '充电价格',
+  //         hidden: false,
+  //         icon: 'PriceTag'
+  //       }
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   //审计
+  //   path: '/audit',
+  //   component: () => import('@/layout/index.vue'),
+  //   redirect: '/audit',
+  //   children: [
+  //     {
+  //       path: '/audit',
+  //       component: () => import('@/view/audit/index.vue'),
+  //       name: 'AtuditLogView',
+  //       meta: {
+  //         title: '审计日志',
+  //         hidden: false,
+  //         icon: 'Edit'
+  //       }
+  //     },
+  //   ]
+  // },
 ]
+
+
+
 
 //任意路由
 export const anyRoute = {

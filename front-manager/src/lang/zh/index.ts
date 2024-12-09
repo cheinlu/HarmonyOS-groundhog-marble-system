@@ -1,6 +1,6 @@
 export default {
   login:{
-    welcome:'欢迎来到 土拨鼠充电平台',
+    welcome:'欢迎来到 大理石Sass平台',
     account:'没有账号',
     register:'去注册',
     tenement:'租户',
@@ -18,7 +18,7 @@ export default {
     
   },
   register:{
-    welcome:'欢迎注册 土拨鼠充电平台',
+    welcome:'欢迎注册 大理石Sass平台',
     username: '用户名',
     validCode: '验证码',
     getCode:'获取验证码',

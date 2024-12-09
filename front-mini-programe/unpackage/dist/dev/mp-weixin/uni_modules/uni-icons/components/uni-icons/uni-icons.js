@@ -1,5 +1,5 @@
 "use strict";
-const uni_modules_uniIcons_components_uniIcons_icons = require("./icons.js");
+const uni_modules_uniIcons_components_uniIcons_uniicons_file_vue = require("./uniicons_file_vue.js");
 const common_vendor = require("../../../../common/vendor.js");
 const getVal = (val) => {
   const reg = /^[0-9]*$/g;
@@ -24,23 +24,33 @@ const _sfc_main = {
     customPrefix: {
       type: String,
       default: ""
+    },
+    fontFamily: {
+      type: String,
+      default: ""
     }
   },
   data() {
     return {
-      icons: uni_modules_uniIcons_components_uniIcons_icons.icons.glyphs
+      icons: uni_modules_uniIcons_components_uniIcons_uniicons_file_vue.fontData
     };
   },
   computed: {
     unicode() {
       let code = this.icons.find((v) => v.font_class === this.type);
       if (code) {
-        return unescape(`%u${code.unicode}`);
+        return code.unicode;
       }
       return "";
     },
     iconSize() {
       return getVal(this.size);
+    },
+    styleObj() {
+      if (this.fontFamily !== "") {
+        return `color: ${this.color}; font-size: ${this.iconSize}; font-family: ${this.fontFamily};`;
+      }
+      return `color: ${this.color}; font-size: ${this.iconSize};`;
     }
   },
   methods: {
@@ -51,13 +61,12 @@ const _sfc_main = {
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: $props.color,
-    b: $options.iconSize,
-    c: common_vendor.n("uniui-" + $props.type),
-    d: common_vendor.n($props.customPrefix),
-    e: common_vendor.n($props.customPrefix ? $props.type : ""),
-    f: common_vendor.o((...args) => $options._onClick && $options._onClick(...args))
+    a: common_vendor.s($options.styleObj),
+    b: common_vendor.n("uniui-" + $props.type),
+    c: common_vendor.n($props.customPrefix),
+    d: common_vendor.n($props.customPrefix ? $props.type : ""),
+    e: common_vendor.o((...args) => $options._onClick && $options._onClick(...args))
   };
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "C:/Users/123/Desktop/code/lucy-demo/01土拨鼠充电系统/groundhog-charging-system/front-mini-programe/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/hy-harmonyos/Desktop/Lucy-folder/code/HarmonyOS-groundhog-marble-system/front-mini-programe/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
 wx.createComponent(Component);

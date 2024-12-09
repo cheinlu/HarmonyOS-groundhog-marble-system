@@ -1,9 +1,5 @@
 {
-  "navigationBarTitleText": "我的",
+  "navigationBarTitleText": "联系方式",
   "enablePullDownRefresh": false,
-  "usingComponents": {
-    "login": "../../components/login/login",
-    "info": "../../components/info/info",
-    "tabbar": "../../components/tabbar/tabbar"
-  }
+  "usingComponents": {}
 }

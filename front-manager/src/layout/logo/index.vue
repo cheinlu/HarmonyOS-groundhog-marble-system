@@ -1,7 +1,7 @@
 <template>
   <div class="logo">
     <img src="@/assets/images/Groundhog.jpg" alt="" />
-    <p>土拨鼠 SaaS 充电平台</p>
+    <p>大理石 SaaS 平台</p>
   </div>
 </template>
 

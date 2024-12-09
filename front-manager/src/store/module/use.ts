@@ -109,8 +109,9 @@ const useUserStore = defineStore('User',{
       this.permissionList = res.data.permissionList
 
       SET_PERMISSION(res.data.permissionList)
-      //当前用户展示的异步路由
+      //当前用户展示的异步路由 
       let filteredAsyncRoute = filterRoutes(cloneDeep(asyncRoute), res.data.permissionList)
+      
       //菜单需要的路由数据整理
       this.menuRoutes = [...constantRoute,...filteredAsyncRoute,anyRoute]
       //目前路由器管理的只有常量路由:用户计算完毕异步路由、任意路由动态追加

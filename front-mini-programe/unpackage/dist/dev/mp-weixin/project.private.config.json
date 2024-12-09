@@ -8,6 +8,97 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/furniture/furniture",
+          "pathName": "pages/furniture/furniture",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/rawStone/rawStone",
+          "pathName": "pages/rawStone/rawStone",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/slabs/slabs",
+          "pathName": "pages/slabs/slabs",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "subpkg/slabsDetail/slabsDetail",
+          "pathName": "subpkg/slabsDetail/slabsDetail",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/rawStone/rawStone",
+          "pathName": "pages/rawStone/rawStone",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "subpkg/furnitureDetail/furnitureDetail",
+          "pathName": "subpkg/furnitureDetail/furnitureDetail",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/furniture/furniture",
+          "pathName": "pages/furniture/furniture",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/my/my",
+          "pathName": "pages/my/my",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "subpkg/furnitureDetail/furnitureDetail",
+          "pathName": "subpkg/furnitureDetail/furnitureDetail",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/furniture/furniture",
+          "pathName": "pages/furniture/furniture",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/slabs/slabs",
+          "pathName": "pages/slabs/slabs",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "subpkg/slabsSize/slabsSize",
+          "pathName": "subpkg/slabsSize/slabsSize",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "subpkg/slabsDetail/slabsDetail",
+          "pathName": "subpkg/slabsDetail/slabsDetail",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "",
           "pathName": "pages/charge/charge",
           "query": "",

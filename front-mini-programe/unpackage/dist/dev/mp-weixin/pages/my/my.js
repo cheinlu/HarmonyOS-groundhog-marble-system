@@ -1,35 +1,41 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
-const store_user = require("../../store/user.js");
+const common_assets = require("../../common/assets.js");
+const utils_api_marble = require("../../utils/api/marble.js");
+require("../../utils/request.js");
+require("../../env.js");
+require("../../store/user.js");
 require("../../utils/token.js");
-if (!Array) {
-  const _easycom_login2 = common_vendor.resolveComponent("login");
-  const _easycom_info2 = common_vendor.resolveComponent("info");
-  const _easycom_tabbar2 = common_vendor.resolveComponent("tabbar");
-  (_easycom_login2 + _easycom_info2 + _easycom_tabbar2)();
-}
-const _easycom_login = () => "../../components/login/login.js";
-const _easycom_info = () => "../../components/info/info.js";
-const _easycom_tabbar = () => "../../components/tabbar/tabbar.js";
-if (!Math) {
-  (_easycom_login + _easycom_info + _easycom_tabbar)();
-}
 const _sfc_main = {
   __name: "my",
   setup(__props) {
-    let useStore = store_user.useUserStore();
-    common_vendor.onShow(() => {
-      common_vendor.index.hideTabBar({
-        animation: false
-      });
-      useStore.activeTab = 2;
+    common_vendor.onMounted(() => {
+      getStoreList();
     });
+    const storeList = common_vendor.ref([]);
+    const getStoreList = async () => {
+      let { data: res } = await utils_api_marble.requestStoreList();
+      if (res.code == 0) {
+        storeList.value = res.data.store_infos;
+      }
+    };
     return (_ctx, _cache) => {
-      return common_vendor.e({
-        a: !common_vendor.unref(useStore).token
-      }, !common_vendor.unref(useStore).token ? {} : {});
+      return {
+        a: common_vendor.f(storeList.value, (address, k0, i0) => {
+          return {
+            a: common_vendor.t(address.name),
+            b: common_vendor.t(address.address),
+            c: common_vendor.t(address.phone),
+            d: "tel:" + address.phone,
+            e: address.name
+          };
+        }),
+        b: common_assets._imports_0,
+        c: common_assets._imports_1,
+        d: _ctx.scrollTop
+      };
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "C:/Users/123/Desktop/code/lucy-demo/01土拨鼠充电系统/groundhog-charging-system/front-mini-programe/pages/my/my.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/hy-harmonyos/Desktop/Lucy-folder/code/HarmonyOS-groundhog-marble-system/front-mini-programe/pages/my/my.vue"]]);
 wx.createPage(MiniProgramPage);

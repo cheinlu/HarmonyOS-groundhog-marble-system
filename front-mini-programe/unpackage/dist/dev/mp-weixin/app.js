@@ -118,11 +118,15 @@ require("./uni_modules/uview-plus/libs/config/props/upload.js");
 require("./uni_modules/uview-plus/libs/config/zIndex.js");
 require("./uni_modules/uview-plus/libs/function/platform.js");
 if (!Math) {
-  "./pages/charge/charge.js";
+  "./pages/home/home.js";
   "./pages/my/my.js";
-  "./pages/scan/scan.js";
-  "./subpkg/charging/charging.js";
-  "./subpkg/chargeOrder/chargeOrder.js";
+  "./pages/slabs/slabs.js";
+  "./pages/rawStone/rawStone.js";
+  "./pages/furniture/furniture.js";
+  "./subpkg/slabsDetail/slabsDetail.js";
+  "./subpkg/slabsSize/slabsSize.js";
+  "./subpkg/furnitureDetail/furnitureDetail.js";
+  "./subpkg/slabsSearch/slabsSearch.js";
 }
 const _sfc_main = {
   onLaunch: function() {
@@ -135,7 +139,7 @@ const _sfc_main = {
     console.log("App Hide");
   }
 };
-const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "C:/Users/123/Desktop/code/lucy-demo/01土拨鼠充电系统/groundhog-charging-system/front-mini-programe/App.vue"]]);
+const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/hy-harmonyos/Desktop/Lucy-folder/code/HarmonyOS-groundhog-marble-system/front-mini-programe/App.vue"]]);
 common_vendor.index.$showMsg = function(title = "数据请求失败！", duration = 1500) {
   common_vendor.index.showToast({
     title,
