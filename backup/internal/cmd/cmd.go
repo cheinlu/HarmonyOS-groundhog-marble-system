@@ -96,12 +96,8 @@ var (
 				// 微信路由
 				group.Bind(
 					&wxController.WxLoginController{},
+					&wxController.WxMarblesController{},
 				)
-				group.GET("", new(wxController.WxChargeController).StationList)
-				group.GET("", new(wxController.WxChargeController).PileList)
-				group.GET("", new(wxController.WxMarblesNameController).MarblesNameList)
-				group.GET("", new(wxController.WxMarblesController).MarblesList)
-				group.GET("", new(wxController.WxMarblesController).MarblesMarbleList)
 				group.Group("", func(group *ghttp.RouterGroup) {
 					group.Middleware(middleware.Auth)
 					group.POST("", new(wxController.WxChargeController).StartCharge)

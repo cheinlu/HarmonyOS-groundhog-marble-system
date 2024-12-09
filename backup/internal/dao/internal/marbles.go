@@ -20,40 +20,52 @@ type MarblesDao struct {
 
 // MarblesColumns defines and stores column names for table marbles.
 type MarblesColumns struct {
-	Id          string //
-	TenantId    string //
-	Sn          string //
-	Name        string //
-	Type        string //
-	PictureUrls string //
-	Price       string //
-	Width       string //
-	Length      string //
-	Height      string //
-	Mass        string //
-	Area        string //
-	State       string //
-	Description string //
-	IsDeleted   string //
+	Id           string //
+	TenantId     string //
+	Sn           string //
+	Name         string //
+	Type         string //
+	PictureUrls  string //
+	Price        string //
+	Width        string //
+	Length       string //
+	Height       string //
+	Mass         string //
+	Area         string //
+	State        string //
+	Description  string //
+	Remark       string //
+	IsDeleted    string //
+	PictureUrls1 string //
+	PictureUrls2 string //
+	PictureUrls3 string //
+	PictureUrls4 string //
+	PictureUrls5 string //
 }
 
 // marblesColumns holds the columns for table marbles.
 var marblesColumns = MarblesColumns{
-	Id:          "id",
-	TenantId:    "tenant_id",
-	Sn:          "sn",
-	Name:        "name",
-	Type:        "type",
-	PictureUrls: "picture_urls",
-	Price:       "price",
-	Width:       "width",
-	Length:      "length",
-	Height:      "height",
-	Mass:        "mass",
-	Area:        "area",
-	State:       "state",
-	Description: "description",
-	IsDeleted:   "is_deleted",
+	Id:           "id",
+	TenantId:     "tenant_id",
+	Sn:           "sn",
+	Name:         "name",
+	Type:         "type",
+	PictureUrls:  "picture_urls",
+	Price:        "price",
+	Width:        "width",
+	Length:       "length",
+	Height:       "height",
+	Mass:         "mass",
+	Area:         "area",
+	State:        "state",
+	Description:  "description",
+	Remark:       "remark",
+	IsDeleted:    "is_deleted",
+	PictureUrls1: "picture_urls1",
+	PictureUrls2: "picture_urls2",
+	PictureUrls3: "picture_urls3",
+	PictureUrls4: "picture_urls4",
+	PictureUrls5: "picture_urls5",
 }
 
 // NewMarblesDao creates and returns a new DAO object for table data access.

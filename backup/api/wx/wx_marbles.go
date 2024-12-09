@@ -14,19 +14,25 @@ type WXMarblesListReq struct {
 	model.PageReq
 }
 type WXMarblesListRes struct {
-	Id          int     `json:"id"          ` //
-	Sn          string  `json:"sn"          ` //
-	Name        string  `json:"name"        ` //
-	Type        string  `json:"type"        ` //
-	PictureUrls string  `json:"pictureUrls" ` //
-	Price       int     `json:"price"       ` //
-	Width       int     `json:"width"       ` //
-	Length      int     `json:"length"      ` //
-	Height      int     `json:"height"      ` //
-	Mass        int     `json:"mass"        ` //
-	Area        float64 `json:"area"        ` //
-	State       int     `json:"state"       ` //
-	Description string  `json:"description" ` //
+	Id           int     `json:"id"          ` //
+	Sn           string  `json:"sn"          ` //
+	Name         string  `json:"name"        ` //
+	Type         string  `json:"type"        ` //
+	PictureUrls  string  `json:"pictureUrls" ` //
+	Price        int     `json:"price"       ` //
+	Width        int     `json:"width"       ` //
+	Length       int     `json:"length"      ` //
+	Height       int     `json:"height"      ` //
+	Mass         int     `json:"mass"        ` //
+	Area         float64 `json:"area"        ` //
+	State        int     `json:"state"       ` //
+	Remark       string  `json:"remark"       `
+	Description  string  `json:"description" `  //
+	PictureUrls1 string  `json:"pictureUrls1" ` //
+	PictureUrls2 string  `json:"pictureUrls2" ` //
+	PictureUrls3 string  `json:"pictureUrls3" ` //
+	PictureUrls4 string  `json:"pictureUrls4" ` //
+	PictureUrls5 string  `json:"pictureUrls5" ` //
 }
 
 type WXMarblesMarbleListReq struct {
@@ -58,4 +64,36 @@ type WXMarbleLayerListRes struct {
 	Height      int                `json:"height"      ` //
 	Area        float64            `json:"area"        ` //
 	Slices      []WXMarblesListRes `json:"slices"      ` //
+}
+
+type WXMarblesNameListReq struct {
+	g.Meta `path:"/wx-api/marble/name/list" tags:"微信小程序业务接口" method:"GET" summary:"小程序：大理石名称列表"`
+	model.PageReq
+}
+type WXMarblesNameListRes struct {
+	Id         int    `json:"id"         ` //
+	Name       string `json:"name"       ` //
+	PictureUrl string `json:"pictureUrl" ` //
+}
+
+type WXStoreListReq struct {
+	g.Meta `path:"/wx-api/marble/store/list" tags:"微信小程序业务接口" method:"GET" summary:"小程序：商铺地址列表"`
+}
+
+type WXStoreListRes struct {
+	StoreInfos []StoreInfo `json:"store_infos"`
+}
+
+type StoreInfo struct {
+	Name    string `json:"name"`
+	Address string `json:"address"`
+	Phone   string `json:"phone"`
+}
+
+type WXSharedPassworadReq struct {
+	g.Meta `path:"/wx-api/marble/password" tags:"微信小程序业务接口" method:"GET" summary:"小程序：展示密码"`
+}
+
+type WXSharedPassworadRes struct {
+	Password string `json:"password"`
 }

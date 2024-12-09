@@ -6,6 +6,9 @@ import (
 	v2 "login-demo/api/wx"
 	"login-demo/internal/logic"
 	"login-demo/internal/model"
+	"strings"
+
+	"github.com/gogf/gf/v2/os/gcfg"
 )
 
 type WxMarblesController struct {
@@ -44,7 +47,7 @@ func (c WxMarblesController) MarblesMarbleList(ctx context.Context, req *v2.WXMa
 	// 初始化分页参数
 	model.InitPageReq(&req.PageReq, 1, 1000)
 
-	// 查询大理石名称列表
+	// 查询大理石切片名称列表
 	marbles, count, err := logic.Marbles.MarblesList(ctx, &v2.WXMarblesListReq{
 		Name:    req.Name,
 		Type:    "slice",
@@ -57,13 +60,10 @@ func (c WxMarblesController) MarblesMarbleList(ctx context.Context, req *v2.WXMa
 	// 创建一个 map 来存储大理石信息
 	marbleMap := make(map[string]v2.WXMarblesMarbleListRes)
 	layerMap := make(map[string]v2.WXMarbleLayerListRes)
-
 	for _, marble := range marbles {
-		marbleSn := marble.Sn[:18]
-		layerSn := marble.Sn[:22]
-
+		marbleSn := marble.Sn[:strings.Index(marble.Sn, "#")]
+		layerSn := marble.Sn[:strings.LastIndex(marble.Sn, "#")]
 		if marble.Type == "slice" {
-			fmt.Println(marbleSn, layerSn)
 			updateMarbleMap(marbleMap, layerMap, marble, marbleSn, layerSn)
 		}
 	}
@@ -143,4 +143,36 @@ func createNewLayer(marble v2.WXMarblesListRes, layerSn string) v2.WXMarbleLayer
 		Length:      marble.Length,
 		Slices:      []v2.WXMarblesListRes{marble},
 	}
+}
+
+// 获取大理石名称列表
+func (c WxMarblesController) StoreList(ctx context.Context, req *v2.WXStoreListReq) (rep v2.WXStoreListRes, err error) {
+	Config, _ := gcfg.New()
+	err = Config.MustGet(ctx, "storeList").Scan(&rep.StoreInfos)
+	return
+}
+
+// 获取大理石名称列表
+func (c WxMarblesController) SharedPassward(ctx context.Context, req *v2.WXSharedPassworadReq) (rep v2.WXSharedPassworadRes, err error) {
+	Config, _ := gcfg.New()
+	err = Config.MustGet(ctx, "marble").Scan(&rep)
+	return
+}
+
+// 获取大理石名称列表
+func (c WxMarblesController) MarblesNameList(ctx context.Context, req *v2.WXMarblesNameListReq) (pageRes model.PageRes, err error) {
+	// 初始化分页参数
+	model.InitPageReq(&req.PageReq, 1, 1000)
+	// 查询大理石名称列表
+	marblesNames, count, err := logic.MarblesName.MarblesNameList(ctx, req.PageReq)
+	res := make([]v2.WXMarblesNameListRes, len(marblesNames))
+	for i, v := range marblesNames {
+		res[i] = v2.WXMarblesNameListRes{
+			Id:         v.Id,
+			Name:       v.Name,
+			PictureUrl: v.PictureUrl,
+		}
+	}
+	pageRes.List, pageRes.PageNo, pageRes.PageSize, pageRes.TotalCount = res, req.PageNo, req.PageSize, count
+	return
 }

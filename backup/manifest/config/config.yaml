@@ -125,3 +125,14 @@ storage:
     bucketName: tuboshu-static3
     location: ap-southeast-1
     accessUrl: https://static.xxx.top
+
+storeList:
+  - name: 惠州店
+    address: 惠州市西湖
+    phone: 555-832231
+  - name: 深圳市店
+    address: 深圳市宝安区坪洲地铁站
+    phone: 13522332222
+# 荒料小程序密码
+marble:
+  password: 888888

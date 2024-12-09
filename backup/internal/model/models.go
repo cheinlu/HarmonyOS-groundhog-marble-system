@@ -20,19 +20,25 @@ type MarbleQuery struct {
 }
 
 type MarblesResult struct {
-	Id          int    `json:"id"          ` //
-	Sn          string `json:"sn"          ` //
-	Name        string `json:"name"        ` //
-	Type        string `json:"type"        ` //
-	PictureUrls string `json:"pictureUrls" ` //
-	Price       int    `json:"price"       ` //
-	Width       int    `json:"width"       ` //
-	Length      int    `json:"length"      ` //
-	Height      int    `json:"height"      ` //
-	Mass        int    `json:"mass"        ` //
-	Area        int    `json:"area"        ` //
-	State       int    `json:"state"       ` //
-	Description string `json:"description" ` //
+	Id           int    `json:"id"          ` //
+	Sn           string `json:"sn"          ` //
+	Name         string `json:"name"        ` //
+	Type         string `json:"type"        ` //
+	PictureUrls  string `json:"pictureUrls" ` //
+	Price        int    `json:"price"       ` //
+	Width        int    `json:"width"       ` //
+	Length       int    `json:"length"      ` //
+	Height       int    `json:"height"      ` //
+	Mass         int    `json:"mass"        ` //
+	Area         int    `json:"area"        ` //
+	State        int    `json:"state"       ` //
+	Remark       string `json:"remark"`
+	Description  string `json:"description" `  //
+	PictureUrls1 string `json:"pictureUrls1" ` //
+	PictureUrls2 string `json:"pictureUrls2" ` //
+	PictureUrls3 string `json:"pictureUrls3" ` //
+	PictureUrls4 string `json:"pictureUrls4" ` //
+	PictureUrls5 string `json:"pictureUrls5" ` //
 }
 
 // 充电订单聚合查询

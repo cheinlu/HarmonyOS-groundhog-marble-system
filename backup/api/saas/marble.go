@@ -24,17 +24,24 @@ type MarbleListRes struct {
 
 // （大理石切片和荒料和商品）入库和添加
 type MarbleAddReq struct {
-	g.Meta      `path:"marble/add" tags:"大理石" method:"POST" summary:"大理石添加和入库"`
-	Type        string `string:"type"  dc:"类型，slices 切片，marble 荒料，shopping 商品"`
-	Sn          string `json:"sn"          ` //
-	Name        string `json:"name"        ` //
-	PictureUrls string `json:"pictureUrls" ` //
-	Price       int    `json:"price"       ` //
-	Width       int    `json:"width"       ` //
-	Length      int    `json:"length"      ` //
-	Height      int    `json:"height"      ` //
-	Mass        int    `json:"mass"        ` //
-	Area        int    `json:"area"        ` //
+	g.Meta       `path:"marble/add" tags:"大理石" method:"POST" summary:"大理石添加和入库"`
+	Type         string `string:"type"  dc:"类型，slices 切片，marble 荒料，shopping 商品"`
+	Sn           string `json:"sn"          ` //
+	Name         string `json:"name"        ` //
+	PictureUrls  string `json:"pictureUrls" ` //
+	Price        int    `json:"price"       ` //
+	Width        int    `json:"width"       ` //
+	Length       int    `json:"length"      ` //
+	Height       int    `json:"height"      ` //
+	Mass         int    `json:"mass"        ` //
+	Area         int    `json:"area"        ` //
+	Description  string `json:"description"`
+	Remark       string `json:"remark"`
+	PictureUrls1 string `json:"pictureUrls1" ` //
+	PictureUrls2 string `json:"pictureUrls2" ` //
+	PictureUrls3 string `json:"pictureUrls3" ` //
+	PictureUrls4 string `json:"pictureUrls4" ` //
+	PictureUrls5 string `json:"pictureUrls5" ` //
 }
 
 type MarbleAddRes struct {
@@ -44,19 +51,26 @@ type MarbleAddRes struct {
 
 // 修改｜出库（大理石切片和荒料和商品）
 type MarbleUpdateReq struct {
-	g.Meta      `path:"marble/update" tags:"大理石" method:"POST" summary:"修改｜出库（大理石切片和荒料和商品）"`
-	Type        string `string:"type"  dc:"类型，slices 切片，marble 荒料，shopping 商品"`
-	Id          int    `json:"id"          ` //
-	Sn          string `json:"sn"          ` //
-	Name        string `json:"name"        ` //
-	PictureUrls string `json:"pictureUrls" ` //
-	Price       int    `json:"price"       ` //
-	Width       int    `json:"width"       ` //
-	Length      int    `json:"length"      ` //
-	Height      int    `json:"height"      ` //
-	Mass        int    `json:"mass"        ` //
-	Area        int    `json:"area"        ` //
-	State       string `json:"state"       ` //
+	g.Meta       `path:"marble/update" tags:"大理石" method:"POST" summary:"修改｜出库（大理石切片和荒料和商品）"`
+	Type         string `string:"type"  dc:"类型，slices 切片，marble 荒料，shopping 商品"`
+	Id           int    `json:"id"          ` //
+	Sn           string `json:"sn"          ` //
+	Name         string `json:"name"        ` //
+	PictureUrls  string `json:"pictureUrls" ` //
+	Price        int    `json:"price"       ` //
+	Width        int    `json:"width"       ` //
+	Length       int    `json:"length"      ` //
+	Height       int    `json:"height"      ` //
+	Mass         int    `json:"mass"        ` //
+	Area         int    `json:"area"        ` //
+	State        string `json:"state"       ` //
+	Description  string `json:"description"`
+	Remark       string `json:"remark"`
+	PictureUrls1 string `json:"pictureUrls1" ` //
+	PictureUrls2 string `json:"pictureUrls2" ` //
+	PictureUrls3 string `json:"pictureUrls3" ` //
+	PictureUrls4 string `json:"pictureUrls4" ` //
+	PictureUrls5 string `json:"pictureUrls5" ` //
 }
 
 type MarbleUpdateRes struct {
@@ -85,4 +99,16 @@ type FileUploadRes struct {
 	g.Meta `mime:"application/json" `
 	Name   string `json:"name" dc:"文件名称"`
 	Url    string `json:"url" dc:"访问URL"`
+}
+
+// 多文件上传请求
+type MultiFileUploadReq struct {
+	g.Meta `path:"multi/file/upload" tags:"公用" method:"post" summary:"多文件上传"`
+	Files  *ghttp.UploadFiles `json:"files" type:"json" dc:"选择上传文件"`
+}
+
+// 多文件上传响应
+type MultiFileUploadRes struct {
+	g.Meta `mime:"application/json" `
+	Urls   string `json:"urls" dc:"访问URL,用逗号隔开"`
 }

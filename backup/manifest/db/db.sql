@@ -229,11 +229,11 @@ CREATE TABLE marbles_name (
 REPLACE INTO marbles_name
 (id, tenant_id,name, picture_url) 
 VALUES 
-(1,1,  "鱼肚灰", "xxx"),
-(2, 1, "伯爵白", "xxx"),
-(3, 1, "烟雨江南", "xxx"),
-(4, 1, "梵高棕", "xxx"),
-(5, 1, "芬迪白", "xxx");
+(1,1,  "鱼肚灰", "http://127.0.0.1:8000/20241208172949-176111.jpg"),
+(2, 1, "伯爵白", "http://127.0.0.1:8000/20241208172949-176111.jpg"),
+(3, 1, "烟雨江南", "http://127.0.0.1:8000/20241208172949-176111.jpg"),
+(4, 1, "梵高棕", "http://127.0.0.1:8000/20241208172949-176111.jpg"),
+(5, 1, "芬迪白", "http://127.0.0.1:8000/20241208172949-176111.jpg");
 
 
 # state 0出库，state 1存在
@@ -252,14 +252,19 @@ CREATE TABLE marbles (
     area INTEGER,
     state INTEGER,
     description TEXT,
-    is_deleted INTEGER DEFAULT 0
+    remark TEXT,
+    is_deleted INTEGER DEFAULT 0,
+    picture_urls1 TEXT,
+    picture_urls2 TEXT,
+    picture_urls3 TEXT,
+    picture_urls4 TEXT,
+    picture_urls5 TEXT
 );
-
 
 REPLACE INTO marbles
 (id, tenant_id, sn, name,type,picture_urls,price,width,length,height,mass,area,state,description) 
 VALUES 
-(1,  1,"DLN-KMB23023-00200#6-3#5", "鱼肚灰","slice","www.baidu.com","","2960","1990","18","","5860800",0,""),
+(1,  1,"DLN-KMB23023-00200#6-3#5", "鱼肚灰","slice","www.baidu.com","","2960","1990","18","","5860800",0,"111"),
 (2,  1,"DLN-KMB23023-00200#6-3#7", "鱼肚灰","slice","www.baidu.com","","2960","1990","18","","5860800",0,""),
 (3,  1,"DLN-KMB23023-00200#6-3#9", "鱼肚灰","slice","www.baidu.com","","2960","1990","18","","5860800",0,""),
 (4,  1,"DLN-KMB23023-00200#6-3#30", "鱼肚灰","slice","www.baidu.com","","2960","1990","18","","5860800",0,""),
@@ -287,3 +292,5 @@ REPLACE INTO alert_rule
 (id, tenant_id, rulename,rule,rule_type,is_deleted) 
 VALUES
 (1, 1, "接口httpcode错误率高","apisix_http_code_error_rate:5m > 10", "业务",0);
+
+
