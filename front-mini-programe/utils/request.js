@@ -1,9 +1,10 @@
-import BASE_URL from '@/env.js'
+
 import useUserStore from '@/store/user.js'
 export const setRequestConfig = () => {
   uni.$u.http.setConfig((config) => {
     /* config 为默认全局配置*/
-    config.baseURL = BASE_URL /* 本地根域名 */
+	// config.baseURL = 'http://127.0.0.1:8000/'
+    config.baseURL = 'https://marble.lusson.xyz'
     return config
   })
   // 请求拦截

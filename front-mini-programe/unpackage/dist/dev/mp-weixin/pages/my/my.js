@@ -3,7 +3,6 @@ const common_vendor = require("../../common/vendor.js");
 const common_assets = require("../../common/assets.js");
 const utils_api_marble = require("../../utils/api/marble.js");
 require("../../utils/request.js");
-require("../../env.js");
 require("../../store/user.js");
 require("../../utils/token.js");
 const _sfc_main = {

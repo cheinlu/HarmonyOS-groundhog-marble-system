@@ -56,7 +56,7 @@
             }
         },
         "requiredPrivateInfos" : [ "getLocation" ],
-        "appid" : "wx974ca7be50e0f1cd",
+        "appid" : "wx7f98e415a32572a7",
         "setting" : {
             "urlCheck" : false,
             "minified" : true
