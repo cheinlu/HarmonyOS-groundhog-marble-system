@@ -46,7 +46,7 @@
   <el-drawer v-model="drawer" size="50%">
     <!-- 头部标题:将来文字内容应该动态的 -->
     <template #header>
-      <h4>{{ $t(chargeForm.id ? 'equip.editStation' : 'equip.addStation') }}</h4>
+      <h4>{{ $t(chargeForm.id ? '修改大板' : '添加大板') }}</h4>
     </template>
     <!-- 身体部分 -->
     <template #default>
@@ -98,18 +98,17 @@
 
 <script setup lang="ts">
 import { ref, onMounted, reactive, nextTick } from 'vue'
-import { Delete, Download, Plus, ZoomIn } from '@element-plus/icons-vue'
+import { Plus } from '@element-plus/icons-vue'
 
 import useLayOutSettingStore from '@/store/module/setting'
 import { ElMessage } from 'element-plus'
 import type { UploadProps } from 'element-plus'
 
-import {reqMarbles,reqAddOrUpdateMarbles,reqRemoveMarbles,reqUploadMarbles} from '@/api/marble/index.ts'
+import {reqMarbles,reqAddOrUpdateMarbles,reqRemoveMarbles,reqUploadMarbles} from '@/api/marble/index'
 import type {marbleList,marbles,marbleAddOrUpdate} from '@/api/marble/type'
 
 const dialogImageUrl = ref('')
 const dialogVisible = ref(false)
-const disabled = ref(false)
 
 
 let settingStore = useLayOutSettingStore()

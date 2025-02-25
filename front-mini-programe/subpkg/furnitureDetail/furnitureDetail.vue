@@ -75,7 +75,6 @@
   			<view class="home" @click="switchHome()"> 
   			<image class="homg_img" src="./images/home.png" mode=""></image>
   			 </view>
-  	    <view class="addcart"> 在线咨询 </view>
   	    <view class="buynow" @click="clickPhone()"> 电话联系 </view>
   	  </view>
   	</view>
@@ -290,7 +289,7 @@ let confimCharge = ()=>{
   padding: 0 20rpx var(--window-bottom);
   border-top: 1rpx solid #eaeaea;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   box-sizing: content-box;
   .buttons {

@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted ,computed} from 'vue'
-import { reqAllPermiList,reqBindPermi } from '@/api/acl/authority/index.ts'
+import { reqAllPermiList,reqBindPermi } from '@/api/acl/authority/index'
 import { useRoute,useRouter} from 'vue-router'
 import { ElMessage } from 'element-plus'
 let $route = useRoute()

@@ -5,6 +5,13 @@
   "main": "",
   "author": "",
   "license": "",
-  "dependencies": {}
+  "dependencies": {
+    "@tbs/common": "file:../common",
+    "@tbs/home": "file:../feature/home",
+    "@tbs/slabs": "file:../feature/slabs",
+    "@tbs/blocks": "file:../feature/blocks",
+    "@tbs/furniture": "file:../feature/furniture",
+    "@tbs/mine": "file:../feature/mine"
+  }
 }
 

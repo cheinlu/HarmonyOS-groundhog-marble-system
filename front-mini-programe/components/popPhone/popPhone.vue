@@ -3,7 +3,7 @@
   <u-popup :show="show" mode="bottom" closeable @close="confim">
     <view class="pop-contain">
       <view class="phone">
-        400-0000-863
+        18060036683/18201995299
 		<image class="image" src="/static/images/right_arrow.png" mode=""></image>
       </view>
 	  <view class="confim" @click="confirmBtn()">

@@ -48,7 +48,7 @@
   <el-drawer v-model="drawer" size="50%">
     <!-- 头部标题:将来文字内容应该动态的 -->
     <template #header>
-      <h4>{{ $t(chargeForm.id ? 'equip.editStation' : 'equip.addStation') }}</h4>
+      <h4>{{ $t(chargeForm.id ? '修改荒料' : '添加荒料') }}</h4>
     </template>
     <!-- 身体部分 -->
     <template #default>
@@ -126,7 +126,7 @@ import useLayOutSettingStore from '@/store/module/setting'
 import { ElMessage } from 'element-plus'
 import type { UploadProps, } from 'element-plus'
 
-import {reqMarbles,reqAddOrUpdateMarbles,reqRemoveMarbles,reqUploadMarbles} from '@/api/marble/index.ts'
+import {reqMarbles,reqAddOrUpdateMarbles,reqRemoveMarbles,reqUploadMarbles} from '@/api/marble/index'
 import type {marbleList,marbles,marbleAddOrUpdate} from '@/api/marble/type'
 
 

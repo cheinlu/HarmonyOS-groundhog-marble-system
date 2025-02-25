@@ -1,61 +1,76 @@
-import BreakpointType from '../common/bean/BreanpointType'
-import BreakpointConstants from '../common/constants/BreakpointConstants'
-import BreakpointSystem from '../common/utils/BreakpointSystem'
-import ChargeIndex from '../view/charge/ChargeIndex'
-import ScanIndex from '../view/scan/ScanIndex'
-import UserIndex from '../view/user/UserIndex'
+import { BlocksPage } from '@tbs/blocks'
+import { StyleConst } from '@tbs/common'
+import { FurniturePage } from '@tbs/furniture'
+import { HomePage } from '@tbs/home'
+import { MinePage } from '@tbs/mine'
+import { SlabsPage } from '@tbs/slabs'
+import { buttonInfo, ButtonInfoModel } from '../viewModel/pageData'
+
 @Entry
 @Component
 struct Index {
-  @State currentIndex:number = 0
-  private breakpointSystem:BreakpointSystem = new BreakpointSystem()
-  @StorageProp('currentBreakpoint') currentBreakpoint:string = BreakpointConstants.BREAKPOINT_SM
+  controller: TabsController = new TabsController()
+  @State currentIndex: number = 0
 
-  aboutToAppear(){
-    this.breakpointSystem.register()
+  aboutToAppear(): void {
+    getContext().eventHub.on('tabSwitch', (index: number) => {
+      this.controller.changeIndex(index)
+    })
   }
 
-  aboutToDisappear(){
-    this.breakpointSystem.unregister()
-  }
-
-  @Builder TabBarBuilder(title: ResourceStr, image: ResourceStr, index: number){
-    Column({space:8}){
-      Image(image)
-        .width(22)
-        .fillColor(this.selectColor(index))
-      Text(title)
-        .fontSize(14)
-        .fontColor(this.selectColor(index))
-    }
-  }
-
-  selectColor(index: number){
-    return this.currentIndex === index ? $r('app.color.primary_color') : $r('app.color.gray')
+  aboutToDisappear(): void {
+    getContext().eventHub.off('tabSwitch')
   }
 
   build() {
-    Tabs({ barPosition: BreakpointConstants.BAR_POSITION.getValue(this.currentBreakpoint) }){
-      TabContent(){
-        ChargeIndex()
+    Flex({ direction: FlexDirection.Column, justifyContent: FlexAlign.End, alignItems: ItemAlign.Center }) {
+      Tabs({ barPosition: BarPosition.End, index: 0, controller: this.controller }) {
+        ForEach(buttonInfo, (item: ButtonInfoModel, index?: number) => {
+          TabContent() {
+            if (index == 0) {
+              HomePage()
+            } else if (index == 1) {
+              SlabsPage()
+            } else if (index == 2) {
+              BlocksPage()
+            } else if (index == 3) {
+              FurniturePage()
+            } else if (index == 4) {
+              MinePage()
+            }
+          }.tabBar(this.BottomNavigation(item))
+        })
       }
-      .tabBar(this.TabBarBuilder($r('app.string.tab_record'), $r('app.media.ic_calendar'), 0))
-      TabContent(){
-        ScanIndex()
-      }
-      .tabBar(this.TabBarBuilder($r('app.string.tab_discover'), $r('app.media.discover'), 1))
-      TabContent(){
-        UserIndex()
-      }
-      .tabBar(this.TabBarBuilder($r('app.string.tab_user'), $r('app.media.ic_user_portrait'), 2))
+      .width(StyleConst.FULL_WIDTH)
+      .height(StyleConst.FULL_HEIGHT)
+      .vertical(false)
+      .scrollable(false)
+      .animationDuration(0)
+      .divider({ strokeWidth: 1, color: $r('app.color.color_f0f2f4') })
+      .barHeight($r('app.float.size_55'))
+      .onChange((index) => {
+        this.currentIndex = index
+      })
     }
-    .width('100%')
-    .height('100%')
-    .onChange(index => this.currentIndex = index)
-    .vertical(new BreakpointType({
-      sm: false,
-      md: true,
-      lg: true
-    }).getValue(this.currentBreakpoint))
+  }
+
+  @Builder
+  BottomNavigation(item: ButtonInfoModel) {
+    Column({ space: 6 }) {
+      Image(this.currentIndex === item.index ? item.selectImg : item.img)
+        .objectFit(ImageFit.Contain)
+        .width($r('app.float.size_24'))
+        .height($r('app.float.size_24'))
+      Text(item.title)
+        .fontColor(this.currentIndex === item.index ? $r('app.color.color_0165b8') : Color.Black)
+        .opacity(this.currentIndex === item.index ? 1 : 0.6)
+        .fontWeight(FontWeight.Medium)
+        .textAlign(TextAlign.Center)
+        .fontSize($r('app.float.size_text_10'))
+    }
+    .width(StyleConst.FULL_WIDTH)
+    .height(StyleConst.FULL_HEIGHT)
+    .alignItems(HorizontalAlign.Center)
+    .justifyContent(FlexAlign.Center)
   }
 }

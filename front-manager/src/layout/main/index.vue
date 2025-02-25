@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { watch, ref, nextTick } from 'vue'
-import useLayOutSettingStore from '@/store/module/setting.ts'
+import useLayOutSettingStore from '@/store/module/setting'
 let layOutSettingStore = useLayOutSettingStore()
 
 //控制当前组件是否销毁重建

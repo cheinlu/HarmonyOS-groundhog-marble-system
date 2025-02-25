@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { formatDate } from '@/utils/time.ts'
+import { formatDate } from '@/utils/time'
 import { ElMessage } from 'element-plus'
 import { reqTeList, reqAddOrUpdateTe, reqDeleteTe } from '@/api/acl/tenant/index'
 import {tenantList,teList,tenant} from '@/api/acl/tenant/type'

@@ -4,9 +4,9 @@ import {SET_TOKEN} from '@/utils/token'
 //引入jwt
 import jwtDecode from 'jwt-decode';
 //引入token续期的api接口
-import {reqRefresh} from '@/api/user/index.ts'
+import {reqRefresh} from '@/api/user/index'
 //引入用户相关的仓库
-import useUserStore from '@/store/module/use.ts'
+import useUserStore from '@/store/module/use'
 let request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 10000

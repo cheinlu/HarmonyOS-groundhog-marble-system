@@ -7,7 +7,7 @@ import path from "path";
 var vite_config_default = defineConfig(({ command }) => {
   const isProduction = command === "build";
   return {
-    base: isProduction ? "https://static.tuboshulucy.top/" : "/",
+    base: isProduction ? "https://static.lusson.xyz/" : "/",
     plugins: [
       vue(),
       createSvgIconsPlugin({

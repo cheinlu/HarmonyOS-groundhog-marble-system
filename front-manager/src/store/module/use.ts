@@ -16,7 +16,6 @@ import { constantRoute,asyncRoute,anyRoute} from '@/router/routes'
 //引入路由
 import router from '@/router'
 //引入深拷贝方法
-//@ts-expect-error
 import cloneDeep from 'lodash/cloneDeep'
 //用于过滤当前用户需要展示的异步路由
 function filterRoutes(routes:any,names:any, depth = 0){

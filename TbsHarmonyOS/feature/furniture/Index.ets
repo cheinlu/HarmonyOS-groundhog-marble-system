@@ -1,0 +1,1 @@
+export {FurniturePage} from './src/main/ets/page/FurniturePage'

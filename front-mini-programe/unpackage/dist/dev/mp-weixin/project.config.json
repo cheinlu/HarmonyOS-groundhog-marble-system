@@ -18,8 +18,8 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "3.7.0",
-  "appid": "wx7f98e415a32572a7",
+  "libVersion": "3.7.6",
+  "appid": "wx72c839754535dfa9",
   "projectname": "土拨鼠充电开源演示项目",
   "condition": {
     "search": {

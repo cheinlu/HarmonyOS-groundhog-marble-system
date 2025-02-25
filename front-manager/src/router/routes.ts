@@ -60,24 +60,24 @@ export const constantRoute = [
 
 //异步路由
 export const asyncRoute = [
-  {
-    //数据大屏
-    path: '/screen',
-    component: () => import('@/layout/index.vue'),
-    redirect: '/screen',
-    children: [
-      {
-        path: '/screen',
-        component: () => import('@/view/screen/index.vue'),
-        name: 'ScreenView',
-        meta: {
-          hidden: false,
-          title: '数据大屏',
-          icon: 'Platform',
-        }
-      },
-    ]
-  },
+  // {
+  //   //数据大屏
+  //   path: '/screen',
+  //   component: () => import('@/layout/index.vue'),
+  //   redirect: '/screen',
+  //   children: [
+  //     {
+  //       path: '/screen',
+  //       component: () => import('@/view/screen/index.vue'),
+  //       name: 'ScreenView',
+  //       meta: {
+  //         hidden: false,
+  //         title: '数据大屏',
+  //         icon: 'Platform',
+  //       }
+  //     },
+  //   ]
+  // },
 
   {
     //大理石管理----大板/荒料/家居

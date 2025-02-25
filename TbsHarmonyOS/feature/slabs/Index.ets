@@ -1,0 +1,1 @@
+export {SlabsPage} from './src/main/ets/page/SlabsPage'

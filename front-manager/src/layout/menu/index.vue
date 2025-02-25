@@ -42,8 +42,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 //获取父组件传递的数据
-let arr = defineProps(['menuList'])
-
+defineProps(['menuList'])
 //获取路由
 let $router = useRouter()
 //点击菜单的回调

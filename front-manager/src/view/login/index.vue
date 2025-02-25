@@ -78,19 +78,19 @@
     </div>
     <el-dropdown class="language-rect">
       <span class="el-dropdown-link">
-        <svg-icon name="language" width="30px" height="20px">1</svg-icon>
-        <span>{{ $t('login.language') }}</span>
+        <!-- <svg-icon name="language" width="30px" height="20px">1</svg-icon> -->
+        <!-- <span>{{ $t('login.language') }}</span>
         <el-icon class="el-icon--right">
           <arrow-down />
-        </el-icon>
+        </el-icon> -->
       </span>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item @click="changeZh">
-            {{ $t('login.chinese') }}
+            <!-- {{ $t('login.chinese') }} -->
           </el-dropdown-item>
           <el-dropdown-item @click="changeEn">
-            {{ $t('login.english') }}
+            <!-- {{ $t('login.english') }} -->
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>

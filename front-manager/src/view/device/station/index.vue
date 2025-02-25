@@ -97,7 +97,7 @@
 <script setup lang="ts">
 import BMap from 'vue-baidu-map-3x'
 import { ref, onMounted, reactive, nextTick } from 'vue'
-import { reqStation, reqRemoveStation, reqAddOrUpdateStation, reqUpload } from '@/api/device/station/index.ts'
+import { reqStation, reqRemoveStation, reqAddOrUpdateStation, reqUpload } from '@/api/device/station/index'
 import type { stationList, stations, stationAddOrUpdate } from '@/api/device/station/type'
 import useLayOutSettingStore from '@/store/module/setting'
 import { ElMessage } from 'element-plus'

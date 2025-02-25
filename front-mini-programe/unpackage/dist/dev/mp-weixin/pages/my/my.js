@@ -36,5 +36,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/hy-harmonyos/Desktop/Lucy-folder/code/HarmonyOS-groundhog-marble-system/front-mini-programe/pages/my/my.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/hy-harmonyos/Desktop/Lucy-folder/code/tuboshu/HarmonyOS-groundhog-marble-system/front-mini-programe/pages/my/my.vue"]]);
 wx.createPage(MiniProgramPage);

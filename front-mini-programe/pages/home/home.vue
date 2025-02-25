@@ -1,12 +1,12 @@
 <template>
 	<view class="home-container">
-		<image class="homeBg-img" src="/static/images/home-bg.jpg" mode="">
+		<image class="homeBg-img" src="https://static.lusson.xyz/wx-miniprogram-image/home_bg.png" mode="">
 			<!-- <image class="title-img" src="/static/images/title.png" mode=""></image> -->
 		<view class="title-img">
-			大板云仓
+			科石云仓
 		</view>
-		<video class="video" src="https://aim6.oss-cn-beijing.aliyuncs.com/test_file/null/E01/S01/Fodder/2/20231025141435916gf6vmD.mp4"
-		                    :danmu-list="danmuList" enable-danmu danmu-btn controls></video>
+		<!-- <video class="video" src="https://aim6.oss-cn-beijing.aliyuncs.com/test_file/null/E01/S01/Fodder/2/20231025141435916gf6vmD.mp4"
+		                    :danmu-list="danmuList" enable-danmu danmu-btn controls></video> -->
 		<view class="home-btn">
 			<view class="btn-row" @click="goSwitch('slabs')">
 				<view class="btn-row-zh">大板</view>

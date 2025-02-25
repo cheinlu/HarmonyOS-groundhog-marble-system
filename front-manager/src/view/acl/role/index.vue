@@ -58,10 +58,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted, reactive, nextTick } from 'vue'
-import { formatDate } from '@/utils/time.ts'
-import { reqAllRoleList,reqAddOrUpdateRole ,reqRemoveRole} from '@/api/acl/role/index.ts'
+import { formatDate } from '@/utils/time'
+import { reqAllRoleList,reqAddOrUpdateRole ,reqRemoveRole} from '@/api/acl/role/index'
 import type {roles,roleList,roleAddOrUp} from '@/api/acl/role/type'
-import useLayOutSettingStore from '@/store/module/setting.ts'
+import useLayOutSettingStore from '@/store/module/setting'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 

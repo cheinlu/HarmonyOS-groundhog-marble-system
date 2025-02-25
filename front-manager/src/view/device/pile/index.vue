@@ -76,7 +76,7 @@
 import { ref, onMounted, reactive, nextTick } from 'vue'
 import { reqPile, reqAddOrUpdatePile, reqRemovePile } from '@/api/device/pile/index'
 import type { pileList, piles, pileAddOrUpdate } from '@/api/device/pile/type'
-import { reqStation } from '@/api/device/station/index.ts'
+import { reqStation } from '@/api/device/station/index'
 import type { stationList, stations } from '@/api/device/station/type'
 import useLayOutSettingStore from '@/store/module/setting'
 import { ElMessage } from 'element-plus'

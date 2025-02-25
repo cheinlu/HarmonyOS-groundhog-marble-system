@@ -8,7 +8,7 @@ import path from 'path'
 export default defineConfig(({command})=>{
   const isProduction = command === 'build';
   return {
-    base: isProduction ? 'https://static.tuboshulucy.top/' : '/',
+    base: isProduction ? 'https://static.lusson.xyz/' : '/',
     plugins: [vue(),
       createSvgIconsPlugin({
         iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
@@ -35,7 +35,7 @@ export default defineConfig(({command})=>{
     server:{
       proxy:{
         '/saas-api': {
-          target: 'http://127.0.0.1:8000/',
+          target: 'http://newmanager.lusson.xyz/',
           changeOrigin: true
         },
       }

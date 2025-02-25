@@ -1,12 +1,40 @@
 {
   "app": {
-    "signingConfigs": [],
-    "compileSdkVersion": 9,
-    "compatibleSdkVersion": 9,
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/hy-harmonyos/.ohos/config/default_TbsMarbleHarmonyNext_qiY5rC1gqXz8m3_aDZ7rX13FiaLpkl5Je4F3oKyO4jg=.cer",
+          "storePassword": "0000001BF6EC937729B3D0CAFCFB92DF9F692010835B6CADF976C497BF55414DBF17595368FC3A267EB419",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B9DD6F9C3FAC6D4ECB86CF8C54D60FC890DFD8E0E5C45B70465A1E265E99252F7CFA56877AA55B2",
+          "profile": "/Users/hy-harmonyos/.ohos/config/default_TbsMarbleHarmonyNext_qiY5rC1gqXz8m3_aDZ7rX13FiaLpkl5Je4F3oKyO4jg=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/hy-harmonyos/.ohos/config/default_TbsMarbleHarmonyNext_qiY5rC1gqXz8m3_aDZ7rX13FiaLpkl5Je4F3oKyO4jg=.p12"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
         "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
       }
     ]
   },
@@ -22,6 +50,30 @@
           ]
         }
       ]
+    },
+    {
+      "name": "home",
+      "srcPath": "./feature/home",
+    },
+    {
+      "name": "blocks",
+      "srcPath": "./feature/blocks",
+    },
+    {
+      "name": "furniture",
+      "srcPath": "./feature/furniture",
+    },
+    {
+      "name": "common",
+      "srcPath": "./common",
+    },
+    {
+      "name": "mine",
+      "srcPath": "./feature/mine",
+    },
+    {
+      "name": "slabs",
+      "srcPath": "./feature/slabs",
     }
   ]
 }

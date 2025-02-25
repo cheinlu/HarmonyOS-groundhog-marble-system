@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
-import { reqAuditList } from '@/api/audit/index.ts'
+import { reqAuditList } from '@/api/audit/index'
 import useLayOutSettingStore from '@/store/module/setting'
 let settingStore = useLayOutSettingStore()
 //默认页码

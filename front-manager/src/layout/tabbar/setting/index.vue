@@ -36,9 +36,9 @@
 import { ref } from 'vue'
 import { useRouter,useRoute } from 'vue-router'
 //获取骨架的小仓库
-import useLayOutSettingStore from '@/store/module/setting.ts'
+import useLayOutSettingStore from '@/store/module/setting'
 //获取用户名的仓库
-import useUserStore from '@/store/module/use.ts'
+import useUserStore from '@/store/module/use'
 let userStore = useUserStore()
 let LayOutSettingStore = useLayOutSettingStore()
 //获取路由信息
