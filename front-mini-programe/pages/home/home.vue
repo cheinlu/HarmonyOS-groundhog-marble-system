@@ -2,11 +2,13 @@
 	<view class="home-container">
 		<image class="homeBg-img" src="https://static.lusson.xyz/wx-miniprogram-image/home_bg.png" mode="">
 			<!-- <image class="title-img" src="/static/images/title.png" mode=""></image> -->
-		<view class="title-img">
-			科石云仓
+		<view class="title-ract">
+			<image class="logo-img" src="/static/images/logo.jpg" mode=""></image>
+			<view class="title-img">
+				科石云仓
+			</view>
 		</view>
-		<!-- <video class="video" src="https://aim6.oss-cn-beijing.aliyuncs.com/test_file/null/E01/S01/Fodder/2/20231025141435916gf6vmD.mp4"
-		                    :danmu-list="danmuList" enable-danmu danmu-btn controls></video> -->
+		<video class="video" src="https://static.lusson.xyz/video/home.mp4" show-center-play-btn="false" object-fit="cover" controls></video>
 		<view class="home-btn">
 			<view class="btn-row" @click="goSwitch('slabs')">
 				<view class="btn-row-zh">大板</view>
@@ -46,8 +48,24 @@ let goSwitch = (name)=>{
 		url:switchUrl.value
 	})
 }
+
 </script>
 
+<script>
+	export default{
+		onShareAppMessage() {
+			return {
+				title:'科石',
+				path:"/pages/home/home"
+			}
+		},
+		onShareTimeline(){
+			return{
+				title:'科石',
+			}
+		}
+	}
+</script>
 <style lang="scss">
 .home-container{
 	width: 100vw;
@@ -56,24 +74,34 @@ let goSwitch = (name)=>{
 		width: 100%;
 		height: 100%;
 		position: relative;
-		.title-img{
+		.title-ract{
 			position: absolute;
 			top: 0;
-			left: 0rpx;
-			height: 300rpx;
-			line-height: 300rpx;
-			font-size: 80rpx;
-			color: #fff;
 			width: 100%;
-			text-align: center;
-			// display: flex;
-			// justify-content: center;
+			margin-top: 80rpx;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #fff;
+			border-radius: 20rpx;
+			.logo-img{
+				width: 80rpx;
+				height: 80rpx;
+			}
+			.title-img{
+				font-size: 80rpx;
+				color: #bb9b61;
+				font-weight: bold;
+				text-align: center;
+				margin-left: 20rpx;
+			}
+			
 		}
 		.video{
 			width: 100%;
-			height: 400rpx;
+			height: 500rpx;
 			position: absolute;
-			top: 300rpx;
+			top: 240rpx;
 			left: 0
 		}
 		.home-btn{

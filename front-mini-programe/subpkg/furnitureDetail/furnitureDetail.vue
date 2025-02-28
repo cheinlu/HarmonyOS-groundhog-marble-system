@@ -108,7 +108,21 @@ let confimCharge = ()=>{
 	show.value = false
 }
 </script>
-
+<script>
+	export default{
+		onShareAppMessage() {
+			return {
+				title:'科石',
+				path:"/pages/home/home"
+			}
+		},
+		onShareTimeline(){
+			return{
+				title:'科石',
+			}
+		}
+	}
+</script>
 <style lang="scss">
 .viewport {
   background-color: #f4f4f4;

@@ -70,7 +70,21 @@ const previewImage = () => {
 });
 };
 </script>
-
+<script>
+	export default{
+		onShareAppMessage() {
+			return {
+				title:'科石',
+				path:"/pages/home/home"
+			}
+		},
+		onShareTimeline(){
+			return{
+				title:'科石',
+			}
+		}
+	}
+</script>
 <style lang="scss">
 	.slabs_detail_img {
   width: 100%;

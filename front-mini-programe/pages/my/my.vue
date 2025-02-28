@@ -53,7 +53,21 @@ const getStoreList = async()=>{
 	}
 }
 </script>
-
+<script>
+	export default{
+		onShareAppMessage() {
+			return {
+				title:'科石',
+				path:"/pages/home/home"
+			}
+		},
+		onShareTimeline(){
+			return{
+				title:'科石',
+			}
+		}
+	}
+</script>
 <style lang="scss">
 .swiper {
   width: 100%;

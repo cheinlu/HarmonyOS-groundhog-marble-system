@@ -49,7 +49,21 @@ const previewImage = (pictureUrls) => {
 	});
 };
 </script>
-
+<script>
+	export default{
+		onShareAppMessage() {
+			return {
+				title:'科石',
+				path:"/pages/home/home"
+			}
+		},
+		onShareTimeline(){
+			return{
+				title:'科石',
+			}
+		}
+	}
+</script>
 <style lang="scss">
 	.slabsSizeContent{
 		width: 100%;

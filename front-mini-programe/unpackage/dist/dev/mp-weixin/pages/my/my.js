@@ -5,7 +5,20 @@ const utils_api_marble = require("../../utils/api/marble.js");
 require("../../utils/request.js");
 require("../../store/user.js");
 require("../../utils/token.js");
-const _sfc_main = {
+const __default__ = {
+  onShareAppMessage() {
+    return {
+      title: "科石",
+      path: "/pages/home/home"
+    };
+  },
+  onShareTimeline() {
+    return {
+      title: "科石"
+    };
+  }
+};
+const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
   __name: "my",
   setup(__props) {
     common_vendor.onMounted(() => {
@@ -35,6 +48,7 @@ const _sfc_main = {
       };
     };
   }
-};
+});
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/hy-harmonyos/Desktop/Lucy-folder/code/tuboshu/HarmonyOS-groundhog-marble-system/front-mini-programe/pages/my/my.vue"]]);
+_sfc_main.__runtimeHooks = 6;
 wx.createPage(MiniProgramPage);

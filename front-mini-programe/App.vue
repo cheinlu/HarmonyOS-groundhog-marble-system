@@ -8,6 +8,12 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		onShareAppMessage() {
+			return {
+				title:'分享',
+				path:"/pages/home/home"
+			}
 		}
 	}
 </script>

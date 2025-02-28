@@ -137,6 +137,12 @@ const _sfc_main = {
   },
   onHide: function() {
     console.log("App Hide");
+  },
+  onShareAppMessage() {
+    return {
+      title: "分享",
+      path: "/pages/home/home"
+    };
   }
 };
 const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/hy-harmonyos/Desktop/Lucy-folder/code/tuboshu/HarmonyOS-groundhog-marble-system/front-mini-programe/App.vue"]]);
@@ -149,7 +155,8 @@ common_vendor.index.$showMsg = function(title = "数据请求失败！", duratio
 };
 function createApp() {
   const app = common_vendor.createSSRApp(App);
-  app.use(uni_modules_uviewPlus_index.uviewPlus), app.use(common_vendor.createPinia());
+  app.use(uni_modules_uviewPlus_index.uviewPlus);
+  app.use(common_vendor.createPinia());
   return {
     app,
     Pinia: common_vendor.Pinia

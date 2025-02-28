@@ -50,7 +50,21 @@ let gotoSearch=(name)=>{
 	})
 }
 </script>
-
+<script>
+	export default{
+		onShareAppMessage() {
+			return {
+				title:'科石',
+				path:"/pages/home/home"
+			}
+		},
+		onShareTimeline(){
+			return{
+				title:'科石',
+			}
+		}
+	}
+</script>
 <style lang="scss" scoped>
 .home-container{
 	background-color: #f7f7f7;

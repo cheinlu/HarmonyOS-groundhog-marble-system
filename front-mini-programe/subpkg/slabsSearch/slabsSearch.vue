@@ -112,7 +112,21 @@ const handleInput = (keyword) => {
   }
 }
 </script>
-
+<script>
+	export default{
+		onShareAppMessage() {
+			return {
+				title:'科石',
+				path:"/pages/home/home"
+			}
+		},
+		onShareTimeline(){
+			return{
+				title:'科石',
+			}
+		}
+	}
+</script>
 <style lang="scss">
 	.search-box {
 	    position: sticky;

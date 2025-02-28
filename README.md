@@ -8,119 +8,122 @@
 
   ------------------------------------------------------------------
 
-### 🌟gitee迁移过来，原star70
-<img width="300" alt="image" src="https://github.com/user-attachments/assets/e9864227-9002-4edf-bdce-9a649fc955cb">
 
- ------------------------------------------------------------------
+ ### 🌟 谁用我们
+<img height="100" alt="image" src="md_img/wechat-mp.jpg">
 
- ### 🌟谁用我们
-<img height="100" alt="image" src="https://github.com/user-attachments/assets/c314da1f-29bf-45e6-8c7f-6be682b27dfa">
-
+ #### 🌟 科石云仓 是 鸿蒙土拨鼠大理石开源系统的一个落地案例
  ------------------------------------------------------------------
 
 
-# 土拨鼠充电系统
+# 鸿蒙土拨鼠大理石系统：全栈式云仓管理解决方案
+## 关键词： 开源、鸿蒙APP、微信小程序、SaaS云平台、Go语言、Vue3、Element Plus、大理石管理、云仓系统
 
-## ✍介绍
+## ✍项目简介：
 
-土拨鼠开源充电系统是一套包含鸿蒙App、微信小程序、云平台和后台的充电设备管理系统。
+鸿蒙土拨鼠大理石系统是一套功能强大、易于部署的大理石云仓管理系统，涵盖鸿蒙APP、微信小程序、SaaS云平台和后台管理，助力大理石行业实现数字化转型升级。
 
-鸿蒙App使用Api9+Stage模式+ArkTS+ArkUI开发，包含登录、注册、充电站列表、充电桩信息、在线充电、订单查询、个人中心等多个功能。
+## ✍项目结构：
 
-小程序使用 Uniapp 开发，为电动汽车用户提供充电服务，包括登录、注册、查找充电站、充电桩信息、在线充电、订单查询、个人中心等多个功能。
+### 鸿蒙App-HarmonyOS-Next-鸿蒙大理石App
 
-云平台技术涉及：vue3+vite+ts+Element Plus 多租户、权限、审计、充电站/充电桩管理、订单管理，价格规则，充值等。
+#### 项目文件夹： TbsHarmonyOS
 
-后台使用 Go 语言开发，使用 goframe2 框架和 sqlite 文件数据库。
+##### 软件架构：
 
+1、开发语言：HarmonyOS-Next + Navigation路由导航
 
-## 演示地址
+2、开发工具：DevEco Studio
 
-管理台：https://7483f88q46.goho.co
-(备注：暂时无法使用)
+3、项目运行：真机或模拟器
 
-小程序：
+### 微信小程序-大理石小程序
 
-<img src="md_img/wechat-mp.png" alt="My Image" width="300" height="300">
+#### 项目文件夹： front-mini-programe
 
-## 一键启动
+##### 软件架构：
 
-本服务已经完成镜像打包，可以通过docker一键部署，需要在 linux 系统上。
-```
-docker-compose up -d
-```
+1、开发语言：vue3 + uniapp
 
-## 源码目录
+2、开发工具：HBuilderX + 微信开发者工具
 
-```
-TbsHarmonyOS：鸿蒙App
-front-manager: 前端管理台
-front-mini-programe: 前端小程序
-backup: 后端
-```
-  ------------------------------------------------------------------
+3、项目运行：HBuilderX点击运行--选择运行到小程序模拟器--微信开发者工具
 
-## 一、鸿蒙-HarmonyOs 4.0-土拨鼠充电App
-### 项目文件夹：TbsHarmonyOS
-### 软件架构：
-1.开发语言：Api9+Stage模式+ArkTS+ArkUI
-2.开发工具：DevEco Studio
-3.项目运行：项目在开发工具中启动，效果可Preview 预览或模拟器或真机调试，具体操作可查看此文章https://blog.csdn.net/weixin_71403100/article/details/136150011?spm=1001.2014.3001.5502
-### 项目说明：
-这是一个鸿蒙开发的充电App，开发语言是ArkTs，目前已实现以下功能
-### 已实现功能：
-1.登录(下拉选择租户)+注册
-2.充电页：充电站列表【点击每个站点查看充电桩详情】、充电桩详情【编号+状态+是否可充电】、充电中、充电列表
-3.个人中心页：个人头像+昵称，充电余额，充电订单，功能区，退出登录等
-4.扫码：（此功能暂未实现）
+小程序已上线，可直接搜索【科石】
+
+### 大理石云平台
+
+#### 项目文件夹： front-manager
+
+##### 软件架构：
+
+1、开发语言：vue3 + vite + Ts + Element Plus
+
+2、开发工具：VS Code
+
+3、项目运行：使用npm包管理工具
+
+### 后台
+
+#### 项目文件夹： backup
+
+##### 软件架构：
+
+1、开发语言：Go 语言 + goframe2 框架 + sqlite 文件数据库
+
+说明：backup文件夹内的README文件包含项目介绍/项目启动/代码结构等
+
+## 核心功能：
+
+### 鸿蒙APP & 微信小程序:
+
+面向用户，便捷查看:
+
+1、首页: 实时查看库存数据、订单状态、行业资讯等关键信息，轻松掌握大理石行业动态。
+
+2、大板展示: 精美图片展示各类大理石大板，支持筛选、搜索、收藏等功能，方便用户快速找到心仪产品。
+
+3、荒料信息: 提供荒料规格、颜色、纹理等详细信息，方便用户了解原材料情况。
+
+4、家居案例: 展示精美的大理石家居案例，为用户提供装修灵感。
+
+5、联系我们: 提供企业联系方式、在线客服等功能，方便用户联系咨询。
+
 ### 项目截图：
-<img src="md_img/app2.png" alt="My Image" width="240" height="500"/>  <img src="md_img/app1.png" alt="My Image" width="240" height="500"/>  <img src="md_img/app3.png" alt="My Image" width="240" height="500"/>  <img src="md_img/app4.png" alt="My Image" width="240" height="500"/>
+<img src="md_img/xcx1.jpg" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx2.jpg" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx3.jpg" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx4.jpg" alt="My Image" width="240" height="500"/>
 
-## 二、微信小程序-土拨鼠充电小程序
-### 项目文件夹：front-mini-programe
-### 软件架构：
-1.开发语言：vue3+uniapp
-2.开发工具：HBuilderX + 微信开发者工具
-3.项目运行：HBuilderX点击运行--选择运行到小程序模拟器--微信开发者工具
-### 项目说明：
-这是一个uniapp开发的充电微信小程序，开发语言是js，目前已实现以下功能
-### 已实现功能：
-1.充电：充电站列表【附近站点+距离】、充电桩信息【编号+状态+是否可充电】、充电、充电订单等
-2.扫码：根据桩上的设备二维码，可以扫码连接充电
-3.我的：登录、个人信息页面【头像+昵称、充电余额、充电订单、功能区、退出登录】
+### SaaS云平台:
+
+面向客户，高效管理:
+
+1、大板管理: 客户可便捷录入、编辑、删除大板信息，并上传高清图片，方便用户查看。
+
+2、荒料管理: 客户可记录荒料入库、出库、库存等信息，实现荒料库存的精准管理。
+
+3、家居案例管理: 客户可上传、编辑、删除家居案例，展示企业实力，吸引用户关注。
+
 ### 项目截图：
-<img src="md_img/xcx1.png" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx4.png" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx2.png" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx3.png" alt="My Image" width="240" height="500"/>
+<img src="md_img/ypt.jpg" alt="My Image" width="500" />  
+<img src="md_img/ypt1.jpg" alt="My Image" width="500" />  
+<img src="md_img/ypt2.jpg" alt="My Image" width="500" />
+<img src="md_img/ypt3.jpg" alt="My Image" width="500" />
 
+### 后台管理:
 
-## 三、土拨鼠充电云平台
-### 项目文件夹：front-manager
-### 软件架构：
-1.开发语言：vue3+vite+Ts+Element Plus 
-2.开发工具：VS Code
-3.项目运行：使用pnpm包管理工具
-```
-1、pnpm安装指令：npm i -g pnpm
-2、安装依赖：pnpm install
-3、启动：pnpm run dev
-4、构建生产环境：pnpm run build
-5、访问：
-平台/租户管理员：土拨鼠充电公司
-账户：admin    密码：admin
-```
-### 项目说明：
-这是一个vue3+ts开发的充电云平台，目前已实现以下功能
-### 已实现功能：
-1.设备管理：充电站【站点列表+地图查看】、充电桩【站点下桩信息+充电桩增删改查】
-2.系统设置：用户管理【用户展示+余额充值】、角色管理【权限分配】，租户管理、充值管理
-3.运营管理：订单管理【用户充电订单】、价格规则【不同时段价格】
-### 项目截图：
-<img src="md_img/image-2.png" alt="My Image" width="500" />  
-<img src="md_img/image-8.png" alt="My Image" width="500" />  
-<img src="md_img/image-9.png" alt="My Image" width="500" />
+提供用户管理、权限控制、数据统计等后台管理功能，保障系统安全稳定运行。
 
-## 四、后台
-### 项目文件夹：backup
-### 软件架构：
-后台使用 Go 语言开发，使用 goframe2 框架和 sqlite 文件数据库。
-### 说明：
-backup文件夹内的README文件包含项目介绍/项目启动/代码结构等
+项目优势：
+
+1、全栈开源: 代码完全开源，方便用户二次开发和定制。
+
+2、多端覆盖: 支持鸿蒙APP、微信小程序、Web端，满足用户不同场景使用需求。
+
+3、功能清晰: APP和小程序面向用户，方便查看信息；云平台面向客户，便捷管理数据。
+
+4、易于部署: 采用轻量级架构，部署简单，维护成本低。
+
+欢迎贡献：
+
+我们致力于打造一个开放、共享的大理石行业生态，欢迎各位开发者参与项目贡献，共同推动大理石行业数字化发展！
+
+期待您的加入！
