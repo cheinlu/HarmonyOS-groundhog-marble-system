@@ -1,33 +1,19 @@
 <template>
 	<view class="home-container">
 		<image class="homeBg-img" src="https://static.lusson.xyz/wx-miniprogram-image/home_bg.png" mode="">
-			<!-- <image class="title-img" src="/static/images/title.png" mode=""></image> -->
 		<view class="title-ract">
 			<image class="logo-img" src="/static/images/logo.jpg" mode=""></image>
 			<view class="title-img">
 				科石云仓
 			</view>
 		</view>
-		<video class="video" src="https://static.lusson.xyz/video/home.mp4" show-center-play-btn="false" object-fit="cover" controls></video>
-		<view class="home-btn">
-			<view class="btn-row" @click="goSwitch('slabs')">
-				<view class="btn-row-zh">大板</view>
-				<view class="btn-row-cn">SLICE</view>
-			</view>
-			<view class="btn-row" @click="goSwitch('raw')">
-				<view class="btn-row-zh">荒料</view>
-				<view class="btn-row-cn">MARBRE</view>
-			</view>
-			<view class="btn-row" @click="goSwitch('furniture')">
-				<view class="btn-row-zh">家居</view>
-				<view class="btn-row-cn">HOUSE</view>
-			</view>
-			<view class="btn-row" @click="goSwitch('my')">
-				<view class="btn-row-zh">联系方式</view>
-				<view class="btn-row-cn">ABOUT</view>
-			</view>
-		</view>
-		</image>
+		<video class="video" 
+		src="https://static.lusson.xyz/video/home.mp4" 
+		poster="/static/images/videoImg"
+		show-center-play-btn="false" 
+		object-fit="cover" 
+		controls></video>
+	  </image>
 	</view>
 </template>
 
@@ -78,7 +64,7 @@ let goSwitch = (name)=>{
 			position: absolute;
 			top: 0;
 			width: 100%;
-			margin-top: 80rpx;
+			margin-top: 180rpx;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -90,7 +76,7 @@ let goSwitch = (name)=>{
 			}
 			.title-img{
 				font-size: 80rpx;
-				color: #bb9b61;
+				color: #393431;
 				font-weight: bold;
 				text-align: center;
 				margin-left: 20rpx;
@@ -101,7 +87,7 @@ let goSwitch = (name)=>{
 			width: 100%;
 			height: 500rpx;
 			position: absolute;
-			top: 240rpx;
+			top: 400rpx;
 			left: 0
 		}
 		.home-btn{
