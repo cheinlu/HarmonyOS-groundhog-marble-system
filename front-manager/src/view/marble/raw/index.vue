@@ -12,7 +12,7 @@
   </el-card>
   <el-card style="margin: 10px 0px">
     <el-button type="primary" size="default" @click="addStation" v-has="'ChargeStationAdd'">添加荒料</el-button>
-    <!-- table展示充电站信息 -->
+    <!-- table展示荒料信息 -->
     <el-table style="margin: 10px 0px" border :data="slabArr">
       <el-table-column label="#" align="center" type="index"></el-table-column>
       <el-table-column label="名称" align="center" prop="name" show-overflow-tooltip></el-table-column>
@@ -45,7 +45,7 @@
     <el-pagination v-model:current-page="pageNo" v-model:page-size="pageSize" :page-sizes="[1000]" :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total" @current-change="getMarbles" @size-change="handler" />
   </el-card>
   <!-- 抽屉结构:完成添加新的用户账号|更新已有的账号信息 -->
-  <el-drawer v-model="drawer" size="50%">
+  <el-drawer v-model="drawer" size="50%" @close="handleDrawerClose">
     <!-- 头部标题:将来文字内容应该动态的 -->
     <template #header>
       <h4>{{ $t(chargeForm.id ? '修改荒料' : '添加荒料') }}</h4>
@@ -145,7 +145,7 @@ let slabArr = ref<marbles>([])
 let total = ref<number>(0)
 //抽屉默认关闭
 let drawer = ref<boolean>(false)
-//充电站名
+//荒料名
 let name = ref('')
 
 let descriptionArr = reactive([
@@ -191,7 +191,28 @@ let getMarbles = async (pager = 1) => {
   }
 }
 
-
+const handleDrawerClose = ()=>{
+  Object.assign(chargeForm, {
+    type:'marble',
+    sn: '',
+    name: '',
+    pictureUrls:'',
+    pictureUrls1:'',
+    pictureUrls2:'',
+    pictureUrls3:'',
+    pictureUrls4:'',
+    pictureUrls5:'',
+    price:0,
+    width:0,
+    length:0,
+    height:0,
+    area:0,
+    id: 0,
+    description:'',
+    mass:0,
+    remark:''
+  })
+}
 //分页器下拉菜单的自定义事件的回调
 let handler = () => {
   
@@ -209,7 +230,7 @@ let reset = () => {
   settingStore.refsh = !settingStore.refsh
 }
 
-//添加充电站按钮
+//添加荒料按钮
 let addStation = () => {
   //打开抽屉
   drawer.value = true
@@ -254,7 +275,7 @@ let addStation = () => {
     chargeFormRef.value.clearValidate('remark')
   })
 }
-//修改充电站按钮
+//修改荒料按钮
 let updateStation = (row: any) => {
   //打开抽屉
   drawer.value = true
@@ -281,7 +302,7 @@ let updateStation = (row: any) => {
     chargeFormRef.value.clearValidate('remark')
   })
 }
-//删除充电站按钮
+//删除荒料按钮
 let deleteStation = async (id: number) => {
   let res: any = await reqRemoveMarbles(id)
   if (res.code == 0) {
@@ -289,14 +310,14 @@ let deleteStation = async (id: number) => {
     getMarbles(slabArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
   }
 }
-//点击添加|修改充电站抽屉的取消按钮
+//点击添加|修改荒料抽屉的取消按钮
 let cancel = () => {
   //重新刷新，清空表单数据
   settingStore.refsh = !settingStore.refsh
   //关闭抽屉
   drawer.value = false
 }
-//点击添加|修改充电站抽屉的确定按钮
+//点击添加|修改荒料抽屉的确定按钮
 let save = async () => {
   //表单校验合格再发请求
   await chargeFormRef.value.validate()
@@ -305,13 +326,13 @@ let save = async () => {
     //抽屉关闭
     drawer.value = false
     //提示添加成功
-    ElMessage({ type: 'success', message: chargeForm.id ? '修改充电站成功' : '添加充电站成功' })
+    ElMessage({ type: 'success', message: chargeForm.id ? '修改荒料成功' : '添加荒料成功' })
     //获取数据
     getMarbles()
   } else {
     //抽屉关闭
     drawer.value = false
-    ElMessage({ type: 'error', message: chargeForm.id ? '修改充电站失败' : '添加充电站失败' })
+    ElMessage({ type: 'error', message: chargeForm.id ? '修改荒料失败' : '添加荒料失败' })
   }
 }
 

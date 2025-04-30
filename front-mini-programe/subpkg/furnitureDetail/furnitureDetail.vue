@@ -24,8 +24,26 @@
   	      <view class="meta_name">
   	      	<view class="name ellipsis">{{goods.name}} </view>
   	      </view>
-  			<view class="price">
-  				{{goods.description}} ￥{{goods.price}}
+		  <view class="price" v-if="goods.description">
+		  	{{goods.description}}
+		  </view>
+  			<view class="sku_list" v-for="spec in goods.skus" :key="index">
+  				<view class="price">
+  					<view class="lable">
+  						规格：
+  					</view>
+  					<view class="spec">
+  						{{spec.size}} 
+  					</view>
+  				</view>
+  				<view class="price price1">
+  					<view class="lable">
+  						价格：
+  					</view>
+					<view class="spec">
+						￥{{spec.price}}
+					</view>
+  				</view>
   			</view>
   	    </view>
   	
@@ -204,10 +222,23 @@ let confimCharge = ()=>{
 			height: 50rpx;
 		}
 	}
+	.sku_list{
+		display: flex;
+	}
     .price{
 		color: #a0a0a0;
-		font-size: 24rpx;
+		font-size: 28rpx;
 		margin-top: 20rpx;
+		display: flex;
+		.lable{
+			color: #cf4444;
+		}
+		.spec{
+			width: 150rpx;
+		}
+	}
+	.price1{
+		margin-left: 15rpx;
 	}
   }
   .action {

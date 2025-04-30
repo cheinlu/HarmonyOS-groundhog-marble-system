@@ -30,7 +30,7 @@
               ></image>
               <view class="name ellipsis">{{goods.name}}</view>
               <view class="price">
-                <text class="symbol">{{goods.description}}</text>
+                <!-- <text class="symbol">{{goods.description}}</text> -->
 				<text v-if="goods.price > 0">￥{{goods.price}}</text>
               </view>
 			  <view class="goodsDetail">
@@ -56,8 +56,10 @@ let timer = ref(null)
 
 let categoryList = reactive([
 	{id:0,title:'全部'},
-	{id:1,title:'茶盘'},
-	{id:2,title:'餐桌'}
+	{id:1,title:'餐桌'},
+	{id:2,title:'茶几'},
+	{id:3,title:'茶泡台'},
+	{id:4,title:'托盘'},
 ])
 
 const activeIndex = ref(0)

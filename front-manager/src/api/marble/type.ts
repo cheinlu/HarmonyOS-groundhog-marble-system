@@ -11,7 +11,12 @@ export interface marble {
     type: string
     price: string
     pictureUrls:string
-    
+    skus?:skus[]
+  }
+
+  export interface skus {
+    price: number
+    size: string
   }
   //保存全部充电站列表数据类型
   export type marbles = marble[]
@@ -44,4 +49,5 @@ pictureUrls5?:string
   mass?:number
   description?:string
   remark?:string
+  skus?:skus[]
 }
