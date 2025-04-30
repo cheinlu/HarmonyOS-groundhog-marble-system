@@ -1,15 +1,9 @@
 <template>
 	<view class="home-container">
 		<image class="homeBg-img" src="https://static.lusson.xyz/wx-miniprogram-image/home_bg.png" mode="">
-		<view class="title-ract">
-			<image class="logo-img" src="/static/images/logo.jpg" mode=""></image>
-			<view class="title-img">
-				科石云仓
-			</view>
-		</view>
 		<video class="video" 
 		src="https://static.lusson.xyz/video/home.mp4" 
-		poster="/static/images/videoImg"
+		poster="https://static.lusson.xyz/video/home_video.jpg"
 		show-center-play-btn="false" 
 		object-fit="cover" 
 		controls></video>
@@ -60,34 +54,11 @@ let goSwitch = (name)=>{
 		width: 100%;
 		height: 100%;
 		position: relative;
-		.title-ract{
-			position: absolute;
-			top: 0;
-			width: 100%;
-			margin-top: 180rpx;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			background-color: #fff;
-			border-radius: 20rpx;
-			.logo-img{
-				width: 80rpx;
-				height: 80rpx;
-			}
-			.title-img{
-				font-size: 80rpx;
-				color: #393431;
-				font-weight: bold;
-				text-align: center;
-				margin-left: 20rpx;
-			}
-			
-		}
 		.video{
 			width: 100%;
 			height: 500rpx;
 			position: absolute;
-			top: 400rpx;
+			top: 300rpx;
 			left: 0
 		}
 		.home-btn{

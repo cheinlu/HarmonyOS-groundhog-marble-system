@@ -6,7 +6,7 @@
             "path" : "pages/home/home",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "首页",
+                "navigationBarTitleText": "科石云仓",
                 "enablePullDownRefresh": false
             }
             
@@ -15,7 +15,7 @@
             "path" : "pages/my/my",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "联系方式",
+                "navigationBarTitleText": "科石云仓",
                 "enablePullDownRefresh": false
             }
             
@@ -25,7 +25,7 @@
             "path" : "pages/slabs/slabs",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "大板",
+                "navigationBarTitleText": "科石云仓",
                 "enablePullDownRefresh": false
             }
             
@@ -34,7 +34,7 @@
         	"path" : "pages/rawStone/rawStone",
         	"style" : 
         	{
-        		"navigationBarTitleText" : "荒料",
+        		"navigationBarTitleText" : "科石云仓",
         		"enablePullDownRefresh" : false
         	}
         },
@@ -42,7 +42,7 @@
         	"path" : "pages/furniture/furniture",
         	"style" : 
         	{
-        		"navigationBarTitleText" : "家居",
+        		"navigationBarTitleText" : "科石云仓",
         		"enablePullDownRefresh" : false
         	}
         }

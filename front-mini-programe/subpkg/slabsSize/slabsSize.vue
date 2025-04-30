@@ -22,7 +22,7 @@
          class="image"
          mode="aspectFill"
          :src="item.pictureUrls"
-		 @click="previewImage(item.pictureUrls)"
+		 @click="previewImage(item)"
        ></image>
        <view class="name"> {{item.width}} x {{item.height}} x {{item.length}}mm </view>
        <view class="price">
@@ -42,11 +42,27 @@ onLoad((options)=>{
   sizes.value = JSON.parse(decodeURIComponent(options.item));
 })
 
-const previewImage = (pictureUrls) => {
-	  uni.previewImage({
-		  current:pictureUrls,
-		  urls:[pictureUrls],
-	});
+const previewImage = (item) => {
+	// 过滤掉空值/无效的图片地址
+	const validUrls = [
+	  item.pictureUrls,
+	  item.pictureUrls1,
+	  item.pictureUrls2,
+	  item.pictureUrls3,
+	  item.pictureUrls4,
+	  item.pictureUrls5
+	].filter(url => url && typeof url === 'string' && url.trim() !== '');
+	 if (validUrls.length > 0) {
+		  uni.previewImage({
+			current: item.pictureUrls || validUrls[0], // 当前显示的图片（优先用 pictureUrls）
+			urls: validUrls
+		  });
+		} else {
+		  uni.showToast({
+			title: '暂无有效图片',
+			icon: 'none'
+		  });
+		}
 };
 </script>
 <script>

@@ -23,13 +23,26 @@
 				</view>
 				<image class="right_arrow_img" src="/static/images/right_arrow.png" mode=""></image>
 			</view>
-			<view class="phone">
-			  <image class="phone_img" src="./images/phone.png" mode=""></image>
-			  <view class="phone_text">
-			    <a :href="'tel:' + address.phone">{{address.phone}}</a>
+			 <view class="phone">
+				<image class="phone_img" src="./images/phone.png" mode=""></image>
+				<view class="phone_numbers">
+				  <view 
+					v-for="(phone, index) in address.phones" 
+					:key="index" 
+					class="phone_text" 
+					@click="makePhoneCall(phone)"
+				  >
+					<text>{{ phone }}</text>
+					<image 
+					  v-if="index < address.phones.length - 1" 
+					  class="phone_separator" 
+					  src="/static/images/phone_separator.png" 
+					  mode="widthFix"
+					></image>
+				  </view>
+				</view>
+				<image class="right_arrow_img" src="/static/images/right_arrow.png" mode=""></image>
 			  </view>
-			  <image class="right_arrow_img" src="/static/images/right_arrow.png" mode=""></image>
-			</view>
 		</view>
 		</scroll-view>
   </view>
@@ -46,12 +59,32 @@ onMounted(()=>{
 
 const storeList = ref([])
 
-const getStoreList = async()=>{
-	let {data:res} = await requestStoreList()
-	if(res.code==0){
-		storeList.value = res.data.store_infos
-	}
-}
+const getStoreList = async() => {
+  let {data: res} = await requestStoreList();
+  if (res.code == 0) {
+    storeList.value = res.data.store_infos.map(item => {
+      // 拆分电话号码并过滤空值
+      const phones = item.phone.split('/').filter(p => p.trim());
+      return {
+        ...item,
+        phones: phones.length > 0 ? phones : ['暂无号码']
+      };
+    });
+  }
+};
+
+const makePhoneCall = (phoneNumber) => {
+  if (!phoneNumber || phoneNumber === '暂无号码') {
+    uni.showToast({
+      title: '无效的电话号码',
+      icon: 'none'
+    });
+    return;
+  }
+  wx.makePhoneCall({
+    phoneNumber: phoneNumber
+  });
+};
 </script>
 <script>
 	export default{
@@ -144,4 +177,22 @@ const getStoreList = async()=>{
   color: #c84921;
 }
 
+.phone_numbers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+}
+
+.phone_text {
+  display: flex;
+  align-items: center;
+  margin-right: 10rpx;
+}
+
+.phone_separator {
+  width: 20rpx;
+  height: 20rpx;
+  margin: 0 10rpx;
+}
 </style>

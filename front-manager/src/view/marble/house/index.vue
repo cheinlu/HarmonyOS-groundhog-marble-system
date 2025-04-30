@@ -12,7 +12,7 @@
   </el-card>
   <el-card style="margin: 10px 0px">
     <el-button type="primary" size="default" @click="addStation" v-has="'ChargeStationAdd'">添加家居</el-button>
-    <!-- table展示充电站信息 -->
+    <!-- table展示家居信息 -->
     <el-table style="margin: 10px 0px" border :data="slabArr">
       <el-table-column label="#" align="center" type="index"></el-table-column>
       <el-table-column label="名称" align="center" prop="name" show-overflow-tooltip></el-table-column>
@@ -40,7 +40,7 @@
     <el-pagination v-model:current-page="pageNo" v-model:page-size="pageSize" :page-sizes="[10000]" :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total" @current-change="getMarbles" @size-change="handler" />
   </el-card>
   <!-- 抽屉结构:完成添加新的用户账号|更新已有的账号信息 -->
-  <el-drawer v-model="drawer" size="50%">
+  <el-drawer v-model="drawer" size="50%" @close="handleDrawerClose">
     <!-- 头部标题:将来文字内容应该动态的 -->
     <template #header>
       <h4>{{ $t(chargeForm.id ? '修改家居' : '添加家居') }}</h4>
@@ -63,19 +63,19 @@
         </el-select>
       </el-form-item>
         <el-form-item label="图片" prop="pictureUrls">
-          <el-upload class="avatar-uploader" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+          <el-upload class="avatar-uploader" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUploadHouse">
             <img v-if="chargeForm.pictureUrls" :src="chargeForm.pictureUrls" class="avatar" />
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
           </el-upload>
-          <el-upload class="avatar-uploader" :show-file-list="false" :on-success="handleAvatarSuccess1" :before-upload="beforeAvatarUpload1">
+          <el-upload class="avatar-uploader" :show-file-list="false" :on-success="handleAvatarSuccess1" :before-upload="beforeAvatarUploadHouse1">
             <img v-if="chargeForm.pictureUrls1" :src="chargeForm.pictureUrls1" class="avatar" />
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
           </el-upload>
-          <el-upload class="avatar-uploader" :show-file-list="false" :on-success="handleAvatarSuccess2" :before-upload="beforeAvatarUpload2">
+          <el-upload class="avatar-uploader" :show-file-list="false" :on-success="handleAvatarSuccess2" :before-upload="beforeAvatarUploadHouse2">
             <img v-if="chargeForm.pictureUrls2" :src="chargeForm.pictureUrls2" class="avatar" />
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
           </el-upload>
-          <el-upload class="avatar-uploader" :show-file-list="false" :on-success="handleAvatarSuccess3" :before-upload="beforeAvatarUpload3">
+          <el-upload class="avatar-uploader" :show-file-list="false" :on-success="handleAvatarSuccess3" :before-upload="beforeAvatarUploadHouse3">
             <img v-if="chargeForm.pictureUrls3" :src="chargeForm.pictureUrls3" class="avatar" />
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
           </el-upload>
@@ -85,10 +85,60 @@
     <template #footer>
       <div style="flex: auto">
         <el-button @click="cancel">{{ $t('pop.cancel') }}</el-button>
-        <el-button type="primary" @click="save">{{ $t('pop.confirm') }}</el-button>
+        <el-button type="primary" @click="openSpecDrawer">{{ '完善更多信息' }}</el-button>
       </div>
     </template>
   </el-drawer>
+
+   <!-- 第二个抽屉（规格信息） -->
+   <el-drawer v-model="specDrawer" size="45%" direction="rtl" @close="handleSpecDrawerClose">
+    <template #header>
+      <h4>完善规格信息</h4>
+    </template>
+    <template #default>
+      <el-form :model="chargeForm.skus" ref="specFormRef" :rules="specRules" label-width="65px">
+        <div v-for="(spec, index) in chargeForm.skus" :key="index" class="spec-row">
+          <el-form-item 
+            label="规格" 
+            :prop="`skus[${index}].size`"
+          >
+            <el-input v-model="spec.size" placeholder="如：60*60" style="width: 200px"></el-input>
+          </el-form-item>
+          <el-form-item 
+            label="价格" 
+            :prop="`skus[${index}].price`"
+          >
+            <el-input v-model="spec.price" placeholder="0.00" style="width: 150px">
+              <template #append>元</template>
+            </el-input>
+          </el-form-item>
+          <div class="action-buttons">
+            <el-button 
+              v-if="index > 0"
+              type="danger" 
+              icon="Delete" 
+              size="small"
+              @click="removeSpec(index)"
+            />
+            <el-button 
+              v-if="chargeForm.skus && index === chargeForm.skus.length - 1"
+              type="primary" 
+              icon="Plus" 
+              size="small"
+              @click="addSpec"
+            />
+          </div>
+        </div>
+      </el-form>
+    </template>
+    <template #footer>
+      <div style="flex: auto">
+        <el-button @click="specDrawer = false">返回</el-button>
+        <el-button type="primary" @click="saveAll">完成</el-button>
+      </div>
+    </template>
+  </el-drawer>
+
 
 </template>
 
@@ -100,6 +150,96 @@ import type { UploadProps } from 'element-plus'
 
 import {reqMarbles,reqAddOrUpdateMarbles,reqRemoveMarbles,reqUploadMarbles} from '@/api/marble/index'
 import type {marbleList,marbles,marbleAddOrUpdate} from '@/api/marble/type'
+
+// 新增的状态
+const specDrawer = ref(false)
+const specFormRef = ref()
+
+// 打开规格抽屉
+const openSpecDrawer = async () => {
+  try {
+    await chargeFormRef.value.validate()
+    
+    // 确保 skus 存在且至少有一条记录
+    if (!chargeForm.skus || chargeForm.skus.length === 0) {
+      chargeForm.skus = reactive([{
+        size: '', 
+        price: 0, 
+      }])
+    }
+    
+    specDrawer.value = true
+  } catch (error) {
+    ElMessage.error('请先填写完整的基本信息')
+  }
+}
+
+// 添加规格行
+const addSpec = () => {
+  chargeForm.skus?.push({
+    size: '',
+    price: 0,
+  })
+
+};
+
+// 删除规格行
+const removeSpec = (index: number) => {
+  if (chargeForm.skus&&chargeForm.skus.length > 1) {
+    chargeForm.skus.splice(index, 1)
+
+  }
+}
+
+// 保存所有信息
+const saveAll = async () => {
+  try {
+    // 验证规格表单
+    await specFormRef.value.validate();
+    
+    // 检查是否有空数据
+    const hasEmptySpec = chargeForm.skus?.some(spec => 
+      !spec.size || spec.price === null || spec.price === undefined
+    )
+    
+    if (hasEmptySpec) {
+      ElMessage.error('请填写完整的规格信息')
+      return
+    }
+    
+    // 合并所有数据
+    const formData = {
+      ...chargeForm,
+    }
+    
+    // 提交到服务器
+    let res: any = await reqAddOrUpdateMarbles(formData)
+    
+    if (res.code == 0) {
+      ElMessage.success(chargeForm.id ? '修改成功' : '添加成功')
+      // 关闭所有抽屉
+      drawer.value = false
+      specDrawer.value = false
+      // 刷新数据
+      getMarbles()
+    }
+  } catch (error) {
+    ElMessage.error('请填写完整的规格信息')
+  }
+}
+
+// 规格抽屉关闭时的回调
+const handleSpecDrawerClose = () => {
+  // 重置规格表单
+  chargeForm.skus = [{
+    size: '', 
+    price: 0, 
+  }]
+  // 清除验证
+  nextTick(() => {
+    specFormRef.value?.clearValidate()
+  })
+}
 
 
 let settingStore = useLayOutSettingStore()
@@ -117,14 +257,37 @@ let slabArr = ref<marbles>([])
 let total = ref<number>(0)
 //抽屉默认关闭
 let drawer = ref<boolean>(false)
-//充电站名
+//家居名
 let name = ref('')
 
 let snArr = reactive([
-  {name:'茶盘',id:1},
-  {name:'餐桌',id:2}
+  {name:'餐桌',id:1},
+  {name:'茶几',id:2},
+  {name:'茶泡台',id:3},
+  {name:'托盘',id:4}
 ])
 
+//抽屉关闭的回调函数
+let handleDrawerClose = ()=>{
+  
+  // 重置表单数据
+  Object.assign(chargeForm, {
+    sn: '',
+    name: '',
+    pictureUrls: '',
+    pictureUrls1: '',
+    pictureUrls2: '',
+    pictureUrls3: '',
+    price: null,
+    width: null,
+    length: null,
+    height: null,
+    area: null,
+    remark: '',
+    id: 0, // 确保 id 被重置为 0
+    type: 'shopping',
+  });
+}
 
 //站点信息的收集
 let chargeForm = reactive<marbleAddOrUpdate>({
@@ -141,7 +304,8 @@ let chargeForm = reactive<marbleAddOrUpdate>({
     height:0,
     area:0,
   id: 0,
-  remark:''
+  remark:'',
+  skus:[]
 })
 onMounted(() => {
   getMarbles()
@@ -152,6 +316,7 @@ onMounted(() => {
 let getMarbles = async (pager = 1) => {
   pageNo.value = pager
   let res: marbleList = await reqMarbles(pageNo.value, pageSize.value, name.value,type.value)
+  
   if (res.code == 0) {
     slabArr.value = res.data.List
     pageNo.value = res.data.PageNo
@@ -178,26 +343,11 @@ let reset = () => {
   settingStore.refsh = !settingStore.refsh
 }
 
-//添加充电站按钮
+//添加家居按钮
 let addStation = () => {
   //打开抽屉
   drawer.value = true
 
-  //清空表单数据
-  Object.assign(chargeForm, {
-    sn: '',
-    name: '',
-    pictureUrls:'',
-    pictureUrls1:'',
-    pictureUrls2:'',
-    pictureUrls3:'',
-    price:null,
-    width:null,
-    length:null,
-    height:null,
-    area:null,
-    remark:''
-  })
   //清空上一次表单校验错误提示
   nextTick(() => {
     chargeFormRef.value.clearValidate('sn')
@@ -214,12 +364,13 @@ let addStation = () => {
     chargeFormRef.value.clearValidate('remark')
   })
 }
-//修改充电站按钮
+//修改家居按钮
 let updateStation = (row: any) => {
   //打开抽屉
   drawer.value = true
   //合并参数
   Object.assign(chargeForm, row)
+ 
    //清空上一次表单校验错误结果
    nextTick(() => {
     chargeFormRef.value.clearValidate('sn')
@@ -236,7 +387,7 @@ let updateStation = (row: any) => {
     chargeFormRef.value.clearValidate('remark')
   })
 }
-//删除充电站按钮
+//删除家居按钮
 let deleteStation = async (id: number) => {
   let res: any = await reqRemoveMarbles(id)
   if (res.code == 0) {
@@ -244,31 +395,31 @@ let deleteStation = async (id: number) => {
     getMarbles(slabArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
   }
 }
-//点击添加|修改充电站抽屉的取消按钮
+//点击添加|修改家居抽屉的取消按钮
 let cancel = () => {
   //重新刷新，清空表单数据
   settingStore.refsh = !settingStore.refsh
   //关闭抽屉
   drawer.value = false
 }
-//点击添加|修改充电站抽屉的确定按钮
-let save = async () => {
-  //表单校验合格再发请求
-  await chargeFormRef.value.validate()
-  let res: any = await reqAddOrUpdateMarbles(chargeForm)
-  if (res.code == 0) {
-    //抽屉关闭
-    drawer.value = false
-    //提示添加成功
-    ElMessage({ type: 'success', message: chargeForm.id ? '修改充电站成功' : '添加充电站成功' })
-    //获取数据
-    getMarbles()
-  } else {
-    //抽屉关闭
-    drawer.value = false
-    ElMessage({ type: 'error', message: chargeForm.id ? '修改充电站失败' : '添加充电站失败' })
-  }
-}
+//点击添加|修改家居抽屉的确定按钮
+// let save = async () => {
+//   //表单校验合格再发请求
+//   await chargeFormRef.value.validate()
+//   let res: any = await reqAddOrUpdateMarbles(chargeForm)
+//   if (res.code == 0) {
+//     //抽屉关闭
+//     drawer.value = false
+//     //提示添加成功
+//     ElMessage({ type: 'success', message: chargeForm.id ? '修改家居成功' : '添加家居成功' })
+//     //获取数据
+//     getMarbles()
+//   } else {
+//     //抽屉关闭
+//     drawer.value = false
+//     ElMessage({ type: 'error', message: chargeForm.id ? '修改家居失败' : '添加家居失败' })
+//   }
+// }
 
 //校验规则
 let chargeRules = {
@@ -283,12 +434,24 @@ let chargeRules = {
   remark: [{ required: true, message: '请输入描述', trigger: 'blur' }],
 }
 
+let specRules = {
+  'skus': [
+    { type: 'array', required: true, message: '请至少添加一个规格', trigger: 'blur' }
+  ],
+  'skus.size': [
+    { type: 'array', defaultField: { required: true, message: '请输入规格' }, trigger: 'blur' }
+  ],
+  'skus.price': [
+    { type: 'array', defaultField: { required: true, message: '请输入价格' }, trigger: 'blur' }
+  ]
+};
+
 //图片上传成功的钩子
 const handleAvatarSuccess: UploadProps['onSuccess'] = () => {
   chargeFormRef.value.clearValidate('pictureUrls')
 }
 //上传图片组件->上传图片之前触发的钩子函数
-const beforeAvatarUpload: UploadProps['beforeUpload'] = async (rawFile: any) => {
+const beforeAvatarUploadHouse: UploadProps['beforeUpload'] = async (rawFile: any) => {
   
   //请求上传文件的接口
   let res = await reqUploadMarbles(rawFile)
@@ -304,7 +467,7 @@ const handleAvatarSuccess1: UploadProps['onSuccess'] = () => {
   chargeFormRef.value.clearValidate('pictureUrls1')
 }
 //上传图片组件->上传图片之前触发的钩子函数
-const beforeAvatarUpload1: UploadProps['beforeUpload'] = async (rawFile: any) => {
+const beforeAvatarUploadHouse1: UploadProps['beforeUpload'] = async (rawFile: any) => {
   //请求上传文件的接口
   let res = await reqUploadMarbles(rawFile)
   //将接口的地址赋值给表单并呈现
@@ -319,7 +482,7 @@ const handleAvatarSuccess2: UploadProps['onSuccess'] = () => {
   chargeFormRef.value.clearValidate('pictureUrls2')
 }
 //上传图片组件->上传图片之前触发的钩子函数
-const beforeAvatarUpload2: UploadProps['beforeUpload'] = async (rawFile: any) => {
+const beforeAvatarUploadHouse2: UploadProps['beforeUpload'] = async (rawFile: any) => {
   //请求上传文件的接口
   let res = await reqUploadMarbles(rawFile)
   //将接口的地址赋值给表单并呈现
@@ -334,7 +497,7 @@ const handleAvatarSuccess3: UploadProps['onSuccess'] = () => {
   chargeFormRef.value.clearValidate('pictureUrls3')
 }
 //上传图片组件->上传图片之前触发的钩子函数
-const beforeAvatarUpload3: UploadProps['beforeUpload'] = async (rawFile: any) => {
+const beforeAvatarUploadHouse3: UploadProps['beforeUpload'] = async (rawFile: any) => {
   //请求上传文件的接口
   let res = await reqUploadMarbles(rawFile)
   //将接口的地址赋值给表单并呈现
@@ -351,6 +514,30 @@ export default {
 }
 </script>
 <style scoped>
+.spec-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.spec-row :deep(.el-form-item) {
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  margin-top: 4px;
+}
+
+.action-buttons .el-button {
+  margin-left: 8px;
+}
+
+
+
 .form {
   display: flex;
   justify-content: space-between;

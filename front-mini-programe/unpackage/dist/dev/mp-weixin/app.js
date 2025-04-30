@@ -145,7 +145,7 @@ const _sfc_main = {
     };
   }
 };
-const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/hy-harmonyos/Desktop/Lucy-folder/code/tuboshu/HarmonyOS-groundhog-marble-system/front-mini-programe/App.vue"]]);
+const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/hy-harmonyos/Desktop/Lucy-folder/code/HarmonyOS-groundhog-marble-system/front-mini-programe/App.vue"]]);
 common_vendor.index.$showMsg = function(title = "数据请求失败！", duration = 1500) {
   common_vendor.index.showToast({
     title,
