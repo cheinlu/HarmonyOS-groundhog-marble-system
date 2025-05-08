@@ -26,7 +26,7 @@
 					
 				<text class="small" v-if="propId == 'slab'">{{item.layers.length}}匝/{{item.slices_total}}片/{{item.area}}㎡</text>
 		
-				<text class="small" v-else>{{item.width}}mm x {{item.height}}mm x {{item.length}}mm x {{item.area}}t x {{item.mass}}m³</text>
+				<text class="small" v-else>{{item.width}}mm x {{item.height}}mm x {{item.length}}mm x {{item.mass}}t x {{item.area}}m³</text>
 				
 			    </view>
 				  

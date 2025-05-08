@@ -35,8 +35,8 @@ export default defineConfig(({command})=>{
     server:{
       proxy:{
         '/saas-api': {
-          // target: 'http://newmanager.lusson.xyz/',
-          target:'http://127.0.0.1:8000',
+          target: 'http://newmanager.lusson.xyz/',
+          // target:'http://127.0.0.1:8000',
           changeOrigin: true
         },
       }

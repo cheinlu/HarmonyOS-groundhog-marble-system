@@ -9,7 +9,7 @@ import {reqRefresh} from '@/api/user/index'
 import useUserStore from '@/store/module/use'
 let request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
-  timeout: 10000
+  timeout: 30000
 })
 
 // 添加请求拦截器

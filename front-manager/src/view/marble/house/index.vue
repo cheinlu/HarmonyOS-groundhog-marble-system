@@ -402,24 +402,6 @@ let cancel = () => {
   //关闭抽屉
   drawer.value = false
 }
-//点击添加|修改家居抽屉的确定按钮
-// let save = async () => {
-//   //表单校验合格再发请求
-//   await chargeFormRef.value.validate()
-//   let res: any = await reqAddOrUpdateMarbles(chargeForm)
-//   if (res.code == 0) {
-//     //抽屉关闭
-//     drawer.value = false
-//     //提示添加成功
-//     ElMessage({ type: 'success', message: chargeForm.id ? '修改家居成功' : '添加家居成功' })
-//     //获取数据
-//     getMarbles()
-//   } else {
-//     //抽屉关闭
-//     drawer.value = false
-//     ElMessage({ type: 'error', message: chargeForm.id ? '修改家居失败' : '添加家居失败' })
-//   }
-// }
 
 //校验规则
 let chargeRules = {
@@ -452,14 +434,14 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = () => {
 }
 //上传图片组件->上传图片之前触发的钩子函数
 const beforeAvatarUploadHouse: UploadProps['beforeUpload'] = async (rawFile: any) => {
-  
-  //请求上传文件的接口
-  let res = await reqUploadMarbles(rawFile)
-  //将接口的地址赋值给表单并呈现
-  chargeForm.pictureUrls = res.data.url
- 
-  // 取消默认的上传请求
-  return false
+    // 通过校验后执行上传
+    const res:any = await reqUploadMarbles(rawFile);
+    if(res.code == 0){
+      chargeForm.pictureUrls = res.data.url;
+    }else{
+      ElMessage.error(res.message)
+    }
+    return false; // 阻止默认上传行为
 }
 
 //图片上传成功的钩子
@@ -468,13 +450,14 @@ const handleAvatarSuccess1: UploadProps['onSuccess'] = () => {
 }
 //上传图片组件->上传图片之前触发的钩子函数
 const beforeAvatarUploadHouse1: UploadProps['beforeUpload'] = async (rawFile: any) => {
-  //请求上传文件的接口
-  let res = await reqUploadMarbles(rawFile)
-  //将接口的地址赋值给表单并呈现
-  chargeForm.pictureUrls1 = res.data.url
- 
-  // 取消默认的上传请求
-  return false
+    // 通过校验后执行上传
+    const res:any = await reqUploadMarbles(rawFile);
+    if(res.code == 0){
+      chargeForm.pictureUrls1 = res.data.url;
+    }else{
+      ElMessage.error(res.message)
+    }
+    return false; // 阻止默认上传行为
 }
 
 //图片上传成功的钩子
@@ -483,13 +466,14 @@ const handleAvatarSuccess2: UploadProps['onSuccess'] = () => {
 }
 //上传图片组件->上传图片之前触发的钩子函数
 const beforeAvatarUploadHouse2: UploadProps['beforeUpload'] = async (rawFile: any) => {
-  //请求上传文件的接口
-  let res = await reqUploadMarbles(rawFile)
-  //将接口的地址赋值给表单并呈现
-  chargeForm.pictureUrls2 = res.data.url
- 
-  // 取消默认的上传请求
-  return false
+    // 通过校验后执行上传
+    const res:any = await reqUploadMarbles(rawFile);
+    if(res.code == 0){
+      chargeForm.pictureUrls2 = res.data.url;
+    }else{
+      ElMessage.error(res.message)
+    }
+    return false; // 阻止默认上传行为
 }
 
 //图片上传成功的钩子
@@ -498,13 +482,14 @@ const handleAvatarSuccess3: UploadProps['onSuccess'] = () => {
 }
 //上传图片组件->上传图片之前触发的钩子函数
 const beforeAvatarUploadHouse3: UploadProps['beforeUpload'] = async (rawFile: any) => {
-  //请求上传文件的接口
-  let res = await reqUploadMarbles(rawFile)
-  //将接口的地址赋值给表单并呈现
-  chargeForm.pictureUrls3 = res.data.url
- 
-  // 取消默认的上传请求
-  return false
+    // 通过校验后执行上传
+    const res:any = await reqUploadMarbles(rawFile);
+    if(res.code == 0){
+      chargeForm.pictureUrls3 = res.data.url;
+    }else{
+      ElMessage.error(res.message)
+    }
+    return false; // 阻止默认上传行为
 }
 
 </script>
