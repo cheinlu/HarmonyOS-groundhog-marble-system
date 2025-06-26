@@ -8,7 +8,7 @@ export struct BlocksPage {
   pageSize: number = 1000
   blocksDataSource = new CommonDataSource<blocksList>()
   private scroller: Scroller = new Scroller();
-  password: string = '888888'
+  password: string = ''
   @State valueChange: string = ''
   @State isShowBlock: boolean = false
 
