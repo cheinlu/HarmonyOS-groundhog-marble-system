@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "BlocksSearch",
+      "pageSourceFile": "src/main/ets/view/BlocksSearch.ets",
+      "buildFunction": "BlocksSearchBuilder",
+      "data": {
+        "description": "this is BlocksSearch"
+      }
+    }
+  ]
+}

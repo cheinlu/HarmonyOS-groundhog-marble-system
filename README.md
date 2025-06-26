@@ -90,7 +90,7 @@
 5、联系我们: 提供企业联系方式、在线客服等功能，方便用户联系咨询。
 
 ### 项目截图：
-<img src="md_img/xcx1.jpg" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx2.jpg" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx3.jpg" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx4.jpg" alt="My Image" width="240" height="500"/>
+<img src="md_img/xcx1.png" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx2.png" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx3.png" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx4.png" alt="My Image" width="240" height="500"/>  <img src="md_img/xcx5.png" alt="My Image" width="240" height="500"/>
 
 ### SaaS云平台:
 

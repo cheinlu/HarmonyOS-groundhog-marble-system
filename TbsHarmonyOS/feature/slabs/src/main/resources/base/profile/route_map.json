@@ -1,0 +1,22 @@
+{
+  "routerMap": [
+    {
+      "name": "SlabsSearch",
+      "pageSourceFile": "src/main/ets/view/SlabsSearch.ets",
+      "buildFunction": "SlabsSearchBuilder",
+      "data": {
+        "description": "this is SlabsSearch"
+      }
+    },
+    {
+      "name": "SlabsDetail",
+      "pageSourceFile": "src/main/ets/view/SlabsDetail.ets",
+      "buildFunction": "SlabsDetailBuilder"
+    },
+    {
+      "name": "SlabsSize",
+      "pageSourceFile": "src/main/ets/view/SlabsSize.ets",
+      "buildFunction": "SlabsSizeBuilder"
+    }
+  ]
+}

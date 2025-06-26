@@ -12,9 +12,40 @@
     "deliveryWithInstall": true,
     "installationFree": false,
     "pages": "$profile:main_pages",
+    "querySchemes": [
+      "amapuri",  // 高德地图的 scheme
+      "baidumap", // 百度地图的 scheme
+      "maps"      // 华为地图的 scheme
+    ],
+    "metadata": [
+      {
+        // 配置为华为鸿蒙离线推送/一键登录Client ID
+        "name": "client_id",
+        "value": "6917566865871275311"
+      }
+    ],
     "requestPermissions": [
+      // 网络权限
       {
         "name": "ohos.permission.INTERNET"
+      },
+      {
+        "name": "ohos.permission.APPROXIMATELY_LOCATION",
+        "reason": "$string:permission_approximately_location",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "always"
+        }
+      },
+      {
+        "name": "ohos.permission.LOCATION",
+        "reason": "$string:location_permission_reason",  // 必须符合格式要求
+        "usedScene": {
+          "abilities": ["EntryAbility"],
+          "when": "always"
+        }
       }
     ],
     "abilities": [

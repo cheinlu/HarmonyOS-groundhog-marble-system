@@ -62,11 +62,11 @@ struct Index {
         .width($r('app.float.size_24'))
         .height($r('app.float.size_24'))
       Text(item.title)
-        .fontColor(this.currentIndex === item.index ? $r('app.color.color_0165b8') : Color.Black)
+        .fontColor(this.currentIndex === item.index ? $r('app.color.color_c84921') : Color.Black)
         .opacity(this.currentIndex === item.index ? 1 : 0.6)
         .fontWeight(FontWeight.Medium)
         .textAlign(TextAlign.Center)
-        .fontSize($r('app.float.size_text_10'))
+        .fontSize($r('app.float.size_text_12'))
     }
     .width(StyleConst.FULL_WIDTH)
     .height(StyleConst.FULL_HEIGHT)

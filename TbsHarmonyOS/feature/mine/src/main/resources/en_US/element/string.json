@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "visit_store_map",
+      "value": "高德地图"
+    },
+    {
+      "name": "visit_store_baidu_map",
+      "value": "百度地图"
+    },
+    {
+      "name": "visit_store_petal_map",
+      "value": "花瓣地图"
+    },
+    {
+      "name": "visit_store_install_maps_first",
+      "value": "请安装高德地图、花瓣地图或百度地图"
+    }
+  ]
+}

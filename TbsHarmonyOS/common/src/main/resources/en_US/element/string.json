@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "copy_success",
+      "value": "Successful replication"
+    },
+    {
+      "name": "warehouse",
+      "value": "Big board cloud warehouse"
+    }
+  ]
+}

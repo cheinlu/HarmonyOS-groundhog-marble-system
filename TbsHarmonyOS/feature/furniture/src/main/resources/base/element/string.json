@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "all",
+      "value": "全部"
+    },
+    {
+      "name": "tea",
+      "value": "茶盘"
+    },
+    {
+      "name": "board",
+      "value": "餐桌"
+    }
+  ]
+}

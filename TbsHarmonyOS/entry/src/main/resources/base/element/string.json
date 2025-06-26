@@ -31,6 +31,14 @@
     {
       "name": "mine",
       "value": "我的"
+    },
+    {
+      "name": "permission_approximately_location",
+      "value": "需要获取您的位置信息以提供附近服务"
+    },
+    {
+      "name": "location_permission_reason",
+      "value": "需要获取您的位置信息以提供附近服务"
     }
   ]
 }

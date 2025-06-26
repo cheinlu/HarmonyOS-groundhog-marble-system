@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "FurnitureDetail",
+      "pageSourceFile": "src/main/ets/view/FurnitureDetail.ets",
+      "buildFunction": "FurnitureDetailBuilder"
+    }
+  ]
+}

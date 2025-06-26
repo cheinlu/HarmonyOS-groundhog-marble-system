@@ -52,10 +52,11 @@
     "mp-weixin" : {
         "permission" : {
             "scope.userLocation" : {
-                "desc" : "获取您的地理位置信息以提供相关服务"
+                "desc": "你的位置信息将用于小程序位置接口的效果展示",
+                "dowload": "您的文件访问权限用于打开文件"
             }
         },
-        "requiredPrivateInfos" : [ "getLocation" ],
+        "requiredPrivateInfos" : [ "chooseLocation", "getLocation" ],
         "appid" : "wx72c839754535dfa9",
         "setting" : {
             "urlCheck" : false,
