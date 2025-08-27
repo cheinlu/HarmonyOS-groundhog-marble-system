@@ -1,78 +1,134 @@
-import { CommonDataSource, ScreenUtils, requestCommonList, StyleConst } from "@tbs/common"
+import {
+  CommonDataSource,
+  ScreenUtils,
+  requestCommonList,
+  StyleConst,
+  StorageConst,
+  CommonInterfaceType,
+  LoadingView,
+  LoadMoreFooterView,
+  toast,
+  EmptyDataView,
+  handleRefreshLoadMore,
+  TopComponentView
+} from "@tbs/common"
 import { furnitureObj, furnitureData, categoryList, CategoryLevelModel } from "../model/FurnitureModel"
+import '../view/FurnitureDetail'
+import { router } from "@kit.ArkUI"
+import {
+  pullRefreshLoadMoreModel,
+  pullRefreshResponse
+} from "@tbs/common/src/main/ets/widgets/pullRefresh/model/pullRefreshModel"
+
+@Extend(Image)
+function imageStyles(width: ResourceStr | string, height: ResourceStr | string) {
+  .width(width)
+  .height(height)
+  .objectFit(ImageFit.Cover)
+}
+
+@Extend(Text)
+function textStyles(fontSize: Resource, fontColor: ResourceColor = Color.Black) {
+  .fontSize(fontSize)
+  .fontColor(fontColor)
+}
 
 //家居
 @Component
 export struct FurniturePage {
-  furnitureInfos: NavPathStack = new NavPathStack()
+  @State state: pullRefreshLoadMoreModel<furnitureObj> = {
+    dataSource: new CommonDataSource<furnitureObj>(),
+    hasMore: true,
+    isBottomLoading: false,
+    isLoading: false,
+    totalCount: 0,
+    isRefreshing: false,
+    pageNo: 1,
+    pageSize: 10
+  }
   @State kv: string = ''
   @State changeValue: string = ''
   controller: SearchController = new SearchController()
   private scroll: Scroller = new Scroller()
   @State categoryIndex: number = 0
   @State sn: string = ''
-  pageNo: number = 1
-  pageSize: number = 1000
-  furnitureDataSource = new CommonDataSource<furnitureObj>()
-  goodsWidth = ScreenUtils.getInstance().getScreenWidthVp() - 100
+  private scroller = new ListScroller()
+  @StorageProp(StorageConst.SCREEN_WIDTH_VP) screenWidth: number =
+    ScreenUtils.getInstance().getScreenWidthVp()
+  searchTimer: number | null = null
 
   aboutToAppear(): void {
-    this.getFurnitureList()
+    this.getFurnitureList(true, true)
   }
 
-  getFurnitureList() {
-    requestCommonList(this.kv, 'shopping', this.pageNo, this.pageSize, this.sn).then((data: furnitureData) => {
-      if (data.code == 0 && data.data) {
-        if (data.data.TotalCount && data.data.TotalCount > 0 && data.data.List) {
-          console.log('lucy== list',JSON.stringify(data.data.List))
-          this.furnitureDataSource.resetData(data.data.List)
-        }
-      }
-    })
-  }
-
-  build() {
-    Navigation(this.furnitureInfos) {
-      RelativeContainer() {
-        this.SearchViewBuilder() // 顶部搜索
-
-        this.LeftLevelBuilder() //左侧分类
-
-        this.RightGoodsViewBuilder() //右侧商品
-      }
-      .width(StyleConst.FULL_WIDTH)
-      .height(StyleConst.FULL_HEIGHT)
+  aboutToDisappear(): void {
+    // 组件销毁时清理定时器
+    if (this.searchTimer !== null) {
+      clearTimeout(this.searchTimer);
+      this.searchTimer = null;
     }
   }
 
+  getFurnitureList(isRefresh: boolean = true, isShowLoading: boolean = true): Promise<void> {
+    return handleRefreshLoadMore<furnitureObj>(
+      (pageNo, pageSize, searchKey, type, sn) =>
+      requestCommonList(pageNo, pageSize, searchKey, type, sn) as Promise<pullRefreshResponse<furnitureObj>>,
+      this.state,
+      isRefresh,
+      isShowLoading,
+      this.kv,  // 传递 searchKey
+      CommonInterfaceType.SHOPPING,  // 传递 type
+      this.sn   // 传递 sn
+    );
+  }
+
+  handleSearch(value: string, delay: number = 0): void {
+    if (this.searchTimer !== null) {
+      clearTimeout(this.searchTimer);
+      this.searchTimer = null;
+    }
+
+    if (delay > 0) {
+      this.searchTimer = setTimeout(() => {
+        this.kv = value.trim();
+        this.state.pageNo = 1;
+        this.getFurnitureList(true, true)
+        this.searchTimer = null;
+      }, delay);
+    } else {
+      // 没有延迟，立即执行
+      this.kv = value.trim();
+      this.state.pageNo = 1;
+      this.getFurnitureList(true, true)
+    }
+  }
+
+  // 顶部搜索
   @Builder
   SearchViewBuilder() {
-    Stack({ alignContent: Alignment.Bottom }) {
-      Image($r('app.media.furniture_topimg'))
-        .width(StyleConst.FULL_WIDTH)
-        .height(StyleConst.FULL_HEIGHT)
-
-      Search({ value: this.changeValue, placeholder: '点击快速搜索商品', controller: this.controller })
-        .searchButton('搜索')
-        .width('95%')
-        .height($r('app.float.size_40'))
-        .backgroundColor('#F5F5F5')
-        .placeholderColor(Color.Grey)
-        .placeholderFont({ size: $r('app.float.size_14'), weight: 400 })
-        .textFont({ size: $r('app.float.size_14'), weight: 400 })
-        .margin({ bottom: $r('app.float.size_20') })
-        .onSubmit((value: string) => {
-          this.kv = value
-          this.getFurnitureList()
-        })
-    }
-    .height(StyleConst.PERCENT_30)
-    .id('first_top')
-    .alignRules({
-      top: { anchor: "__container__", align: VerticalAlign.Top }
+    TopComponentView({
+      imageHeight: StyleConst.FULL_HEIGHT,
+      topBuildHeight: StyleConst.PERCENT_30,
+      isShowSearchButton: true,
+      changeValue: this.changeValue,
+      onChange: (value: string) => {
+        this.changeValue = value;
+        // 当输入框内容被清空时，立即触发搜索
+        if (value === '') {
+          this.handleSearch('', 0); // 0 表示无延迟
+        }
+      },
+      onSubmit: (value: string) => {
+        this.handleSearch(value, 500); // 500ms 延迟
+      }
     })
+      .id('first_top')
+      .alignRules({
+        top: { anchor: "__container__", align: VerticalAlign.Top }
+      })
   }
 
+  //左侧分类
   @Builder
   LeftLevelBuilder() {
     Column() {
@@ -85,21 +141,36 @@ export struct FurniturePage {
                 .height($r("app.float.size_48"))
                 .backgroundColor(this.categoryIndex == index ? $r("app.color.color_c84921") :
                 $r("app.color.color_f6f6f6"))
-              Text(item.title)
-                .fontSize($r("app.float.size_text_16"))
-                .textAlign(TextAlign.Center)
-                .height(StyleConst.FULL_HEIGHT)
-                .layoutWeight(1)
-                .maxLines(2)
-                .margin({
-                  left: $r("app.float.size_5"),
-                  right: $r("app.float.size_5")
-                })
-                .textOverflow({ overflow: TextOverflow.Ellipsis })
+              Column() {
+                Text(item.title)
+                  .textStyles($r("app.float.size_text_16"))
+                  .textAlign(TextAlign.Center)
+                  .height(StyleConst.FULL_HEIGHT)
+                  .layoutWeight(1)
+                  .maxLines(2)
+                  .margin({
+                    left: $r("app.float.size_5"),
+                    right: $r("app.float.size_5")
+                  })
+                  .textOverflow({ overflow: TextOverflow.Ellipsis })
+                Text(item.titleEn)
+                  .textStyles($r("app.float.size_text_16"))
+                  .textAlign(TextAlign.Center)
+                  .height(StyleConst.FULL_HEIGHT)
+                  .layoutWeight(1)
+                  .maxLines(2)
+                  .margin({
+                    left: $r("app.float.size_5"),
+                    right: $r("app.float.size_5")
+                  })
+                  .textOverflow({ overflow: TextOverflow.Ellipsis })
+              }
+              .width(StyleConst.FULL_WIDTH)
+              .justifyContent(FlexAlign.Center)
             }
             .width(StyleConst.FULL_WIDTH)
-            .height($r("app.float.size_50"))
-            .backgroundColor(this.categoryIndex == index ? $r("app.color.color_fff") : $r("app.color.color_f6f6f6"))
+            .height($r("app.float.size_65"))
+            .backgroundColor(this.categoryIndex == index ? $r("app.color.color_fff") : $r("app.color.color_f0f2f4"))
             .onClick(() => {
               if (this.categoryIndex != index) {
                 this.categoryIndex = index
@@ -111,14 +182,14 @@ export struct FurniturePage {
                   this.sn = item.title
                 }
               }
-              this.getFurnitureList()
-              this.furnitureDataSource.changeItem(index)
+              this.getFurnitureList(true,true)
+              this.state.dataSource.changeItem(index)
             })
           }
         })
       }
     }
-    .width($r("app.float.size_88"))
+    .width($r("app.float.size_110"))
     .height(StyleConst.FULL_HEIGHT)
     .backgroundColor($r("app.color.color_f6f6f6"))
     .alignRules({
@@ -135,35 +206,15 @@ export struct FurniturePage {
     }
   }
 
+  //右侧商品
   @Builder
   RightGoodsViewBuilder() {
-    Column() {
-      WaterFlow() {
-        LazyForEach(this.furnitureDataSource, (model: furnitureObj) => {
-          FlowItem() {
-            this.GoodsItemView(model)
-          }
-          .width(StyleConst.FULL_WIDTH)
-        }, (item: furnitureObj, index: number) => {
-          return item.id?.toString() + index.toString()
-        })
+    Stack() {
+      if (this.state.isLoading) {
+        LoadingView({ buildHeight: StyleConst.PERCENT_70 })
+      } else {
+        this.RightGoodsView()
       }
-      .padding({
-        left: $r('app.float.size_12'),
-        right: $r('app.float.size_12'),
-      })
-      .scrollBar(BarState.Off)
-      .cachedCount(6)
-      .columnsTemplate('1fr 1fr')
-      .columnsGap($r('app.float.size_9'))
-      .rowsGap($r('app.float.size_9'))
-      .width(ScreenUtils.getInstance().getScreenWidthVp() - 90)
-      .height(StyleConst.FULL_HEIGHT)
-      .margin({ top: $r('app.float.size_12') })
-      .layoutWeight(1)
-
-      Blank()
-        .height(210)
     }
     .id("goods_list")
     .alignRules({
@@ -171,33 +222,84 @@ export struct FurniturePage {
       left: { anchor: "second_left", align: HorizontalAlign.End },
       right: { anchor: "__container__", align: HorizontalAlign.End }
     })
+    .width(this.screenWidth - 110)
   }
 
+  //右侧商品列表
+  @Builder
+  RightGoodsView() {
+    Refresh({ refreshing: $$this.state.isRefreshing }) {
+      if (this.state.dataSource.totalCount() > 0) {
+        WaterFlow({ footer: this.getFooter(), scroller: this.scroller }) {
+          LazyForEach(this.state.dataSource, (model: furnitureObj) => {
+            FlowItem() {
+              this.GoodsItemView(model)
+            }
+            .width(StyleConst.FULL_WIDTH)
+          }, (item: furnitureObj, index: number) => {
+            return item.id?.toString() + index.toString()
+          })
+        }
+        .onReachEnd(() => {
+          if (this.state.hasMore) {
+            this.state.pageNo++; // 页码自增
+            this.getFurnitureList(false, false); // 加载下一页
+          }
+        })
+        .padding({
+          left: $r('app.float.size_12'),
+          right: $r('app.float.size_12'),
+        })
+        .scrollBar(BarState.Off)
+        .cachedCount(6)
+        .columnsTemplate('1fr 1fr')
+        .columnsGap($r('app.float.size_9'))
+        .rowsGap($r('app.float.size_9'))
+        .width(this.screenWidth - 110)
+        .height(StyleConst.PERCENT_65)
+        .margin({ top: $r('app.float.size_12') })
+        .layoutWeight(1)
+      } else {
+        //空数据页面
+        EmptyDataView({ buildHeight: StyleConst.PERCENT_70 })
+      }
+    }
+    .refreshOffset(64)
+    .onRefreshing(() => {
+      this.state.pageNo = 1
+      this.getFurnitureList(true, false)
+    })
+  }
+
+  //滑动到底部文描
+  @Builder
+  getFooter() {
+    LoadMoreFooterView({ isBottomLoading: this.state.isBottomLoading })
+  }
+
+  //右侧商品item
   @Builder
   GoodsItemView(model: furnitureObj) {
     Column({ space: 10 }) {
       Image(model.pictureUrls)
-        .width(StyleConst.FULL_WIDTH)
-        .height($r('app.float.size_130'))
+        .alt($r('app.media.home_bg'))
+        .imageStyles(StyleConst.FULL_WIDTH, $r('app.float.size_130'))
         .borderRadius($r('app.float.size_6'))
       Text(model.name)
-        .fontSize($r('app.float.size_text_16'))
-        .fontColor($r('app.color.color_262626'))
+        .textStyles($r("app.float.size_text_16"), $r('app.color.color_262626'))
         .width(StyleConst.FULL_WIDTH)
         .padding({ left: $r('app.float.size_10') })
       Text() {
-        Span(model.description)
+        Span(model.description || '')
         Span(`${this.priceOrDescription(model)}`)
       }
+      .textStyles($r('app.float.size_text_13'), $r('app.color.color_a0a0a0'))
       .height($r('app.float.size_30'))
-      .fontSize($r('app.float.size_text_13'))
-      .fontColor($r('app.color.color_a0a0a0'))
       .width(StyleConst.FULL_WIDTH)
       .padding({ left: $r('app.float.size_10') })
 
       Text('详情')
-        .fontSize($r('app.float.size_text_15'))
-        .fontColor($r('app.color.color_616161'))
+        .textStyles($r('app.float.size_text_15'), $r('app.color.color_616161'))
         .borderWidth($r('app.float.size_1'))
         .borderColor($r('app.color.color_e3e4e7'))
         .borderRadius($r('app.float.size_4'))
@@ -215,7 +317,22 @@ export struct FurniturePage {
     .borderRadius($r('app.float.size_6'))
     .backgroundColor($r('app.color.color_f6f6f6'))
     .onClick(() => {
-      this.furnitureInfos.pushPath({ name: 'FurnitureDetail', param: model })
+      router.pushNamedRoute({
+        name: 'FurnitureDetail',
+        params: model
+      })
     })
+  }
+
+  build() {
+    RelativeContainer() {
+      this.SearchViewBuilder() // 顶部搜索
+
+      this.LeftLevelBuilder() //左侧分类
+
+      this.RightGoodsViewBuilder() //右侧商品
+    }
+    .width(StyleConst.FULL_WIDTH)
+    .height(StyleConst.FULL_HEIGHT)
   }
 }

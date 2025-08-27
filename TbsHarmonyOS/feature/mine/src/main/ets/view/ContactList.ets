@@ -122,7 +122,7 @@ export struct ContactList {
           builder: MapDialogCall({
             title: '请选择地图',
             titleFontSize: $r('app.float.size_13'),
-            titleTextColor: '#acb1b6',
+            titleTextColor: $r('app.color.color_acb1b6'),
             mapList: this.mapList,
             propBackgroundColor: Color.Transparent,
             propBorderRadius: $r('app.float.size_8'),
@@ -192,7 +192,7 @@ export struct ContactList {
   call(phoneNumber: string) {
     call.makeCall(phoneNumber, (err: BusinessError) => {
       if (err) {
-        console.error('lucy== err',err)
+        console.error('lucy== err', err)
       }
     })
   }
@@ -232,12 +232,13 @@ export struct ContactList {
           ForEach(this.phones, (item: string) => {
             Text(item)
               .contactTextStyle($r('app.float.size_text_16'), $r('app.color.color_737373'))
-              .margin({right:$r('app.float.size_25')})
-              .onClick(()=>{
+              .margin({ right: $r('app.float.size_25') })
+              .onClick(() => {
                 this.call(item)
               })
           })
         }
+
         Image($r('app.media.right_arrow'))
           .contactImageStyle()
       }

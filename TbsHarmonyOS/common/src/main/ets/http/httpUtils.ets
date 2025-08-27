@@ -1,5 +1,6 @@
 import http from '@ohos.net.http';
 import { ResponseResult } from './response';
+import { BusinessError } from '@kit.BasicServicesKit';
 
 
 export function request(url: string, method: http.RequestMethod, headers?: Record<string, Object>,
@@ -12,9 +13,7 @@ export function request(url: string, method: http.RequestMethod, headers?: Recor
     extraData: JSON.stringify(data),
   });
   let response: ResponseResult = new ResponseResult();
-  console.log('lucy== response',JSON.stringify(response),JSON.stringify(responseResult))
   return responseResult.then((value: http.HttpResponse) => {
-    console.log('lucy== 111')
     if (value.responseCode === 200) {
       let res: ResponseResult = JSON.parse(`${value.result}`);
       response.data = res.data;
@@ -25,9 +24,9 @@ export function request(url: string, method: http.RequestMethod, headers?: Recor
       response.code = 400;
     }
     return response;
-  }).catch((error: Error) => {
-    response.message = '请求错误';
-    response.code = 400;
+  }).catch((error: BusinessError) => {
+    response.message = error.message;
+    response.code = error.code;
     return response;
   })
 }

@@ -14,6 +14,8 @@ let request = axios.create({
 
 // 添加请求拦截器
 request.interceptors.request.use((config)=>{
+  console.log('lucy== 大理石',import.meta.env.VITE_APP_BASE_API);
+  
 //获取用户相关的小仓库:获取仓库内部token和租户id,登录成功以后携带给服务器
 const userStore = useUserStore()
 let token = userStore.token

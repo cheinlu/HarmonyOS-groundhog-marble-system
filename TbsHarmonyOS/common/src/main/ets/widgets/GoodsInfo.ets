@@ -2,6 +2,12 @@ import { CommonFormPageType } from "."
 import { StyleConst } from "../common"
 import { commonObj, layers, marblesObj, slices } from "../model"
 
+@Extend(Text)
+function textStyles(fontSize: Resource = $r('app.float.size_text_15'), fontColor: ResourceColor = Color.Black) {
+  .fontSize(fontSize)
+  .fontColor(fontColor)
+}
+
 @Component
 export struct GoodsInfo {
   @Prop goodsModel: marblesObj
@@ -21,8 +27,7 @@ export struct GoodsInfo {
 
         Row() {
           Text(this.goodsText())
-            .fontSize(12)
-            .fontColor($r('app.color.color_fff'))
+            .textStyles($r('app.float.size_text_12'), $r('app.color.color_fff'))
             .maxLines(1)
             .textOverflow({ overflow: TextOverflow.Clip })
         }
@@ -38,53 +43,46 @@ export struct GoodsInfo {
 
       if (this.formPageType == CommonFormPageType.SLABS_SEARCH) {
         Text(this.goodsModel.name)
-          .fontSize($r('app.float.size_text_18'))
-          .fontColor($r('app.color.color_262626'))
+          .textStyles($r('app.float.size_text_18'), $r('app.color.color_262626'))
           .width(StyleConst.FULL_WIDTH)
           .padding({ left: $r('app.float.size_10') })
         Text(`${this.goodsModel.layers?.length}匝/${this.goodsModel.slices_total}片/${this.goodsModel.area}㎡`)
-          .fontSize($r('app.float.size_text_15'))
-          .fontColor($r('app.color.color_cf4444'))
+          .textStyles($r('app.color.color_cf4444'))
           .width(StyleConst.FULL_WIDTH)
           .padding({ left: $r('app.float.size_10') })
           .height($r('app.float.size_35'))
       } else if (this.formPageType == CommonFormPageType.SLABS_DETAIL) {
         Text(`${this.slabsDetailModel.width}x${this.slabsDetailModel.height}x${this.slabsDetailModel.length}mm`)
-          .fontSize($r('app.float.size_text_14'))
-          .fontColor($r('app.color.color_a0a0a0'))
+          .textStyles($r('app.float.size_text_14'), $r('app.color.color_a0a0a0'))
           .width(StyleConst.FULL_WIDTH)
           .padding({ left: $r('app.float.size_10') })
         Row() {
           Text(`${this.slabsDetailModel.slices?.length}片`)
-            .fontSize($r('app.float.size_text_15'))
-            .fontColor($r('app.color.color_cf4444'))
+            .textStyles($r('app.color.color_cf4444'))
 
           Text(`${this.slabsDetailModel.area}㎡`)
-            .fontSize($r('app.float.size_text_15'))
-            .fontColor($r('app.color.color_cf4444'))
+            .textStyles($r('app.color.color_cf4444'))
         }
         .justifyContent(FlexAlign.SpaceBetween)
         .width(StyleConst.FULL_WIDTH)
         .padding({ left: $r('app.float.size_10'), right: $r('app.float.size_10') })
       } else if (this.formPageType == CommonFormPageType.SLABS_SIZE) {
         Text(`${this.slabsSizeModel.width} x ${this.slabsSizeModel.height} x ${this.slabsSizeModel.length}mm`)
-          .fontSize($r('app.float.size_text_15'))
-          .fontColor($r('app.color.color_a0a0a0'))
+          .textStyles($r('app.color.color_a0a0a0'))
           .width(StyleConst.FULL_WIDTH)
           .padding({ left: $r('app.float.size_10') })
         Text(`${this.slabsSizeModel.area}㎡`)
-          .fontSize($r('app.float.size_text_15'))
+          .textStyles($r('app.color.color_cf4444'))
           .width(StyleConst.FULL_WIDTH)
-          .fontColor($r('app.color.color_cf4444'))
           .padding({ left: $r('app.float.size_10') })
       } else if (this.formPageType == CommonFormPageType.BLOCKS_SEARCH) {
         Text(this.blocksModel.name)
+          .textStyles($r('app.float.size_text_18'))
           .fontSize($r('app.float.size_text_18'))
           .width(StyleConst.FULL_WIDTH)
           .padding({ left: $r('app.float.size_10') })
         Text(`${this.blocksModel.width}mm x ${this.blocksModel.height}mm x ${this.blocksModel.length}mm x ${this.blocksModel.area}t x ${this.blocksModel.mass}m³`)
-          .fontSize($r('app.float.size_text_15'))
-          .fontColor($r('app.color.color_cf4444'))
+          .textStyles($r('app.color.color_cf4444'))
           .width(StyleConst.FULL_WIDTH)
           .height($r('app.float.size_55'))
           .padding({ left: $r('app.float.size_10') })

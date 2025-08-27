@@ -8,10 +8,10 @@ export struct HomePage {
 
   build() {
     Stack() {
-    Image('https://static.lusson.xyz/wx-miniprogram-image/home_bg.png')
-      .alt($r('app.media.home_bg_img'))
-      .width(StyleConst.FULL_WIDTH)
-      .height(StyleConst.FULL_HEIGHT)
+      Image('https://static.lusson.xyz/wx-miniprogram-image/home_bg.png')
+        .alt($r('app.media.home_bg_img'))
+        .width(StyleConst.FULL_WIDTH)
+        .height(StyleConst.FULL_HEIGHT)
 
       Video({
         src: this.videoSrc,

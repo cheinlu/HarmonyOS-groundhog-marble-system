@@ -44,12 +44,15 @@ export class skusObj {
 export class CategoryLevelModel {
   id?: number
   title?: string
+  titleEn?: string
 }
 
 const categoryList: Array<CategoryLevelModel> = [
-  { id: 0, title: '全部' },
-  { id: 1, title: '茶盘' },
-  { id: 2, title: '餐桌' }
+  { id: 0, title: '全部', titleEn: 'All' },
+  { id: 1, title: '餐桌', titleEn: 'Dining Table' },
+  { id: 2, title: '边几', titleEn: 'Side Table' },
+  { id: 3, title: '茶泡台', titleEn: 'Tea Table' },
+  { id: 4, title: '托盘', titleEn: 'Tray' },
 ];
 
 export { categoryList }

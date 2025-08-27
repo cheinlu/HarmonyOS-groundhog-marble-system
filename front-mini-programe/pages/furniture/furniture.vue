@@ -11,7 +11,8 @@
       <scroll-view class="primary" scroll-y>
         <view v-for="(item, index) in categoryList" :key="item" class="item" 
 		:class="{ active: index === activeIndex }"  @click="indexChange(item, index)">
-          <text class="name"> {{item.title}} </text>
+		  <text class="primary_text"> {{item.title}} </text>
+          <text class="primary_text"> {{item.titleEn}} </text>
         </view>
       </scroll-view>
       <!-- 右侧：二级分类 -->
@@ -55,11 +56,11 @@ let furnitureList = ref([])
 let timer = ref(null)
 
 let categoryList = reactive([
-	{id:0,title:'全部'},
-	{id:1,title:'餐桌'},
-	{id:2,title:'茶几'},
-	{id:3,title:'茶泡台'},
-	{id:4,title:'托盘'},
+	{id:0,title:'全部',titleEn:'All'},
+	{id:1,title:'餐桌',titleEn:'Dining Table'},
+	{id:2,title:'边几',titleEn:'Side Table'},
+	{id:3,title:'茶泡台',titleEn:'Tea Table'},
+	{id:4,title:'托盘',titleEn:'Tray'},
 ])
 
 const activeIndex = ref(0)
@@ -168,14 +169,15 @@ page {
 /* 一级分类 */
 .primary {
   overflow: hidden;
-  width: 140rpx;
+  width: 150rpx;
   flex: none;
   background-color: #f6f6f6;
   .item {
     display: flex;
+	flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 96rpx;
+    padding: 20rpx 0;
     font-size: 26rpx;
     color: #595c63;
     position: relative;
@@ -198,6 +200,9 @@ page {
       height: 100%;
       background-color: #c84921;
     }
+  }
+  .primary_text{
+	  text-align: center;
   }
 }
 .primary .item:last-child::after,

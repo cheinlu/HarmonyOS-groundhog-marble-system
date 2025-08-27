@@ -20,13 +20,13 @@ function textStyles(item: TextStyle) {
 export struct MapDialogCall {
   mapList: mapListItem[] = []
   controller: CustomDialogController
-  propBackgroundColor: Color | number | string | Resource = '#f3f4f5'
+  propBackgroundColor: Color | number | string | Resource = $r('app.color.color_f3f4f5')
   propPadding: Padding | Length | LocalizedPadding = {}
   propBorderRadius: ResourceStr = '0'
   title: ResourceStr = '';
   titlePadding: Padding = { top: $r('app.float.size_16'), bottom: $r('app.float.size_16') }
   titleFontSize: ResourceStr = $r('app.float.size_text_16')
-  titleTextColor: ResourceColor = '#222427'
+  titleTextColor: ResourceColor = $r('app.color.color_222427')
   titleBgColor: ResourceColor = Color.Transparent
   onClickCallBack?: (ele: mapListItem) => void
   propHeight: Length = $r('app.float.size_25')
@@ -74,7 +74,7 @@ export struct MapDialogCall {
       .backgroundColor(Color.White)
       .height($r('app.float.size_50'))
       .margin({ bottom: $r('app.float.size_16') })
-      .onClick(()=>{
+      .onClick(() => {
         this.controller.close()
       })
     }

@@ -1,17 +1,95 @@
 import { ScreenUtils, StyleConst, SwiperCard } from "@tbs/common"
 import { furnitureObj, skusObj } from "../model/FurnitureModel"
+import { router } from "@kit.ArkUI"
 
-@Builder
-export function FurnitureDetailBuilder(name: string, param: Object) {
-  FurnitureDetail()
+@Extend(Text)
+function textStyles(fontSize: Resource, fontColor: ResourceColor = Color.Black) {
+  .fontSize(fontSize)
+  .fontColor(fontColor)
 }
 
+@Extend(Image)
+function imageStyles(width: ResourceStr | string) {
+  .width(width)
+  .objectFit(ImageFit.Cover)
+}
+
+@Entry({ routeName: 'FurnitureDetail' })
 @Component
 export struct FurnitureDetail {
   scroller: Scroller = new Scroller()
   @State detailData: furnitureObj | undefined = undefined
   @State selectedSpecIndex: number = 0 // 选中规格索引
-  navContext: NavDestinationContext | null = null
+
+  onPageShow(): void {
+    const FurnitureDetailParams = router.getParams() as Record<string, Object>
+    if (FurnitureDetailParams) {
+      this.detailData = FurnitureDetailParams as furnitureObj
+    }
+  }
+
+  // 统一处理图片数组
+  getImageUrls(): string[] {
+    if (!this.detailData) {
+      return []
+    }
+    const images: string[] = [];
+    // 定义要检查的属性列表
+    const props = [
+      'pictureUrls',
+      'pictureUrls1',
+      'pictureUrls2',
+      'pictureUrls3',
+      'pictureUrls4',
+      'pictureUrls5'
+    ];
+
+    // 遍历属性列表，显式访问每个属性
+    for (const prop of props) {
+      let url: string | undefined;
+      // 显式检查并访问每个属性
+      switch (prop) {
+        case 'pictureUrls':
+          url = this.detailData.pictureUrls;
+          break;
+        case 'pictureUrls1':
+          url = this.detailData.pictureUrls1;
+          break;
+        case 'pictureUrls2':
+          url = this.detailData.pictureUrls2;
+          break;
+        case 'pictureUrls3':
+          url = this.detailData.pictureUrls3;
+          break;
+        case 'pictureUrls4':
+          url = this.detailData.pictureUrls4;
+          break;
+        case 'pictureUrls5':
+          url = this.detailData.pictureUrls5;
+          break;
+      }
+
+      if (url && typeof url === 'string' && url.trim() !== '') {
+        images.push(url);
+      }
+    }
+
+    return images;
+  }
+
+  @Builder
+  FurnitureDetailTopBuild() {
+    Image($r('app.media.common_back_black'))
+      .imageStyles($r('app.float.size_20'))
+      .margin({
+        left: $r('app.float.size_5'),
+        bottom: $r('app.float.size_15'),
+        top: ScreenUtils.getInstance().getStatusBarHeight()
+      })
+      .onClick(() => {
+        router.back()
+      })
+  }
 
   @Builder
   FurnitureDetailBuild() {
@@ -29,41 +107,31 @@ export struct FurnitureDetail {
     }
     .width(StyleConst.FULL_WIDTH)
     .height(StyleConst.FULL_HEIGHT)
+    .layoutWeight(1)
     .scrollable(ScrollDirection.Vertical)
     .backgroundColor($r('app.color.color_f4f4f4'))
   }
 
   @Builder
   SwiperBuilder() {
-    Stack({ alignContent: Alignment.TopStart }) {
-      SwiperCard({ swiperHeight: StyleConst.PERCENT_60 })
-      Image($r('app.media.common_back_white'))
-        .width($r('app.float.size_20'))
-        .margin({ left: $r('app.float.size_5'), top: ScreenUtils.getInstance().getStatusBarHeight() })
-        .onClick(() => {
-          this.navContext?.pathStack.pop()
-        })
-    }
+    SwiperCard({ swiperHeight: StyleConst.PERCENT_50, swiperList: this.getImageUrls() })
   }
 
   @Builder
   GoodsInfoBuilder() {
     Column({ space: 20 }) {
       Text(this.detailData?.name)
-        .fontSize($r('app.float.size_text_25'))
-        .fontColor($r('app.color.color_333'))
+        .textStyles($r('app.float.size_text_25'), $r('app.color.color_333'))
         .padding({ left: $r('app.float.size_15') })
       if (this.detailData?.skus && this.detailData.skus.length > 0) {
         Text(`价格：￥${this.detailData.skus[this.selectedSpecIndex]?.price || ''}`)
-          .fontColor($r('app.color.color_cf4444'))
-          .fontSize($r('app.float.size_text_15'))
+          .textStyles($r('app.float.size_text_15'), $r('app.color.color_cf4444'))
           .padding({ left: $r('app.float.size_15') })
       }
       // 规格选择
-      if (this.detailData?.skus) {
+      if (this.detailData?.skus && Array.isArray(this.detailData.skus)) {
         Text('尺寸：')
-          .fontColor($r('app.color.color_cf4444'))
-          .fontSize($r('app.float.size_text_15'))
+          .textStyles($r('app.float.size_text_15'), $r('app.color.color_cf4444'))
           .padding({ left: $r('app.float.size_15') })
 
         Flex({ wrap: FlexWrap.Wrap }) {
@@ -73,10 +141,10 @@ export struct FurnitureDetail {
               .fontColor(this.selectedSpecIndex === index ? $r('app.color.color_c84921') : $r('app.color.color_333'))
               .backgroundColor(this.selectedSpecIndex === index ?
               $r('app.color.color_f8ebe8') : 'transparent')// 半透明背景
-              .padding(5)
+              .padding($r('app.float.size_5'))
               .margin({ right: $r('app.float.size_15') })
               .border({
-                width: 0.5,
+                width: $r('app.float.size_0_5'),
                 radius: $r('app.float.size_4'),
                 color: $r('app.color.color_c84921'),
                 style: BorderStyle.Solid
@@ -89,10 +157,10 @@ export struct FurnitureDetail {
         .width(StyleConst.FULL_WIDTH)
         .padding({ left: $r('app.float.size_15') })
       }
-      Blank().width(StyleConst.FULL_WIDTH).height(1).color($r('app.color.color_a0a0a0'))
+      Blank().width(StyleConst.FULL_WIDTH).height($r('app.float.size_1')).color($r('app.color.color_a0a0a0'))
       Row({ space: 15 }) {
-        Text('系列1').fontColor($r('app.color.color_898b94')).fontSize($r('app.float.size_18'))
-        Text(`家居-${this.detailData?.sn}`).fontSize($r('app.float.size_18'))
+        Text('系列1').textStyles($r('app.float.size_18'), $r('app.color.color_898b94'))
+        Text(`家居-${this.detailData?.sn}`).textStyles($r('app.float.size_18'))
       }.padding({ left: $r('app.float.size_15') }).width(StyleConst.FULL_WIDTH)
 
     }
@@ -105,15 +173,14 @@ export struct FurnitureDetail {
 
   @Builder
   DetailImagesBuilder() {
-    Column({ space: 15 }) {
+    Column() {
       Row() {
         Blank()
           .width($r("app.float.size_2"))
           .height($r("app.float.size_15"))
           .backgroundColor($r("app.color.color_c84921"))
         Text('产品详情')
-          .fontSize($r('app.float.size_18'))
-          .fontColor($r('app.color.color_333'))
+          .textStyles($r('app.float.size_18'), $r('app.color.color_333'))
           .margin({ left: $r('app.float.size_5') })
           .fontWeight(FontWeight.Bold)
       }
@@ -121,35 +188,26 @@ export struct FurnitureDetail {
       .margin({ top: $r('app.float.size_30'), bottom: $r('app.float.size_15') })
       .alignItems(VerticalAlign.Center)
 
-      if (this.detailData?.pictureUrls) {
-        Image(this.detailData?.pictureUrls).width(StyleConst.FULL_WIDTH).height($r('app.float.size_400'))
-      }
-      if (this.detailData?.pictureUrls1) {
-        Image(this.detailData?.pictureUrls1).width(StyleConst.FULL_WIDTH).height($r('app.float.size_400'))
-      }
-      if (this.detailData?.pictureUrls2) {
-        Image(this.detailData?.pictureUrls2).width(StyleConst.FULL_WIDTH).height($r('app.float.size_400'))
-      }
-      if (this.detailData?.pictureUrls3) {
-        Image(this.detailData?.pictureUrls3).width(StyleConst.FULL_WIDTH).height($r('app.float.size_400'))
-      }
-      if (this.detailData?.pictureUrls4) {
-        Image(this.detailData?.pictureUrls4).width(StyleConst.FULL_WIDTH).height($r('app.float.size_400'))
-      }
+      ForEach(this.getImageUrls(), (url: string) => {
+        Image(url)
+          .imageStyles(StyleConst.FULL_WIDTH)
+          .aspectRatio(1)
+          .margin({ bottom: $r('app.float.size_10') })
+      })
     }
-    .padding({ left: $r('app.float.size_20'), right: $r('app.float.size_20') })
+    .padding({ left: $r('app.float.size_20'), right: $r('app.float.size_20'), bottom: $r('app.float.size_20') })
     .backgroundColor(Color.White)
   }
 
   build() {
-    NavDestination() {
+    Column() {
+      //顶部内容
+      this.FurnitureDetailTopBuild()
+      //主体部分
       this.FurnitureDetailBuild()
     }
-    .hideTitleBar(true)
-    .mode(NavDestinationMode.STANDARD)
-    .onReady((context: NavDestinationContext) => {
-      this.navContext = context
-      this.detailData = context.pathInfo.param as furnitureObj
-    })
+    .width(StyleConst.FULL_WIDTH)
+    .height(StyleConst.FULL_HEIGHT)
+    .alignItems(HorizontalAlign.Start)
   }
 }

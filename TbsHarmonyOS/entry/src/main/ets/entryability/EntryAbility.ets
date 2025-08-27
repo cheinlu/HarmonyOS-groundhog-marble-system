@@ -1,8 +1,9 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import { GlobalContext } from '@tbs/common';
+import { GlobalContext, ScreenUtils } from '@tbs/common';
 import WindowModel from '@tbs/common/src/main/ets/widgets/WindowModel';
+import { BusinessError } from '@kit.BasicServicesKit';
 
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
@@ -22,6 +23,13 @@ export default class EntryAbility extends UIAbility {
     this.setMainWindowImmersive(windowStage)
 
     windowStage.loadContent('pages/Index', (err) => {
+      windowStage.getMainWindow((err: BusinessError, data)=>{
+        let windowInfo: window.Window = data;
+        if (!windowInfo.getUIContext()) {
+          return
+        }
+        ScreenUtils.getInstance().setWindow(windowInfo)
+      })
       if (err.code) {
         hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
         return;

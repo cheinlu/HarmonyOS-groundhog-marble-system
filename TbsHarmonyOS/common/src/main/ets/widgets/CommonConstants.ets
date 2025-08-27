@@ -4,3 +4,8 @@ export enum CommonFormPageType {
   SLABS_SIZE = 3, //大板数据
   BLOCKS_SEARCH = 4, //荒料搜
 }
+
+export enum CommonInterfaceType {
+  SHOPPING = 'shopping', //家居
+  MARBLE = 'marble' //大板
+}

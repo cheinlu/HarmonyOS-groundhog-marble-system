@@ -14,7 +14,7 @@ export function requestMarbleList(pageNo: number, pageSize: number) {
   return request(`${Apis.MARBLE_NAME}?pageNo=${pageNo}&pageSize=${pageSize}`, http.RequestMethod.GET);
 }
 
-export function requestMarblesList(name: string, pageNo: number, pageSize: number) {
+export function requestMarblesList(pageNo: number, pageSize: number, name: string = '') {
   return request(`${Apis.MARBLE_LIST}?name=${name}&pageNo=${pageNo}&pageSize=${pageSize}`, http.RequestMethod.GET)
 }
 
@@ -22,7 +22,8 @@ export function requestMarblePassword() {
   return request(Apis.MARBLE_PASSWORD, http.RequestMethod.GET)
 }
 
-export function requestCommonList(name: string, type: string, pageNo: number, pageSize: number, sn: string = '') {
+export function requestCommonList(pageNo: number, pageSize: number, name: string = '', type: string = '',
+  sn: string = '') {
   let url = `${Apis.COMMON_LIST}?name=${name}&type=${type}&pageNo=${pageNo}&pageSize=${pageSize}`
   if (sn) {
     return request(url += `&sn=${sn}`, http.RequestMethod.GET)

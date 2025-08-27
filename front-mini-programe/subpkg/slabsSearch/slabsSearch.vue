@@ -29,7 +29,9 @@
 				<text class="small" v-else>{{item.width}}mm x {{item.height}}mm x {{item.length}}mm x {{item.mass}}t x {{item.area}}m³</text>
 				
 			    </view>
-				  
+				<view class="remark" v-if="propId == 'raw' && item.remark != 0">
+					备注：{{item.remark}}
+				</view>
 			  </view>
 			</view>
 		</view>
@@ -181,7 +183,6 @@ const handleInput = (keyword) => {
 	  	
 	    }
 	    .name {
-	      height: 35rpx;
 	      margin: 20rpx;
 	      font-size: 30rpx;
 	      color: #262626;
@@ -198,6 +199,13 @@ const handleInput = (keyword) => {
 	      font-size: 30rpx;
 	  	margin: 20rpx;
 	    }
+		.remark{
+		  line-height: 1;
+		  padding-top: 4rpx;
+		  color: #cf4444;
+		  font-size: 25rpx;
+		  margin: 20rpx;
+		}
 	    .small {
 	      font-size: 80%;
 	    }

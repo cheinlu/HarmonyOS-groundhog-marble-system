@@ -7,3 +7,5 @@ export * from './src/main/ets/http'
 export * from './src/main/ets/model'
 
 export * from './src/main/ets/location'
+
+export * from './src/main/ets/manager'

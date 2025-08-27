@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "/Users/hy-harmonyos/.ohos/config/default_TbsMarbleHarmonyNext_qiY5rC1gqXz8m3_aDZ7rX13FiaLpkl5Je4F3oKyO4jg=.cer",
-          "storePassword": "0000001BF6EC937729B3D0CAFCFB92DF9F692010835B6CADF976C497BF55414DBF17595368FC3A267EB419",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001B9DD6F9C3FAC6D4ECB86CF8C54D60FC890DFD8E0E5C45B70465A1E265E99252F7CFA56877AA55B2",
-          "profile": "/Users/hy-harmonyos/.ohos/config/default_TbsMarbleHarmonyNext_qiY5rC1gqXz8m3_aDZ7rX13FiaLpkl5Je4F3oKyO4jg=.p7b",
+          "storeFile": "C:/Users/123/Desktop/code/openSource/keshi/signature/.p12",
+          "storePassword": "00000018F74E0B2AEE5067260748ECF1D95A68E519A004929CC8055EFF2D2B4ECEB59E433F546472",
+          "keyAlias": "keshi",
+          "keyPassword": "000000188E2B44611579CB8C6FFD78E7C03B444495879264DD9301195C90750A646875C963072980",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "/Users/hy-harmonyos/.ohos/config/default_TbsMarbleHarmonyNext_qiY5rC1gqXz8m3_aDZ7rX13FiaLpkl5Je4F3oKyO4jg=.p12"
+          "profile": "C:/Users/123/Desktop/code/openSource/keshi/signature/keshiRelease.p7b",
+          "certpath": "C:/Users/123/Desktop/code/openSource/keshi/signature/keshi.cer"
         }
       }
     ],

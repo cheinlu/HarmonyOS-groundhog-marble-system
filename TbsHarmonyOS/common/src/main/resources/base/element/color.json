@@ -119,6 +119,30 @@
     {
       "name": "color_f8ebe8",
       "value": "#f8ebe8"
+    },
+    {
+      "name": "color_ccc",
+      "value": "#ccc"
+    },
+    {
+      "name": "color_0000001A",
+      "value": "#0000001A"
+    },
+    {
+      "name": "color_acb1b6",
+      "value": "#acb1b6"
+    },
+    {
+      "name": "color_f3f4f5",
+      "value": "#f3f4f5"
+    },
+    {
+      "name": "color_666",
+      "value": "#666"
+    },
+    {
+      "name": "color_999",
+      "value": "#999"
     }
   ]
 }

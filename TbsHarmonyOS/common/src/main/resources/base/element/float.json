@@ -1,6 +1,10 @@
 {
   "float": [
     {
+      "name": "size_0_5",
+      "value": "0.5vp"
+    },
+    {
       "name": "size_1",
       "value": "1vp"
     },

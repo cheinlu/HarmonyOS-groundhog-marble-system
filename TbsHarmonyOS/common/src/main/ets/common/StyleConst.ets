@@ -21,4 +21,17 @@ export class StyleConst {
   static readonly PERCENT_90 = '90%'
   static readonly PERCENT_95 = '95%'
   static readonly PERCENT_100 = '100%'
+  // 字体粗细
+  // 900
+  static readonly FONT_WEIGHT_900: number = 900;
+  // 700
+  static readonly FONT_WEIGHT_700: number = 700;
+  // 600
+  static readonly FONT_WEIGHT_600: number = 600;
+  // 500
+  static readonly FONT_WEIGHT_500: number = 500;
+  // 400
+  static readonly FONT_WEIGHT_400: number = 400;
+  // 300
+  static readonly FONT_WEIGHT_300: number = 300;
 }
