@@ -38,10 +38,6 @@ export struct SlabsSearch {
   controller: SearchController = new SearchController()
   searchTimer: number | null = null
 
-  aboutToAppear(): void {
-    this.getMarbleList(true, true)
-  }
-
   aboutToDisappear(): void {
     // 组件销毁时清理定时器
     if (this.searchTimer !== null) {
@@ -54,6 +50,10 @@ export struct SlabsSearch {
     const SlabsSearchParams = router.getParams() as Record<string, Object>
     if (SlabsSearchParams) {
       this.kv = SlabsSearchParams.searchKey as string
+      this.getMarbleList(true, true)
+    } else {
+      this.kv = ''
+      this.getMarbleList(true, true)
     }
   }
 

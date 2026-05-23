@@ -2,6 +2,7 @@ import {
   CommonDataSource,
   CommonFormPageType,
   GoodsInfo,
+  ImagePreviewView,
   layers,
   ScreenUtils,
   ShareMenuSheet,
@@ -17,6 +18,7 @@ export struct SlabsSize {
   @State layersObj: layers | undefined = undefined
   slabsSizeDataSource = new CommonDataSource<slices>()
   @State showShareBottomSheet: boolean = false
+  @State imageUrl: ResourceStr = ''
 
   onPageShow(): void {
     const SlabsSizeParams = router.getParams() as Record<string, Object>
@@ -101,6 +103,12 @@ export struct SlabsSize {
           GoodsInfo({
             slabsSizeModel: model,
             formPageType: CommonFormPageType.SLABS_SIZE,
+            clickCallBack: () => {
+              if (model.pictureUrls) {
+                this.imageUrl = model.pictureUrls
+                this.previewCustomDialog.open()
+              }
+            }
           })
         }
         .width(StyleConst.FULL_WIDTH)
@@ -120,18 +128,15 @@ export struct SlabsSize {
     .layoutWeight(1)
   }
 
-  build() {
-    Column() {
-      //顶部内容
-      this.SlabsSizeTopBuild()
-      //内容区域
-      this.SlabsSizeContentBuild()
-    }
-    .width(StyleConst.FULL_WIDTH)
-    .height(StyleConst.FULL_HEIGHT)
-    .alignItems(HorizontalAlign.Start)
-    .margin({ top: $r('app.float.size_20') })
-  }
+  //点击图片预览事件
+  private previewCustomDialog: CustomDialogController = new CustomDialogController({
+    builder: ImagePreviewView({
+      imageUrl: this.imageUrl,
+    }),
+    customStyle: true, //自由设置样式
+    alignment: DialogAlignment.Center,
+    autoCancel: false,
+  })
 
   @Builder
   ShareMenusBuilder() {
@@ -153,6 +158,19 @@ export struct SlabsSize {
     .height(StyleConst.FULL_HEIGHT)
     .justifyContent(FlexAlign.End)
     .backgroundColor($r('app.color.color_80000000'))
+  }
+
+  build() {
+    Column() {
+      //顶部内容
+      this.SlabsSizeTopBuild()
+      //内容区域
+      this.SlabsSizeContentBuild()
+    }
+    .width(StyleConst.FULL_WIDTH)
+    .height(StyleConst.FULL_HEIGHT)
+    .alignItems(HorizontalAlign.Start)
+    .margin({ top: $r('app.float.size_20') })
   }
 }
 

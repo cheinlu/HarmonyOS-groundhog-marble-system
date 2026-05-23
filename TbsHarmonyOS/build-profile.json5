@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "storeFile": "C:/Users/123/Desktop/code/openSource/keshi/signature/.p12",
-          "storePassword": "00000018F74E0B2AEE5067260748ECF1D95A68E519A004929CC8055EFF2D2B4ECEB59E433F546472",
+          "certpath": "C:/Users/123/Desktop/code/openSource/keshi/signature/keshi.cer",
           "keyAlias": "keshi",
-          "keyPassword": "000000188E2B44611579CB8C6FFD78E7C03B444495879264DD9301195C90750A646875C963072980",
-          "signAlg": "SHA256withECDSA",
+          "keyPassword": "000000188F53C24627A71BC5F77D3AD45959575A722D3222801178E5D4CD222427690BFB89050F40",
           "profile": "C:/Users/123/Desktop/code/openSource/keshi/signature/keshiRelease.p7b",
-          "certpath": "C:/Users/123/Desktop/code/openSource/keshi/signature/keshi.cer"
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:/Users/123/Desktop/code/openSource/keshi/signature/.p12",
+          "storePassword": "00000018B5B557A42F702F316BB4483E40CBCC234079834A89D8CE59EC0F039639F2EFD381F189BC"
         }
       }
     ],

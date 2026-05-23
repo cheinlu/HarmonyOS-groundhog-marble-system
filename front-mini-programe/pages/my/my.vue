@@ -3,10 +3,10 @@
     <view class="my_swiper">
       <swiper class="swiper" :circular="true" :autoplay="true" :interval="3000" :indicator-dots="true" :indicator-color="'#767471'">
         <swiper-item>
-          <image class="swiper-item" src="https://static.lusson.xyz/wx-miniprogram-image/home_bg.png" mode=""></image>
+          <image class="swiper-item" src="https://static.lusson.cn/wx-miniprogram-image/home_bg.png" mode=""></image>
         </swiper-item>
         <swiper-item>
-          <image class="swiper-item" src="https://static.lusson.xyz/wx-miniprogram-image/home_bg.png" mode=""></image>
+          <image class="swiper-item" src="https://static.lusson.cn/wx-miniprogram-image/home_bg.png" mode=""></image>
         </swiper-item>
       </swiper>
     </view>

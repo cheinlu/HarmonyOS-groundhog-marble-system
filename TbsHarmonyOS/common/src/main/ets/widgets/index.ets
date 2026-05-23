@@ -23,3 +23,5 @@ export * from './pullRefresh/pullRefreshLoadMoreUtils'
 export * from './pullRefresh/pullRefreshLoadMore'
 
 export * from './TopComponentView'
+
+export * from './ImagePreviewView'

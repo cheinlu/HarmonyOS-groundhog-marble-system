@@ -22,6 +22,7 @@ export struct GoodsInfo {
     Column({ space: 15 }) {
       Stack({ alignContent: Alignment.Bottom }) {
         Image(this.goodsBgImg())
+          .alt($r('app.media.default_img'))
           .width(StyleConst.FULL_WIDTH)
           .height($r('app.float.size_130'))
 

@@ -4,7 +4,7 @@ export const setRequestConfig = () => {
   uni.$u.http.setConfig((config) => {
     /* config 为默认全局配置*/
 	// config.baseURL = 'http://127.0.0.1:8000/'
-    config.baseURL = 'https://marble.lusson.xyz'
+    config.baseURL = 'https://marble.lusson.cn'
     return config
   })
   // 请求拦截

@@ -1,5 +1,5 @@
 import { BlocksPage } from '@tbs/blocks'
-import { StyleConst } from '@tbs/common'
+import { ScreenUtils, StyleConst } from '@tbs/common'
 import { FurniturePage } from '@tbs/furniture'
 import { HomePage } from '@tbs/home'
 import { MinePage } from '@tbs/mine'
@@ -48,6 +48,7 @@ struct Index {
       .animationDuration(0)
       .divider({ strokeWidth: 1, color: $r('app.color.color_f0f2f4') })
       .barHeight($r('app.float.size_55'))
+      .margin({bottom:ScreenUtils.getInstance().getSafeBottomHeight()})
       .onChange((index) => {
         this.currentIndex = index
       })

@@ -7,7 +7,7 @@ export struct EmptyDataView {
 
   build() {
     Column({ space: 20 }) {
-      Image($r('app.media.empty'))
+      Image($r("app.media.default_img"))
         .width($r('app.float.size_180'))
         .height($r('app.float.size_180'))
         .borderRadius($r('app.float.size_10'))

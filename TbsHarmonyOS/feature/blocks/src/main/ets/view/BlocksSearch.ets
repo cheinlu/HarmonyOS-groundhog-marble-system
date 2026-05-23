@@ -6,6 +6,7 @@ import {
   EmptyDataView,
   GoodsInfo,
   handleRefreshLoadMore,
+  ImagePreviewView,
   LoadingView,
   LoadMoreFooterView,
   requestCommonList,
@@ -44,14 +45,11 @@ export struct BlocksSearch {
   }
   @State kv: string = ''
   @State changeValue: string = ''
+  @State imageUrl: ResourceStr = ''
   private scroller = new ListScroller()
   navContext: NavDestinationContext | null = null
   controller: SearchController = new SearchController()
   searchTimer: number | null = null
-
-  aboutToAppear(): void {
-    this.getCommonList(true, true)
-  }
 
   aboutToDisappear(): void {
     // 组件销毁时清理定时器
@@ -65,15 +63,17 @@ export struct BlocksSearch {
     const BlocksSearchParams = router.getParams() as Record<string, Object>
     if (BlocksSearchParams && typeof BlocksSearchParams.searchKey === 'string') {
       this.kv = BlocksSearchParams.searchKey
+      this.getCommonList(true, true)
     } else {
       this.kv = ''
+      this.getCommonList(true, true)
     }
   }
 
   getCommonList(isRefresh: boolean = true, isShowLoading: boolean = true): Promise<void> {
     return handleRefreshLoadMore<commonObj>(
-      // 断言 requestMarblesList 的返回类型符合要求
-      (pageNo, pageSize, searchKey) => requestCommonList(pageNo, pageSize, searchKey
+      // 断言 requestCommonList 的返回类型符合要求
+      (pageNo, pageSize, searchKey, type) => requestCommonList(pageNo, pageSize, searchKey, type
       ) as Promise<pullRefreshResponse<commonObj>>,
       this.state,
       isRefresh,
@@ -147,6 +147,13 @@ export struct BlocksSearch {
               GoodsInfo({
                 blocksModel: model,
                 formPageType: CommonFormPageType.BLOCKS_SEARCH,
+                clickCallBack: () => {
+                  console.log('lucy== model++', JSON.stringify(model))
+                  if (model.pictureUrls) {
+                    this.imageUrl = model.pictureUrls
+                    this.previewCustomDialog.open()
+                  }
+                }
               })
             }
             .width(StyleConst.FULL_WIDTH)
@@ -190,6 +197,16 @@ export struct BlocksSearch {
   getFooter() {
     LoadMoreFooterView({ isBottomLoading: this.state.isBottomLoading })
   }
+
+  //点击图片预览事件
+  private previewCustomDialog: CustomDialogController = new CustomDialogController({
+    builder: ImagePreviewView({
+      imageUrl: this.imageUrl,
+    }),
+    customStyle: true, //自由设置样式
+    alignment: DialogAlignment.Center,
+    autoCancel: false,
+  })
 
   build() {
     Column() {

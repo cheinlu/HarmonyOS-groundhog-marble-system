@@ -282,7 +282,7 @@ export struct FurniturePage {
   GoodsItemView(model: furnitureObj) {
     Column({ space: 10 }) {
       Image(model.pictureUrls)
-        .alt($r('app.media.home_bg'))
+        .alt($r('app.media.default_img'))
         .imageStyles(StyleConst.FULL_WIDTH, $r('app.float.size_130'))
         .borderRadius($r('app.float.size_6'))
       Text(model.name)

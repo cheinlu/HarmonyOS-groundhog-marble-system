@@ -5,7 +5,7 @@ import { BusinessError } from '@kit.BasicServicesKit';
 
 export function request(url: string, method: http.RequestMethod, headers?: Record<string, Object>,
   data?: Record<string, Object>): Promise<ResponseResult> {
-  const BASE_URL = 'https://marble.lusson.xyz'
+  const BASE_URL = 'https://marble.lusson.cn'
   let httpRequest = http.createHttp();
   let responseResult = httpRequest.request(BASE_URL + url, {
     method: method,

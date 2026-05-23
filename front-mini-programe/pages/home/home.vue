@@ -1,9 +1,9 @@
 <template>
 	<view class="home-container">
-		<image class="homeBg-img" src="https://static.lusson.xyz/wx-miniprogram-image/home_bg.png" mode="">
+		<image class="homeBg-img" src="https://static.lusson.cn/wx-miniprogram-image/home_bg.png" mode="">
 		<video class="video" 
-		src="https://static.lusson.xyz/video/home.mp4" 
-		poster="https://static.lusson.xyz/video/home_video.jpg"
+		src="https://static.lusson.cn/video/home.mp4" 
+		poster="https://static.lusson.cn/video/home_video.jpg"
 		show-center-play-btn="false" 
 		object-fit="cover" 
 		controls></video>

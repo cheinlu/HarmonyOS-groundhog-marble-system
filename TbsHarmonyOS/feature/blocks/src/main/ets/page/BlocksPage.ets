@@ -157,7 +157,7 @@ export struct BlocksPage {
                   .maxLines(1)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                 Image(model.pictureUrl)
-                  .alt($r('app.media.home_bg'))
+                  .alt($r('app.media.default_img'))
                   .imageStyles(StyleConst.PERCENT_60, StyleConst.FULL_HEIGHT)
                   .shadow({
                     radius: $r('app.float.size_2'),
